@@ -37,7 +37,7 @@
       --title-grad: linear-gradient(135deg, #ffffff 0%, #bae6fd 32%, #38bdf8 68%, #2563eb 100%);
       --title-shadow: 0 8px 30px rgba(56, 189, 248, 0.32);
       --glass-bg: rgba(8, 24, 54, 0.62);
-      --glass-strong: rgba(5, 12, 28, 0.96);
+      --glass-strong: rgba(6, 14, 34, 0.97);
       --glass-border: rgba(56, 189, 248, 0.18);
       --glass-hover: rgba(56, 189, 248, 0.13);
       --side-stroke: rgba(56, 189, 248, 0.44);
@@ -79,7 +79,7 @@
       --title-grad: linear-gradient(135deg, #fffbeb 0%, #fde68a 38%, #f59e0b 75%, #b45309 100%);
       --title-shadow: 0 8px 28px rgba(245, 158, 11, 0.28);
       --glass-bg: rgba(28, 18, 8, 0.72);
-      --glass-strong: rgba(20, 12, 5, 0.96);
+      --glass-strong: rgba(22, 13, 5, 0.97);
       --glass-border: rgba(245, 158, 11, 0.22);
       --glass-hover: rgba(245, 158, 11, 0.13);
       --side-stroke: rgba(245, 158, 11, 0.40);
@@ -100,8 +100,8 @@
       --title-grad: linear-gradient(135deg, #f8fafc 0%, #7dd3fc 52%, #1d4ed8 100%);
       --title-shadow: 0 6px 22px rgba(56, 189, 248, 0.18);
       --glass-bg: rgba(8, 10, 16, 0.82);
-      --glass-strong: rgba(4, 6, 10, 0.98);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(6, 8, 14, 0.98);
+      --glass-border: rgba(255, 255, 255, 0.10);
       --glass-hover: rgba(255, 255, 255, 0.06);
       --side-stroke: rgba(148, 163, 184, 0.14);
       --side-fill: rgba(148, 163, 184, 0.02);
@@ -176,7 +176,6 @@
       pointer-events: none;
     }
 
-    /* Lightweight Glass Surfaces (Low GPU memory usage on phones) */
     .glass-header {
       position: sticky;
       top: 0;
@@ -203,7 +202,7 @@
     .glass-popover {
       background: var(--glass-strong);
       border: 1px solid var(--glass-border);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.78);
     }
 
     @media (min-width: 768px) {
@@ -213,12 +212,10 @@
       }
     }
 
-    /* Hide Install Button when running as installed app */
     @media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
       #btn-header-install-app { display: none !important; }
     }
 
-    /* Cinema Dark automatic UI dimming */
     html.theme-cinema.cinema-playing .cinema-ambient-dim {
       opacity: 0.06 !important;
     }
@@ -432,7 +429,6 @@
       background: var(--accent-primary);
     }
 
-    /* Designer Multi-Stop Theme Gradient & Distinctive Geometric Display Font */
     .hero-title {
       margin: 0 0 12px;
       font-family: 'Outfit', 'Cairo', system-ui, sans-serif;
@@ -659,7 +655,7 @@
     .flex-1 { flex: 1; }
 
     /* ==========================================================================
-       6. FULL HD CINEMA PLAYER & CONTROLS
+       6. FULL HD CINEMA PLAYER, CONTROLS & STUDIO SETTINGS POPOVER
        ========================================================================== */
     .player-section {
       max-width: 1150px;
@@ -679,6 +675,16 @@
       border: 1px solid var(--glass-border);
       box-shadow: 0 22px 56px rgba(0, 0, 0, 0.75);
       user-select: none;
+    }
+
+    .player-container.is-fullscreen-active,
+    .player-container:fullscreen,
+    .player-container:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      aspect-ratio: auto !important;
+      border-radius: 0 !important;
+      border: none !important;
     }
 
     .player-container.theater-fullscreen {
@@ -823,20 +829,30 @@
     }
 
     .ctrl-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.13);
       color: #ffffff;
       flex-shrink: 0;
+      transition: background 0.18s ease, transform 0.12s ease;
     }
 
+    .ctrl-btn:active { transform: scale(0.93); }
+
     .ctrl-btn-play {
-      background: #0ea5e9;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
       color: #ffffff;
+      box-shadow: 0 2px 12px rgba(56, 189, 248, 0.35);
+    }
+
+    .ctrl-btn-active {
+      background: rgba(56, 189, 248, 0.28) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.5);
     }
 
     .vol-box {
@@ -851,8 +867,8 @@
     input[type="range"].cinema-range {
       -webkit-appearance: none;
       appearance: none;
-      background: rgba(148, 163, 184, 0.30);
-      height: 5px;
+      background: rgba(148, 163, 184, 0.28);
+      height: 6px;
       border-radius: 999px;
       outline: none;
       cursor: pointer;
@@ -861,11 +877,18 @@
     input[type="range"].cinema-range::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 13px;
-      height: 13px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
-      background: var(--accent-primary);
+      background: #ffffff;
+      border: 2.5px solid var(--accent-primary);
+      box-shadow: 0 0 10px var(--accent-glow);
       cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+
+    input[type="range"].cinema-range::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
     }
 
     .vol-slider-hud { width: 46px; }
@@ -874,26 +897,108 @@
     .desktop-only { display: none; }
     @media (min-width: 640px) { .desktop-only { display: inline-flex; } }
 
-    /* Settings Popover */
+    /* ==========================================================================
+       STUDIO VIDEO & AUDIO SETTINGS POPOVER (ENHANCED UI)
+       ========================================================================== */
+    @keyframes settingsPopIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
     .settings-popover {
       position: fixed;
-      bottom: 64px;
+      bottom: 66px;
       right: 12px;
       width: calc(100vw - 24px);
-      max-width: 330px;
-      max-height: 70vh;
+      max-width: 350px;
+      max-height: 74vh;
       overflow-y: auto;
-      padding: 16px;
-      border-radius: 18px;
+      padding: 14px;
+      border-radius: 22px;
       z-index: 45;
+      color: var(--text-primary);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      animation: settingsPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .player-container.is-fullscreen-active .settings-popover,
+    .player-container.theater-fullscreen .settings-popover,
+    .player-container:fullscreen .settings-popover {
+      position: absolute;
+      bottom: 50px;
+      right: 0;
+      max-height: calc(100% - 70px);
     }
 
     @media (min-width: 640px) {
       .settings-popover {
         position: absolute;
-        bottom: 46px;
+        bottom: 50px;
         right: 0;
+        max-height: calc(100% - 70px);
       }
+    }
+
+    .settings-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .settings-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .settings-card {
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      padding: 11px 12px;
+      margin-bottom: 10px;
+    }
+
+    .settings-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .settings-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .settings-label-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .val-pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent-primary);
+    }
+
+    .val-pill-amber {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
     }
 
     .grid-3 {
@@ -903,17 +1008,46 @@
     }
 
     .pill-opt {
-      padding: 6px 4px;
-      border-radius: 8px;
+      padding: 7px 6px;
+      border-radius: 10px;
       font-size: 11px;
-      font-weight: 700;
-      background: rgba(255, 255, 255, 0.10);
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid transparent;
       text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .pill-opt:hover {
+      background: rgba(255, 255, 255, 0.14);
     }
 
     .pill-opt.active {
-      background: #0ea5e9;
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
       color: #ffffff;
+      box-shadow: 0 3px 12px var(--accent-glow);
+    }
+
+    .btn-close-popover {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      background: rgba(255, 255, 255, 0.10);
+      color: var(--text-secondary);
+    }
+
+    .btn-reset-pill {
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent-primary);
     }
 
     /* Gesture & Up-Next Overlays */
@@ -1237,7 +1371,7 @@
           </div>
         </div>
 
-        <!-- Bottom HUD (Strict LTR: Play on Far Left, Settings + Fullscreen on Far Right) -->
+        <!-- Bottom HUD -->
         <div id="player-bottom-hud" class="player-hud-layer player-bottom-hud">
           <div class="scrubber-wrap">
             <div id="scrubber-time-tooltip" dir="ltr" class="scrubber-tooltip hidden">00:00</div>
@@ -1307,59 +1441,112 @@
                 </svg>
               </button>
 
-              <!-- Settings Popover -->
+              <!-- ==============================================================
+                   STUDIO VIDEO & AUDIO SETTINGS POPOVER
+                   ============================================================== -->
               <div id="popover-video-settings" class="hidden settings-popover glass-popover">
-                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--glass-border);">
-                  <span data-i18n="settingsHeader" style="font-size: 0.82rem; font-weight: 800;">Video &amp; Audio Settings</span>
-                  <button type="button" id="btn-reset-picture" style="font-size: 11px; font-weight: 700; color: var(--accent-primary);">
-                    <span data-i18n="btnResetPicture">Reset Picture</span>
-                  </button>
+                
+                <!-- Top Header Bar -->
+                <div class="settings-header-bar">
+                  <div class="settings-title-wrap">
+                    <svg width="16" height="16" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                      <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+                      <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+                      <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+                      <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+                    </svg>
+                    <span data-i18n="settingsHeader">Video &amp; Audio Settings</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <button type="button" id="btn-reset-picture" class="btn-reset-pill">
+                      <span data-i18n="btnResetPicture">Reset</span>
+                    </button>
+                    <button type="button" id="btn-close-settings" class="btn-close-popover" aria-label="Close Settings">✕</button>
+                  </div>
                 </div>
 
-                <!-- Audio Boost -->
-                <div style="margin-bottom: 14px;">
-                  <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
-                    <span data-i18n="labelAudioBoost" style="font-weight: 700;">Audio Boost</span>
-                    <span id="popover-volume-value" dir="ltr" style="font-weight: 800; color: #fbbf24;">100%</span>
+                <!-- Card 1: Audio Amplifier (0% - 200%) -->
+                <div class="settings-card">
+                  <div class="settings-card-head">
+                    <span class="settings-label-icon">
+                      <svg width="14" height="14" style="color: #fbbf24;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                      </svg>
+                      <span data-i18n="labelAudioBoost">Audio Boost</span>
+                    </span>
+                    <span id="popover-volume-value" dir="ltr" class="val-pill val-pill-amber">100%</span>
                   </div>
-                  <input type="range" id="slider-popover-volume" min="0" max="200" value="100" step="1" class="cinema-range" style="width: 100%; margin-bottom: 8px;" />
+                  <input type="range" id="slider-popover-volume" min="0" max="200" value="100" step="1" class="cinema-range" style="width: 100%; margin-bottom: 9px;" />
                   <div class="grid-3" dir="ltr">
-                    <button type="button" data-preset-vol="100" class="vol-preset-pill pill-opt">100%</button>
+                    <button type="button" data-preset-vol="100" class="vol-preset-pill pill-opt active">100%</button>
                     <button type="button" data-preset-vol="150" class="vol-preset-pill pill-opt" style="color: #fcd34d;">150%</button>
-                    <button type="button" data-preset-vol="200" class="vol-preset-pill pill-opt" style="color: #fcd34d;">200%</button>
+                    <button type="button" data-preset-vol="200" class="vol-preset-pill pill-opt" style="color: #fcd34d;">200% Max</button>
                   </div>
                 </div>
 
-                <!-- Brightness / Contrast / Saturation -->
-                <div style="border-top: 1px solid var(--glass-border); padding-top: 10px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px;">
-                  <div>
-                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
-                      <span data-i18n="labelBrightness" style="font-weight: 700;">Brightness</span>
-                      <span id="val-brightness" dir="ltr" style="font-weight: 700; color: var(--accent-primary);">100%</span>
-                    </div>
-                    <input type="range" id="slider-brightness" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
+                <!-- Card 2: Picture Studio (Presets + Brightness / Contrast / Saturation) -->
+                <div class="settings-card">
+                  <div class="settings-card-head">
+                    <span class="settings-label-icon">
+                      <svg width="14" height="14" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                      </svg>
+                      <span data-i18n="pictureStudioTitle">Picture Studio</span>
+                    </span>
                   </div>
-                  <div>
-                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
-                      <span data-i18n="labelContrast" style="font-weight: 700;">Contrast</span>
-                      <span id="val-contrast" dir="ltr" style="font-weight: 700; color: var(--accent-primary);">100%</span>
-                    </div>
-                    <input type="range" id="slider-contrast" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
+
+                  <!-- 1-Tap Picture Presets -->
+                  <div class="grid-3" style="margin-bottom: 11px;">
+                    <button type="button" data-pic-preset="standard" class="pic-preset-btn pill-opt active">
+                      <span data-i18n="presetStandard">Standard</span>
+                    </button>
+                    <button type="button" data-pic-preset="vibrant" class="pic-preset-btn pill-opt">
+                      <span data-i18n="presetVibrant">Vibrant</span>
+                    </button>
+                    <button type="button" data-pic-preset="cinema" class="pic-preset-btn pill-opt">
+                      <span data-i18n="presetCinema">Cinema</span>
+                    </button>
                   </div>
-                  <div>
-                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
-                      <span data-i18n="labelSaturation" style="font-weight: 700;">Saturation</span>
-                      <span id="val-saturation" dir="ltr" style="font-weight: 700; color: var(--accent-primary);">100%</span>
+
+                  <div style="display: flex; flex-direction: column; gap: 9px;">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
+                        <span data-i18n="labelBrightness" style="font-weight: 700;">Brightness</span>
+                        <span id="val-brightness" dir="ltr" class="val-pill">100%</span>
+                      </div>
+                      <input type="range" id="slider-brightness" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
                     </div>
-                    <input type="range" id="slider-saturation" min="0" max="200" value="100" class="cinema-range" style="width: 100%;" />
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
+                        <span data-i18n="labelContrast" style="font-weight: 700;">Contrast</span>
+                        <span id="val-contrast" dir="ltr" class="val-pill">100%</span>
+                      </div>
+                      <input type="range" id="slider-contrast" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
+                        <span data-i18n="labelSaturation" style="font-weight: 700;">Saturation</span>
+                        <span id="val-saturation" dir="ltr" class="val-pill">100%</span>
+                      </div>
+                      <input type="range" id="slider-saturation" min="0" max="200" value="100" class="cinema-range" style="width: 100%;" />
+                    </div>
                   </div>
                 </div>
 
-                <!-- Playback Speed -->
-                <div style="border-top: 1px solid var(--glass-border); padding-top: 10px; margin-bottom: 14px;">
-                  <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px;">
-                    <span data-i18n="labelPlaybackSpeed" style="font-weight: 700;">Playback Speed</span>
-                    <span id="val-playback-speed" dir="ltr" style="font-weight: 800; color: var(--accent-primary);">1.0x</span>
+                <!-- Card 3: Playback Speed -->
+                <div class="settings-card">
+                  <div class="settings-card-head">
+                    <span class="settings-label-icon">
+                      <svg width="14" height="14" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                      </svg>
+                      <span data-i18n="labelPlaybackSpeed">Playback Speed</span>
+                    </span>
+                    <span id="val-playback-speed" dir="ltr" class="val-pill">1.0x</span>
                   </div>
                   <div class="grid-3" dir="ltr">
                     <button type="button" data-speed="0.25" class="speed-option-btn pill-opt">0.25x</button>
@@ -1374,10 +1561,10 @@
                   </div>
                 </div>
 
-                <!-- Subtitles -->
-                <div style="border-top: 1px solid var(--glass-border); padding-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-                  <button type="button" id="btn-load-subtitle" class="pill-opt" style="padding: 8px; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                    <span dir="ltr" style="padding: 1px 5px; border-radius: 4px; background: rgba(14,165,233,0.2); color: #38bdf8; font-size: 10px;">CC</span>
+                <!-- Card 4: Subtitles -->
+                <div class="settings-card" style="display: flex; flex-direction: column; gap: 8px;">
+                  <button type="button" id="btn-load-subtitle" class="pill-opt" style="padding: 9px; display: flex; align-items: center; justify-content: center; gap: 7px; border-color: var(--glass-border); background: rgba(56, 189, 248, 0.12);">
+                    <span dir="ltr" style="padding: 1px 6px; border-radius: 5px; background: rgba(14,165,233,0.28); color: #38bdf8; font-size: 10px; font-weight: 900;">CC</span>
                     <span data-i18n="btnLoadSubtitle">Load Subtitles (.SRT / .VTT)</span>
                   </button>
                   <div style="display: flex; gap: 6px;">
@@ -1385,15 +1572,16 @@
                       <span data-i18n="btnSubSize">Subtitle Size:</span>
                       <span id="label-sub-size" style="color: #38bdf8;">Normal</span>
                     </button>
-                    <button type="button" id="btn-remove-subtitle" class="hidden pill-opt" style="padding: 7px 10px; background: rgba(244,63,94,0.2); color: #fda4af;">
+                    <button type="button" id="btn-remove-subtitle" class="hidden pill-opt" style="padding: 7px 11px; background: rgba(244,63,94,0.22); color: #fda4af;">
                       <span data-i18n="btnRemoveSub">Remove</span>
                     </button>
                   </div>
                 </div>
+
               </div>
 
-              <!-- Fullscreen Button -->
-              <button type="button" id="btn-player-fullscreen" aria-label="Fullscreen" class="ctrl-btn">
+              <!-- Fullscreen Landscape Toggle Button -->
+              <button type="button" id="btn-player-fullscreen" aria-label="Fullscreen Landscape" class="ctrl-btn">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                 </svg>
@@ -1527,8 +1715,12 @@
           btnPlayNow: 'Play Now',
           btnCancel: 'Cancel',
           settingsHeader: 'Video & Audio Settings',
-          btnResetPicture: 'Reset Picture',
+          btnResetPicture: 'Reset',
           labelAudioBoost: 'Audio Boost',
+          pictureStudioTitle: 'Picture Studio',
+          presetStandard: 'Standard',
+          presetVibrant: 'Vibrant',
+          presetCinema: 'Cinema',
           labelBrightness: 'Brightness',
           labelContrast: 'Contrast',
           labelSaturation: 'Saturation',
@@ -1601,8 +1793,12 @@
           btnPlayNow: 'تشغيل الآن',
           btnCancel: 'إلغاء',
           settingsHeader: 'إعدادات الفيديو والصوت',
-          btnResetPicture: 'إعادة ضبط الصورة',
+          btnResetPicture: 'إعادة ضبط',
           labelAudioBoost: 'مضخم الصوت',
+          pictureStudioTitle: 'استوديو الصورة',
+          presetStandard: 'قياسي',
+          presetVibrant: 'ألوان زاهية',
+          presetCinema: 'سينمائي',
           labelBrightness: 'إضاءة الفيديو',
           labelContrast: 'التباين',
           labelSaturation: 'تشبع الألوان',
@@ -1687,12 +1883,13 @@
       const hudCurrentTime = document.getElementById('hud-current-time');
       const hudTotalDuration = document.getElementById('hud-total-duration');
 
+      const btnSettings = document.getElementById('btn-player-settings');
       const popoverSettings = document.getElementById('popover-video-settings');
       const svgSettingsGear = document.getElementById('svg-settings-gear');
       const upnextBanner = document.getElementById('upnext-banner-overlay');
 
       /* Single-Stream Memory State: Only ONE ObjectURL exists at a time */
-      let playlist = []; // Array of { title, fileName, size, file, watched }
+      let playlist = [];
       let activeStreamUrl = null;
       let collectionName = 'Playlist';
       let currentIndex = -1;
@@ -1922,7 +2119,7 @@
          ====================================================================== */
       function showHomeScreen() {
         cancelUpNextCountdown();
-        popoverSettings.classList.add('hidden');
+        closeSettingsPopover();
         viewPlayer.classList.add('hidden');
         viewHome.classList.remove('hidden');
         renderMemoryManagerUI();
@@ -1997,6 +2194,10 @@
           badgeHudVol.style.color = '#7dd3fc';
           hudBoostBadge.classList.add('hidden');
         }
+
+        document.querySelectorAll('.vol-preset-pill').forEach((btn) => {
+          btn.classList.toggle('active', Number(btn.dataset.presetVol) === clamped);
+        });
       }
 
       sliderHudVol.addEventListener('input', (e) => setVolumePercent(e.target.value));
@@ -2115,6 +2316,7 @@
         videoEl.play().catch(() => {
           iconPlay.classList.remove('hidden');
           iconPause.classList.add('hidden');
+          playerContainer.classList.remove('controls-hidden');
         });
 
         document.getElementById('hud-episode-title').textContent = item.title;
@@ -2176,7 +2378,7 @@
       });
 
       /* ======================================================================
-         9. PLAYER CONTROLS, SCRUBBER, SETTINGS & SUBTITLES
+         9. HUD TIMING, LANDSCAPE FULLSCREEN & STUDIO SETTINGS POPOVER
          ====================================================================== */
       function togglePlayPause() {
         if (!videoEl.src) return;
@@ -2199,22 +2401,50 @@
       document.getElementById('btn-player-rw10').addEventListener('click', () => seekByOffset(-10));
       document.getElementById('btn-player-ff10').addEventListener('click', () => seekByOffset(10));
 
+      function revealHudWithDelay(delayMs) {
+        playerContainer.classList.remove('controls-hidden');
+        clearTimeout(hudHideTimer);
+        if (!videoEl.paused && popoverSettings.classList.contains('hidden')) {
+          hudHideTimer = setTimeout(() => {
+            if (!videoEl.paused && popoverSettings.classList.contains('hidden')) {
+              playerContainer.classList.add('controls-hidden');
+            }
+          }, delayMs);
+        }
+      }
+
+      /* Hide HUD immediately as soon as video starts playing (if settings menu is closed) */
       videoEl.addEventListener('play', () => {
         iconPlay.classList.add('hidden');
         iconPause.classList.remove('hidden');
         rootHtml.classList.add('cinema-playing');
-        scheduleHudAutoHide();
         requestScreenWakeLock();
+
+        clearTimeout(hudHideTimer);
+        if (popoverSettings.classList.contains('hidden')) {
+          hudHideTimer = setTimeout(() => {
+            if (!videoEl.paused && popoverSettings.classList.contains('hidden')) {
+              playerContainer.classList.add('controls-hidden');
+            }
+          }, 300);
+        }
       });
 
+      /* Keep HUD visible while paused so user can adjust settings anytime */
       videoEl.addEventListener('pause', () => {
         iconPause.classList.add('hidden');
         iconPlay.classList.remove('hidden');
         rootHtml.classList.remove('cinema-playing');
+        clearTimeout(hudHideTimer);
         playerContainer.classList.remove('controls-hidden');
         recordCurrentPlaybackInHistory(true);
         releaseScreenWakeLock();
       });
+
+      /* Keep HUD alive for 6 seconds whenever user interacts with bottom control bar */
+      const bottomHudEl = document.getElementById('player-bottom-hud');
+      bottomHudEl.addEventListener('pointerdown', () => revealHudWithDelay(6000), { passive: true });
+      bottomHudEl.addEventListener('input', () => revealHudWithDelay(6000), { passive: true });
 
       videoEl.addEventListener('loadedmetadata', () => {
         hudTotalDuration.textContent = formatTime(videoEl.duration);
@@ -2260,38 +2490,80 @@
           isScrubbing = false;
           scrubberRail.releasePointerCapture(e.pointerId);
           scrubberTooltip.classList.add('hidden');
+          revealHudWithDelay(6000);
         }
       });
 
-      document.getElementById('btn-player-settings').addEventListener('click', (e) => {
+      /* Settings Popover Open / Close */
+      function openSettingsPopover() {
+        popoverSettings.classList.remove('hidden');
+        btnSettings.classList.add('ctrl-btn-active');
+        svgSettingsGear.style.transform = 'rotate(65deg)';
+        clearTimeout(hudHideTimer);
+        playerContainer.classList.remove('controls-hidden');
+      }
+
+      function closeSettingsPopover() {
+        popoverSettings.classList.add('hidden');
+        btnSettings.classList.remove('ctrl-btn-active');
+        svgSettingsGear.style.transform = 'rotate(0deg)';
+        revealHudWithDelay(6000);
+      }
+
+      btnSettings.addEventListener('click', (e) => {
         e.stopPropagation();
-        const hid = popoverSettings.classList.toggle('hidden');
-        svgSettingsGear.style.transform = hid ? 'rotate(0deg)' : 'rotate(65deg)';
+        if (popoverSettings.classList.contains('hidden')) openSettingsPopover();
+        else closeSettingsPopover();
+      });
+
+      document.getElementById('btn-close-settings').addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeSettingsPopover();
+      });
+
+      popoverSettings.addEventListener('click', (e) => e.stopPropagation());
+      popoverSettings.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        clearTimeout(hudHideTimer);
       });
 
       document.addEventListener('click', (e) => {
         if (!popoverSettings.classList.contains('hidden') && !document.getElementById('settings-popover-container').contains(e.target)) {
-          popoverSettings.classList.add('hidden');
-          svgSettingsGear.style.transform = 'rotate(0deg)';
+          closeSettingsPopover();
         }
       });
 
-      function applyPictureFilters() {
+      /* Picture Studio Sliders & 1-Tap Presets */
+      function applyPictureFilters(activePresetName) {
         videoEl.style.filter = `brightness(${picBrightness}%) contrast(${picContrast}%) saturate(${picSaturation}%)`;
         document.getElementById('val-brightness').textContent = `${picBrightness}%`;
         document.getElementById('val-contrast').textContent = `${picContrast}%`;
         document.getElementById('val-saturation').textContent = `${picSaturation}%`;
+        document.getElementById('slider-brightness').value = picBrightness;
+        document.getElementById('slider-contrast').value = picContrast;
+        document.getElementById('slider-saturation').value = picSaturation;
+
+        document.querySelectorAll('.pic-preset-btn').forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.picPreset === activePresetName);
+        });
       }
 
-      document.getElementById('slider-brightness').addEventListener('input', (e) => { picBrightness = Number(e.target.value); applyPictureFilters(); });
-      document.getElementById('slider-contrast').addEventListener('input', (e) => { picContrast = Number(e.target.value); applyPictureFilters(); });
-      document.getElementById('slider-saturation').addEventListener('input', (e) => { picSaturation = Number(e.target.value); applyPictureFilters(); });
+      document.querySelectorAll('.pic-preset-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const p = btn.dataset.picPreset;
+          if (p === 'vibrant') { picBrightness = 106; picContrast = 116; picSaturation = 132; }
+          else if (p === 'cinema') { picBrightness = 95; picContrast = 112; picSaturation = 105; }
+          else { picBrightness = 100; picContrast = 100; picSaturation = 100; }
+          applyPictureFilters(p);
+        });
+      });
+
+      document.getElementById('slider-brightness').addEventListener('input', (e) => { picBrightness = Number(e.target.value); applyPictureFilters('custom'); });
+      document.getElementById('slider-contrast').addEventListener('input', (e) => { picContrast = Number(e.target.value); applyPictureFilters('custom'); });
+      document.getElementById('slider-saturation').addEventListener('input', (e) => { picSaturation = Number(e.target.value); applyPictureFilters('custom'); });
       document.getElementById('btn-reset-picture').addEventListener('click', () => {
         picBrightness = picContrast = picSaturation = 100;
-        document.getElementById('slider-brightness').value = 100;
-        document.getElementById('slider-contrast').value = 100;
-        document.getElementById('slider-saturation').value = 100;
-        applyPictureFilters();
+        applyPictureFilters('standard');
         showToast(t('toastPictureReset'));
       });
 
@@ -2353,58 +2625,115 @@
         document.getElementById('dynamic-cue-style').textContent = `video::cue { background-color: rgba(2,6,23,0.82); color: #fff; font-family: 'Plus Jakarta Sans','Cairo',sans-serif; font-size: ${SUB_SIZE_SCALES[subSizeIndex]}; line-height: 1.45; padding: 4px 10px; border-radius: 6px; }`;
       });
 
+      /* ======================================================================
+         FULLSCREEN WITH AUTOMATIC LANDSCAPE ORIENTATION LOCK
+         ====================================================================== */
+      async function lockLandscapeOrientation() {
+        try {
+          if (screen.orientation && typeof screen.orientation.lock === 'function') {
+            await screen.orientation.lock('landscape');
+          }
+        } catch (_) {}
+      }
+
+      function unlockScreenOrientation() {
+        try {
+          if (screen.orientation && typeof screen.orientation.unlock === 'function') {
+            screen.orientation.unlock();
+          }
+        } catch (_) {}
+      }
+
+      function handleFullscreenStateChange() {
+        const isNativeFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isNativeFs) {
+          playerContainer.classList.add('is-fullscreen-active');
+          lockLandscapeOrientation();
+        } else {
+          playerContainer.classList.remove('is-fullscreen-active', 'theater-fullscreen');
+          unlockScreenOrientation();
+        }
+      }
+
+      document.addEventListener('fullscreenchange', handleFullscreenStateChange);
+      document.addEventListener('webkitfullscreenchange', handleFullscreenStateChange);
+
       async function togglePlayerFullscreen() {
         try {
           if (document.fullscreenElement || document.webkitFullscreenElement) {
             if (document.exitFullscreen) await document.exitFullscreen();
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            playerContainer.classList.remove('theater-fullscreen');
+            playerContainer.classList.remove('theater-fullscreen', 'is-fullscreen-active');
+            unlockScreenOrientation();
             return;
           }
           if (playerContainer.classList.contains('theater-fullscreen')) {
-            playerContainer.classList.remove('theater-fullscreen');
+            playerContainer.classList.remove('theater-fullscreen', 'is-fullscreen-active');
+            unlockScreenOrientation();
             return;
           }
-          if (playerContainer.requestFullscreen) await playerContainer.requestFullscreen();
-          else if (playerContainer.webkitRequestFullscreen) playerContainer.webkitRequestFullscreen();
-          else if (videoEl.webkitEnterFullscreen) videoEl.webkitEnterFullscreen();
-          else playerContainer.classList.add('theater-fullscreen');
+
+          if (playerContainer.requestFullscreen) {
+            await playerContainer.requestFullscreen();
+            playerContainer.classList.add('is-fullscreen-active');
+            await lockLandscapeOrientation();
+          } else if (playerContainer.webkitRequestFullscreen) {
+            playerContainer.webkitRequestFullscreen();
+            playerContainer.classList.add('is-fullscreen-active');
+            await lockLandscapeOrientation();
+          } else if (videoEl.webkitEnterFullscreen) {
+            videoEl.webkitEnterFullscreen();
+            await lockLandscapeOrientation();
+          } else {
+            playerContainer.classList.add('theater-fullscreen', 'is-fullscreen-active');
+            await lockLandscapeOrientation();
+          }
         } catch (_) {
           playerContainer.classList.toggle('theater-fullscreen');
+          playerContainer.classList.toggle('is-fullscreen-active');
+          if (playerContainer.classList.contains('theater-fullscreen')) {
+            await lockLandscapeOrientation();
+          } else {
+            unlockScreenOrientation();
+          }
         }
       }
 
       document.getElementById('btn-player-fullscreen').addEventListener('click', togglePlayerFullscreen);
 
-      function scheduleHudAutoHide() {
-        playerContainer.classList.remove('controls-hidden');
-        clearTimeout(hudHideTimer);
-        if (!videoEl.paused && popoverSettings.classList.contains('hidden')) {
-          hudHideTimer = setTimeout(() => playerContainer.classList.add('controls-hidden'), 3200);
-        }
-      }
-
-      playerContainer.addEventListener('mousemove', scheduleHudAutoHide, { passive: true });
-      playerContainer.addEventListener('touchstart', scheduleHudAutoHide, { passive: true });
-
+      /* Accurate Tap & Double-Tap Video Gesture Handler (6s HUD Delay) */
+      let controlsHiddenAtPointerDown = false;
       let lastTap = 0;
       let tapTimer = null;
+
+      videoEl.addEventListener('pointerdown', () => {
+        controlsHiddenAtPointerDown = playerContainer.classList.contains('controls-hidden');
+      }, { passive: true });
+
       videoEl.addEventListener('click', (e) => {
         const now = Date.now();
         const rect = videoEl.getBoundingClientRect();
         const ratio = (e.clientX - rect.left) / (rect.width || 1);
-        if (now - lastTap < 280) {
+
+        if (now - lastTap < 250) {
           clearTimeout(tapTimer);
           lastTap = 0;
-          if (ratio < 0.38) seekByOffset(-10);
-          else if (ratio > 0.62) seekByOffset(10);
+          if (ratio < 0.35) seekByOffset(-10);
+          else if (ratio > 0.65) seekByOffset(10);
           else togglePlayerFullscreen();
         } else {
           lastTap = now;
           tapTimer = setTimeout(() => {
-            if (window.innerWidth >= 768) togglePlayPause();
-            else playerContainer.classList.contains('controls-hidden') ? scheduleHudAutoHide() : playerContainer.classList.add('controls-hidden');
-          }, 260);
+            if (!popoverSettings.classList.contains('hidden')) {
+              closeSettingsPopover();
+              return;
+            }
+            if (controlsHiddenAtPointerDown) {
+              revealHudWithDelay(6000);
+            } else {
+              togglePlayPause();
+            }
+          }, 240);
         }
       });
 

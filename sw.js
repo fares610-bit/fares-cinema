@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fares-cinema-offline-v3';
+const CACHE_NAME = 'fares-cinema-offline-v4';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
