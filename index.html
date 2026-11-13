@@ -15,7 +15,6 @@
   <link id="pwa-manifest-link" rel="manifest" href="./manifest.json" />
   <title>fares.com | Fares Cinema</title>
 
-  <!-- Distinctive Display & Bilingual Fonts (Graceful Offline Fallback) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -202,7 +201,7 @@
     .glass-popover {
       background: var(--glass-strong);
       border: 1px solid var(--glass-border);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.78);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
     }
 
     @media (min-width: 768px) {
@@ -378,7 +377,7 @@
     }
 
     /* ==========================================================================
-       5. MAIN CONTAINER, DESIGNER TITLE & CATEGORIZED MEDIA LIBRARY
+       5. MAIN CONTAINER & CATEGORIZED MEDIA LIBRARY
        ========================================================================== */
     .main-wrap {
       position: relative;
@@ -566,7 +565,6 @@
       color: var(--text-secondary);
     }
 
-    /* Library Category Filter Tabs */
     .lib-tabs {
       display: inline-flex;
       align-items: center;
@@ -591,7 +589,6 @@
       color: #ffffff;
     }
 
-    /* Folder Cards Grid */
     .folders-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -744,7 +741,7 @@
     .flex-1 { flex: 1; }
 
     /* ==========================================================================
-       6. FULL HD CINEMA PLAYER, CONTROLS & STUDIO SETTINGS POPOVER
+       6. PRO FULL HD CINEMA PLAYER, GESTURES, LOCK & SETTINGS DRAWER
        ========================================================================== */
     .player-section {
       max-width: 1150px;
@@ -764,6 +761,9 @@
       border: 1px solid var(--glass-border);
       box-shadow: 0 22px 56px rgba(0, 0, 0, 0.75);
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: manipulation;
     }
 
     .player-container.is-fullscreen-active,
@@ -792,10 +792,13 @@
       object-fit: contain;
       background: #000000;
       display: block;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     .player-hud-layer {
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.22s ease, transform 0.22s ease;
     }
 
     .player-container.controls-hidden { cursor: none; }
@@ -810,45 +813,116 @@
       transform: translateY(-10px);
     }
 
+    /* Screen Locked State */
+    .player-container.screen-locked .player-top-hud,
+    .player-container.screen-locked .player-bottom-hud {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .unlock-floating-bar {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 55;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(6, 14, 34, 0.90);
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Top Pill Notification Banner (For +10s, -10s, 2.0x Hold, Aspect Ratio) */
+    .top-action-pill {
+      position: absolute;
+      top: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 45;
+      padding: 6px 15px;
+      border-radius: 999px;
+      background: rgba(6, 14, 34, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      pointer-events: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
     .player-top-hud {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 20;
-      padding: 12px 16px;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+      z-index: 25;
+      padding: 10px 14px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, transparent 100%);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      pointer-events: none;
+      gap: 8px;
     }
+
+    .top-hud-btn {
+      height: 32px;
+      padding: 0 9px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .top-hud-btn:active { transform: scale(0.93); }
 
     .player-bottom-hud {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 20;
-      padding: 28px 12px 10px;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.72) 65%, transparent 100%);
+      z-index: 25;
+      padding: 24px 12px 10px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.74) 65%, transparent 100%);
     }
 
     @media (min-width: 640px) {
-      .player-bottom-hud { padding: 32px 18px 14px; }
+      .player-bottom-hud { padding: 28px 18px 14px; }
     }
 
     /* Timeline Scrubber */
     .scrubber-wrap {
       position: relative;
       width: 100%;
-      margin-bottom: 10px;
+      padding: 12px 0;
+      margin-bottom: 2px;
+      cursor: pointer;
+      touch-action: none;
     }
 
     .scrubber-tooltip {
       position: absolute;
-      top: -30px;
+      top: -22px;
       transform: translateX(-50%);
       padding: 2px 7px;
       border-radius: 6px;
@@ -862,14 +936,17 @@
 
     .scrubber-rail {
       width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.25);
+      height: 7px;
+      background: rgba(255, 255, 255, 0.26);
       border-radius: 999px;
-      cursor: pointer;
       position: relative;
-      touch-action: none;
+      pointer-events: none;
+      transition: height 0.12s ease;
     }
 
+    .scrubber-wrap:active .scrubber-rail {
+      height: 9px;
+    }
     .scrubber-buffered {
       position: absolute;
       top: 0;
@@ -891,8 +968,8 @@
     }
 
     .scrubber-thumb {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: #ffffff;
       box-shadow: 0 0 10px #38bdf8;
@@ -914,12 +991,12 @@
     .controls-left, .controls-right {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
 
     .ctrl-btn {
-      width: 34px;
-      height: 34px;
+      width: 35px;
+      height: 35px;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -976,18 +1053,11 @@
       transition: transform 0.12s ease;
     }
 
-    input[type="range"].cinema-range::-webkit-slider-thumb:hover {
-      transform: scale(1.18);
-    }
-
     .vol-slider-hud { width: 46px; }
     @media (min-width: 640px) { .vol-slider-hud { width: 76px; } }
 
-    .desktop-only { display: none; }
-    @media (min-width: 640px) { .desktop-only { display: inline-flex; } }
-
     /* ==========================================================================
-       STUDIO VIDEO & AUDIO SETTINGS POPOVER
+       STUDIO VIDEO & AUDIO SETTINGS DRAWER (FULL HEIGHT, NEVER CLIPPED)
        ========================================================================== */
     @keyframes settingsPopIn {
       from { opacity: 0; transform: translateY(10px) scale(0.97); }
@@ -995,38 +1065,30 @@
     }
 
     .settings-popover {
-      position: fixed;
-      bottom: 66px;
+      position: absolute;
       right: 12px;
-      width: calc(100vw - 24px);
-      max-width: 350px;
-      max-height: 74vh;
+      bottom: 58px;
+      width: min(370px, calc(100% - 24px));
+      max-height: calc(100% - 70px);
       overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
       padding: 14px;
-      border-radius: 22px;
-      z-index: 45;
+      border-radius: 20px;
+      z-index: 50;
       color: var(--text-primary);
-      border: 1px solid rgba(56, 189, 248, 0.28);
+      border: 1px solid rgba(56, 189, 248, 0.35);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
-      animation: settingsPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: settingsPopIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .player-container.is-fullscreen-active .settings-popover,
-    .player-container.theater-fullscreen .settings-popover,
-    .player-container:fullscreen .settings-popover {
-      position: absolute;
-      bottom: 50px;
-      right: 0;
-      max-height: calc(100% - 70px);
-    }
-
-    @media (min-width: 640px) {
+    @media (max-height: 500px) and (orientation: landscape) {
       .settings-popover {
-        position: absolute;
-        bottom: 50px;
-        right: 0;
-        max-height: calc(100% - 70px);
+        width: min(440px, calc(100% - 24px));
+        bottom: 54px;
+        max-height: calc(100% - 62px);
+        padding: 12px;
       }
     }
 
@@ -1118,57 +1180,32 @@
     }
 
     .btn-close-popover {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
-      background: rgba(255, 255, 255, 0.10);
-      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
     }
 
     .btn-reset-pill {
-      padding: 4px 9px;
+      padding: 5px 10px;
       border-radius: 8px;
       font-size: 11px;
       font-weight: 800;
-      background: rgba(56, 189, 248, 0.14);
+      background: rgba(56, 189, 248, 0.16);
       color: var(--accent-primary);
     }
 
-    /* Gesture & Up-Next Overlays */
-    .gesture-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 25;
-    }
-
-    .gesture-bubble {
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.78);
-      border: 1px solid rgba(56, 189, 248, 0.45);
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 13px;
-    }
-
+    /* Up-Next Overlay */
     .upnext-overlay {
       position: absolute;
       inset: 0;
-      z-index: 30;
+      z-index: 35;
       background: rgba(0, 0, 0, 0.84);
       display: flex;
       align-items: center;
@@ -1219,7 +1256,7 @@
 </head>
 <body>
 
-  <!-- Background Geometric Canvas (Auto-pauses during video playback to save RAM/GPU) -->
+  <!-- Background Geometric Canvas -->
   <canvas id="geometric-bg-canvas" aria-hidden="true"></canvas>
 
   <!-- Eye-Care Warm Filter -->
@@ -1236,7 +1273,7 @@
     <span class="fares-side-line"></span>
   </aside>
 
-  <!-- Fallback Hidden File Inputs -->
+  <!-- Hidden File Inputs -->
   <input type="file" id="input-video-files" accept="video/*,.mkv,.mp4,.webm,.avi,.mov,.m4v" multiple class="hidden" />
   <input type="file" id="input-folder-files" webkitdirectory directory multiple class="hidden" />
   <input type="file" id="input-subtitle-file" accept=".srt,.vtt" class="hidden" />
@@ -1246,7 +1283,6 @@
        ======================================================================== -->
   <header class="glass-header cinema-ambient-dim">
     <div class="header-inner">
-      <!-- Brand -->
       <button type="button" id="btn-brand-home" class="brand-btn" dir="ltr">
         <div class="brand-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" style="transform: translateX(1px);">
@@ -1259,7 +1295,6 @@
         </div>
       </button>
 
-      <!-- Right Actions -->
       <div class="header-actions">
         <button type="button" id="btn-header-install-app" class="btn-pill glass-surface glass-surface-interactive"
           style="border-color: var(--accent-primary); color: var(--accent-primary);">
@@ -1282,7 +1317,6 @@
         </button>
       </div>
 
-      <!-- 4 Lighting Modes -->
       <nav aria-label="Lighting Modes" class="lighting-nav glass-surface">
         <button type="button" data-lighting-mode="dark" class="lighting-mode-btn">
           <span data-i18n="modeDark">Dark</span>
@@ -1348,7 +1382,7 @@
       <!-- ORGANIZED MEDIA LIBRARY & WATCH HISTORY STACK -->
       <div class="cards-stack">
 
-        <!-- Categorized Media Library Card (Folders + Standalone Videos) -->
+        <!-- Categorized Media Library Card -->
         <div id="home-media-library" class="hidden section-card glass-surface">
           <div class="card-header">
             <div class="card-title-group">
@@ -1364,7 +1398,6 @@
             </div>
 
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
-              <!-- Category Filter Tabs -->
               <div class="lib-tabs">
                 <button type="button" data-lib-filter="all" class="lib-tab-btn active" data-i18n="tabAll">All</button>
                 <button type="button" data-lib-filter="folders" class="lib-tab-btn" data-i18n="tabFolders">Folders</button>
@@ -1377,7 +1410,6 @@
             </div>
           </div>
 
-          <!-- Dynamic Library Content (Folders Grid + Single Videos Grid OR Opened Folder View) -->
           <div id="home-library-body"></div>
         </div>
 
@@ -1407,17 +1439,23 @@
       </div>
     </section>
 
-    <!-- VIEW B: FULL HD PLAYER SCREEN -->
+    <!-- VIEW B: PRO FULL HD PLAYER SCREEN -->
     <section id="view-player-screen" class="hidden player-section">
 
       <div id="player-container" dir="ltr" class="player-container">
         <video id="cinema-video-el" class="cinema-video" playsinline webkit-playsinline preload="metadata"></video>
 
-        <!-- Gesture Feedback -->
-        <div id="player-gesture-overlay" class="gesture-overlay hidden">
-          <div class="gesture-bubble">
-            <span id="gesture-text-slot" dir="ltr"></span>
-          </div>
+        <!-- Floating Unlock Button (Visible only when Screen Lock is active) -->
+        <button type="button" id="btn-unlock-screen" class="hidden unlock-floating-bar">
+          <svg width="15" height="15" style="color: #38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span data-i18n="tapToUnlock">Screen Locked • Tap to Unlock</span>
+        </button>
+
+        <!-- Top Action Pill Banner (+10s, -10s, 2.0x Hold, Aspect Fit) -->
+        <div id="top-action-pill" class="hidden top-action-pill">
+          <span id="top-action-pill-text"></span>
         </div>
 
         <!-- Up Next Banner -->
@@ -1439,19 +1477,180 @@
           </div>
         </div>
 
-        <!-- Top HUD -->
+        <!-- TOP HUD BAR: Back + Title + Aspect Ratio + Rotate + Screen Lock -->
         <div class="player-hud-layer player-top-hud">
-          <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+          <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
+            <button type="button" id="btn-player-back" class="top-hud-btn" aria-label="Back to Library" title="Back">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+              </svg>
+            </button>
             <span dir="ltr" style="padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 900; background: rgba(14,165,233,0.25); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); flex-shrink: 0;">FULL HD</span>
-            <h2 id="hud-episode-title" class="truncate" style="margin: 0; font-size: 0.9rem; font-weight: 700; color: #fff;">fares.com</h2>
+            <h2 id="hud-episode-title" class="truncate" style="margin: 0; font-size: 0.88rem; font-weight: 700; color: #fff;">fares.com</h2>
           </div>
+
           <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
             <span id="hud-speed-badge" dir="ltr" class="hidden" style="padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 800; background: rgba(99,102,241,0.35); color: #c7d2fe;">1.0x</span>
             <span id="hud-boost-badge" dir="ltr" class="hidden" style="padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 800; background: rgba(245,158,11,0.35); color: #fcd34d;">200%</span>
+
+            <!-- Aspect Ratio / Zoom Fit Icon -->
+            <button type="button" id="btn-player-aspect" class="top-hud-btn" aria-label="Aspect Ratio" title="Fit / Fill / Stretch">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 4v16M15 4v16"/>
+              </svg>
+              <span id="label-aspect-mode">Fit</span>
+            </button>
+
+            <!-- Rotate Orientation Icon -->
+            <button type="button" id="btn-player-rotate" class="top-hud-btn" aria-label="Rotate Screen" title="Rotate Screen">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/>
+              </svg>
+            </button>
+
+            <!-- Screen Lock Icon -->
+            <button type="button" id="btn-player-lock" class="top-hud-btn" aria-label="Lock Screen" title="Lock Screen" style="border: 1px solid rgba(56, 189, 248, 0.35); color: #7dd3fc;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </button>
           </div>
         </div>
 
-        <!-- Bottom HUD -->
+        <!-- STUDIO VIDEO & AUDIO SETTINGS DRAWER (Direct Child of player-container -> Full Height Scrollable!) -->
+        <div id="popover-video-settings" class="hidden settings-popover glass-popover">
+          <div class="settings-header-bar">
+            <div class="settings-title-wrap">
+              <svg width="16" height="16" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+                <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+                <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+              </svg>
+              <span data-i18n="settingsHeader">Video &amp; Audio Settings</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <button type="button" id="btn-reset-picture" class="btn-reset-pill">
+                <span data-i18n="btnResetPicture">Reset</span>
+              </button>
+              <button type="button" id="btn-close-settings" class="btn-close-popover" aria-label="Close Settings">✕</button>
+            </div>
+          </div>
+
+          <!-- Card 1: Audio Amplifier (0% - 200%) -->
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <span class="settings-label-icon">
+                <svg width="14" height="14" style="color: #fbbf24;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+                <span data-i18n="labelAudioBoost">Audio Boost</span>
+              </span>
+              <span id="popover-volume-value" dir="ltr" class="val-pill val-pill-amber">100%</span>
+            </div>
+            <input type="range" id="slider-popover-volume" min="0" max="200" value="100" step="1" class="cinema-range" style="width: 100%; margin-bottom: 9px;" />
+            <div class="grid-3" dir="ltr">
+              <button type="button" data-preset-vol="100" class="vol-preset-pill pill-opt active">100%</button>
+              <button type="button" data-preset-vol="150" class="vol-preset-pill pill-opt" style="color: #fcd34d;">150%</button>
+              <button type="button" data-preset-vol="200" class="vol-preset-pill pill-opt" style="color: #fcd34d;">200% Max</button>
+            </div>
+          </div>
+
+          <!-- Card 2: Picture Studio -->
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <span class="settings-label-icon">
+                <svg width="14" height="14" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                </svg>
+                <span data-i18n="pictureStudioTitle">Picture Studio</span>
+              </span>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: 11px;">
+              <button type="button" data-pic-preset="standard" class="pic-preset-btn pill-opt active">
+                <span data-i18n="presetStandard">Standard</span>
+              </button>
+              <button type="button" data-pic-preset="vibrant" class="pic-preset-btn pill-opt">
+                <span data-i18n="presetVibrant">Vibrant</span>
+              </button>
+              <button type="button" data-pic-preset="cinema" class="pic-preset-btn pill-opt">
+                <span data-i18n="presetCinema">Cinema</span>
+              </button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
+                  <span data-i18n="labelBrightness" style="font-weight: 700;">Brightness</span>
+                  <span id="val-brightness" dir="ltr" class="val-pill">100%</span>
+                </div>
+                <input type="range" id="slider-brightness" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
+                  <span data-i18n="labelContrast" style="font-weight: 700;">Contrast</span>
+                  <span id="val-contrast" dir="ltr" class="val-pill">100%</span>
+                </div>
+                <input type="range" id="slider-contrast" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
+                  <span data-i18n="labelSaturation" style="font-weight: 700;">Saturation</span>
+                  <span id="val-saturation" dir="ltr" class="val-pill">100%</span>
+                </div>
+                <input type="range" id="slider-saturation" min="0" max="200" value="100" class="cinema-range" style="width: 100%;" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Playback Speed -->
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <span class="settings-label-icon">
+                <svg width="14" height="14" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <span data-i18n="labelPlaybackSpeed">Playback Speed</span>
+              </span>
+              <span id="val-playback-speed" dir="ltr" class="val-pill">1.0x</span>
+            </div>
+            <div class="grid-3" dir="ltr">
+              <button type="button" data-speed="0.25" class="speed-option-btn pill-opt">0.25x</button>
+              <button type="button" data-speed="0.5" class="speed-option-btn pill-opt">0.5x</button>
+              <button type="button" data-speed="0.75" class="speed-option-btn pill-opt">0.75x</button>
+              <button type="button" data-speed="1" class="speed-option-btn pill-opt active">1.0x</button>
+              <button type="button" data-speed="1.25" class="speed-option-btn pill-opt">1.25x</button>
+              <button type="button" data-speed="1.5" class="speed-option-btn pill-opt">1.5x</button>
+              <button type="button" data-speed="2" class="speed-option-btn pill-opt">2.0x</button>
+              <button type="button" data-speed="2.5" class="speed-option-btn pill-opt">2.5x</button>
+              <button type="button" data-speed="3" class="speed-option-btn pill-opt">3.0x</button>
+            </div>
+          </div>
+
+          <!-- Card 4: Subtitles -->
+          <div class="settings-card" style="display: flex; flex-direction: column; gap: 8px;">
+            <button type="button" id="btn-load-subtitle" class="pill-opt" style="padding: 9px; display: flex; align-items: center; justify-content: center; gap: 7px; border-color: var(--glass-border); background: rgba(56, 189, 248, 0.12);">
+              <span dir="ltr" style="padding: 1px 6px; border-radius: 5px; background: rgba(14,165,233,0.28); color: #38bdf8; font-size: 10px; font-weight: 900;">CC</span>
+              <span data-i18n="btnLoadSubtitle">Load Subtitles (.SRT / .VTT)</span>
+            </button>
+            <div style="display: flex; gap: 6px;">
+              <button type="button" id="btn-cycle-sub-size" class="pill-opt flex-1" style="padding: 7px;">
+                <span data-i18n="btnSubSize">Subtitle Size:</span>
+                <span id="label-sub-size" style="color: #38bdf8;">Normal</span>
+              </button>
+              <button type="button" id="btn-remove-subtitle" class="hidden pill-opt" style="padding: 7px 11px; background: rgba(244,63,94,0.22); color: #fda4af;">
+                <span data-i18n="btnRemoveSub">Remove</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM HUD BAR (Clean: Play/Pause, Prev, Next, Volume, Time | Subtitles CC, Settings Gear, Fullscreen) -->
         <div id="player-bottom-hud" class="player-hud-layer player-bottom-hud">
           <div class="scrubber-wrap">
             <div id="scrubber-time-tooltip" dir="ltr" class="scrubber-tooltip hidden">00:00</div>
@@ -1464,7 +1663,7 @@
           </div>
 
           <div class="controls-row">
-            <!-- FAR LEFT CLUSTER -->
+            <!-- LEFT CLUSTER -->
             <div class="controls-left min-w-0">
               <button type="button" id="btn-player-play-pause" aria-label="Play or Pause" class="ctrl-btn ctrl-btn-play">
                 <svg id="icon-play" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="transform: translateX(1px);">
@@ -1480,9 +1679,6 @@
                   <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
                 </svg>
               </button>
-
-              <button type="button" id="btn-player-rw10" dir="ltr" class="ctrl-btn desktop-only" style="font-size: 11px; font-weight: 800;">-10s</button>
-              <button type="button" id="btn-player-ff10" dir="ltr" class="ctrl-btn desktop-only" style="font-size: 11px; font-weight: 800;">+10s</button>
 
               <button type="button" id="btn-player-next" aria-label="Next Episode" class="ctrl-btn">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -1505,15 +1701,17 @@
               </div>
 
               <!-- Time -->
-              <div dir="ltr" class="truncate" style="font-size: 10px; font-weight: 700; color: #e2e8f0; padding-left: 2px;">
+              <div dir="ltr" class="truncate" style="font-size: 10.5px; font-weight: 700; color: #e2e8f0; padding-left: 2px;">
                 <span id="hud-current-time">00:00</span>
                 <span style="color: #64748b;"> / </span>
                 <span id="hud-total-duration" style="color: #94a3b8;">00:00</span>
               </div>
             </div>
 
-            <!-- FAR RIGHT CLUSTER: Settings Gear + Fullscreen -->
-            <div class="controls-right" style="position: relative;" id="settings-popover-container">
+            <!-- RIGHT CLUSTER: Quick Subtitles CC + Settings Gear + Fullscreen -->
+            <div class="controls-right">
+              <button type="button" id="btn-hud-subtitles" aria-label="Subtitles" class="ctrl-btn" style="font-size: 11px; font-weight: 900;">CC</button>
+
               <button type="button" id="btn-player-settings" aria-label="Video Settings" class="ctrl-btn">
                 <svg id="svg-settings-gear" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="transition: transform 0.25s ease;">
                   <circle cx="12" cy="12" r="3"/>
@@ -1521,140 +1719,6 @@
                 </svg>
               </button>
 
-              <!-- STUDIO VIDEO & AUDIO SETTINGS POPOVER -->
-              <div id="popover-video-settings" class="hidden settings-popover glass-popover">
-                <div class="settings-header-bar">
-                  <div class="settings-title-wrap">
-                    <svg width="16" height="16" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                      <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
-                      <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
-                      <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
-                      <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
-                    </svg>
-                    <span data-i18n="settingsHeader">Video &amp; Audio Settings</span>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 6px;">
-                    <button type="button" id="btn-reset-picture" class="btn-reset-pill">
-                      <span data-i18n="btnResetPicture">Reset</span>
-                    </button>
-                    <button type="button" id="btn-close-settings" class="btn-close-popover" aria-label="Close Settings">✕</button>
-                  </div>
-                </div>
-
-                <!-- Card 1: Audio Amplifier (0% - 200%) -->
-                <div class="settings-card">
-                  <div class="settings-card-head">
-                    <span class="settings-label-icon">
-                      <svg width="14" height="14" style="color: #fbbf24;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-                      </svg>
-                      <span data-i18n="labelAudioBoost">Audio Boost</span>
-                    </span>
-                    <span id="popover-volume-value" dir="ltr" class="val-pill val-pill-amber">100%</span>
-                  </div>
-                  <input type="range" id="slider-popover-volume" min="0" max="200" value="100" step="1" class="cinema-range" style="width: 100%; margin-bottom: 9px;" />
-                  <div class="grid-3" dir="ltr">
-                    <button type="button" data-preset-vol="100" class="vol-preset-pill pill-opt active">100%</button>
-                    <button type="button" data-preset-vol="150" class="vol-preset-pill pill-opt" style="color: #fcd34d;">150%</button>
-                    <button type="button" data-preset-vol="200" class="vol-preset-pill pill-opt" style="color: #fcd34d;">200% Max</button>
-                  </div>
-                </div>
-
-                <!-- Card 2: Picture Studio -->
-                <div class="settings-card">
-                  <div class="settings-card-head">
-                    <span class="settings-label-icon">
-                      <svg width="14" height="14" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                        <circle cx="12" cy="12" r="5"/>
-                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-                      </svg>
-                      <span data-i18n="pictureStudioTitle">Picture Studio</span>
-                    </span>
-                  </div>
-
-                  <div class="grid-3" style="margin-bottom: 11px;">
-                    <button type="button" data-pic-preset="standard" class="pic-preset-btn pill-opt active">
-                      <span data-i18n="presetStandard">Standard</span>
-                    </button>
-                    <button type="button" data-pic-preset="vibrant" class="pic-preset-btn pill-opt">
-                      <span data-i18n="presetVibrant">Vibrant</span>
-                    </button>
-                    <button type="button" data-pic-preset="cinema" class="pic-preset-btn pill-opt">
-                      <span data-i18n="presetCinema">Cinema</span>
-                    </button>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; gap: 9px;">
-                    <div>
-                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
-                        <span data-i18n="labelBrightness" style="font-weight: 700;">Brightness</span>
-                        <span id="val-brightness" dir="ltr" class="val-pill">100%</span>
-                      </div>
-                      <input type="range" id="slider-brightness" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
-                    </div>
-                    <div>
-                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
-                        <span data-i18n="labelContrast" style="font-weight: 700;">Contrast</span>
-                        <span id="val-contrast" dir="ltr" class="val-pill">100%</span>
-                      </div>
-                      <input type="range" id="slider-contrast" min="50" max="180" value="100" class="cinema-range" style="width: 100%;" />
-                    </div>
-                    <div>
-                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; margin-bottom: 4px;">
-                        <span data-i18n="labelSaturation" style="font-weight: 700;">Saturation</span>
-                        <span id="val-saturation" dir="ltr" class="val-pill">100%</span>
-                      </div>
-                      <input type="range" id="slider-saturation" min="0" max="200" value="100" class="cinema-range" style="width: 100%;" />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card 3: Playback Speed -->
-                <div class="settings-card">
-                  <div class="settings-card-head">
-                    <span class="settings-label-icon">
-                      <svg width="14" height="14" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                      </svg>
-                      <span data-i18n="labelPlaybackSpeed">Playback Speed</span>
-                    </span>
-                    <span id="val-playback-speed" dir="ltr" class="val-pill">1.0x</span>
-                  </div>
-                  <div class="grid-3" dir="ltr">
-                    <button type="button" data-speed="0.25" class="speed-option-btn pill-opt">0.25x</button>
-                    <button type="button" data-speed="0.5" class="speed-option-btn pill-opt">0.5x</button>
-                    <button type="button" data-speed="0.75" class="speed-option-btn pill-opt">0.75x</button>
-                    <button type="button" data-speed="1" class="speed-option-btn pill-opt active">1.0x</button>
-                    <button type="button" data-speed="1.25" class="speed-option-btn pill-opt">1.25x</button>
-                    <button type="button" data-speed="1.5" class="speed-option-btn pill-opt">1.5x</button>
-                    <button type="button" data-speed="2" class="speed-option-btn pill-opt">2.0x</button>
-                    <button type="button" data-speed="2.5" class="speed-option-btn pill-opt">2.5x</button>
-                    <button type="button" data-speed="3" class="speed-option-btn pill-opt">3.0x</button>
-                  </div>
-                </div>
-
-                <!-- Card 4: Subtitles -->
-                <div class="settings-card" style="display: flex; flex-direction: column; gap: 8px;">
-                  <button type="button" id="btn-load-subtitle" class="pill-opt" style="padding: 9px; display: flex; align-items: center; justify-content: center; gap: 7px; border-color: var(--glass-border); background: rgba(56, 189, 248, 0.12);">
-                    <span dir="ltr" style="padding: 1px 6px; border-radius: 5px; background: rgba(14,165,233,0.28); color: #38bdf8; font-size: 10px; font-weight: 900;">CC</span>
-                    <span data-i18n="btnLoadSubtitle">Load Subtitles (.SRT / .VTT)</span>
-                  </button>
-                  <div style="display: flex; gap: 6px;">
-                    <button type="button" id="btn-cycle-sub-size" class="pill-opt flex-1" style="padding: 7px;">
-                      <span data-i18n="btnSubSize">Subtitle Size:</span>
-                      <span id="label-sub-size" style="color: #38bdf8;">Normal</span>
-                    </button>
-                    <button type="button" id="btn-remove-subtitle" class="hidden pill-opt" style="padding: 7px 11px; background: rgba(244,63,94,0.22); color: #fda4af;">
-                      <span data-i18n="btnRemoveSub">Remove</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Fullscreen Landscape Toggle Button -->
               <button type="button" id="btn-player-fullscreen" aria-label="Fullscreen Landscape" class="ctrl-btn">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
@@ -1748,7 +1812,7 @@
   </div>
 
   <!-- ========================================================================
-       3. PERSISTENT INDEXEDDB MEDIA LIBRARY & SINGLE-STREAM ENGINE
+       3. PERSISTENT INDEXEDDB LIBRARY & PRO TOUCH/GESTURE ENGINE
        ======================================================================== -->
   <script>
     (function () {
@@ -1788,6 +1852,7 @@
           upNextLabel: 'UP NEXT',
           btnPlayNow: 'Play Now',
           btnCancel: 'Cancel',
+          tapToUnlock: 'Screen Locked • Tap to Unlock',
           settingsHeader: 'Video & Audio Settings',
           btnResetPicture: 'Reset',
           labelAudioBoost: 'Audio Boost',
@@ -1863,6 +1928,7 @@
           upNextLabel: 'الحلقة التالية',
           btnPlayNow: 'تشغيل الآن',
           btnCancel: 'إلغاء',
+          tapToUnlock: 'الشاشة مقفلة • اضغط لفتح القفل',
           settingsHeader: 'إعدادات الفيديو والصوت',
           btnResetPicture: 'إعادة ضبط',
           labelAudioBoost: 'مضخم الصوت',
@@ -1956,9 +2022,8 @@
       const DB_VERSION = 1;
       let dbInstance = null;
 
-      // Collections: [{ id, name, type: 'folder'|'singles', updatedAt, items: [{ id, title, fileName, ext, size, fileHandle, file, watched }] }]
       let collections = [];
-      let watchHistory = []; // [{ id, collectionId, fileName, title, collectionName, currentTime, duration, updatedAt, fileHandle }]
+      let watchHistory = [];
 
       let activeCollectionId = null;
       let playlist = [];
@@ -1966,7 +2031,7 @@
       let collectionName = 'Playlist';
       let currentIndex = -1;
 
-      let libraryFilter = 'all'; // 'all' | 'folders' | 'videos'
+      let libraryFilter = 'all';
       let openedFolderId = null;
 
       let currentVolumePercent = 100;
@@ -1986,6 +2051,16 @@
       let hudHideTimer = null;
       let lastHistorySaveTimestamp = 0;
 
+      let isScreenLocked = false;
+      let unlockBtnTimer = null;
+
+      const ASPECT_MODES = [
+        { id: 'contain', label: 'Fit' },
+        { id: 'cover', label: 'Fill' },
+        { id: 'fill', label: 'Stretch' },
+      ];
+      let aspectIndex = 0;
+
       const THEME_STORAGE_KEY = 'fares_cinema_lighting_mode_v1';
 
       function openPersistentDB() {
@@ -1996,21 +2071,12 @@
             const req = indexedDB.open(DB_NAME, DB_VERSION);
             req.onupgradeneeded = (e) => {
               const db = e.target.result;
-              if (!db.objectStoreNames.contains('collections')) {
-                db.createObjectStore('collections', { keyPath: 'id' });
-              }
-              if (!db.objectStoreNames.contains('history')) {
-                db.createObjectStore('history', { keyPath: 'id' });
-              }
+              if (!db.objectStoreNames.contains('collections')) db.createObjectStore('collections', { keyPath: 'id' });
+              if (!db.objectStoreNames.contains('history')) db.createObjectStore('history', { keyPath: 'id' });
             };
-            req.onsuccess = (e) => {
-              dbInstance = e.target.result;
-              resolve(dbInstance);
-            };
+            req.onsuccess = (e) => { dbInstance = e.target.result; resolve(dbInstance); };
             req.onerror = () => resolve(null);
-          } catch (_) {
-            resolve(null);
-          }
+          } catch (_) { resolve(null); }
         });
       }
 
@@ -2018,7 +2084,6 @@
         const db = await openPersistentDB();
         if (!db) return;
         try {
-          // Strip raw File blobs before saving to IndexedDB (keep FileSystemFileHandle which is lightweight!)
           const serializable = {
             id: col.id,
             name: col.name,
@@ -2042,46 +2107,31 @@
       async function deleteCollectionFromDB(colId) {
         const db = await openPersistentDB();
         if (!db) return;
-        try {
-          const tx = db.transaction('collections', 'readwrite');
-          tx.objectStore('collections').delete(colId);
-        } catch (_) {}
+        try { db.transaction('collections', 'readwrite').objectStore('collections').delete(colId); } catch (_) {}
       }
 
       async function clearAllCollectionsFromDB() {
         const db = await openPersistentDB();
         if (!db) return;
-        try {
-          const tx = db.transaction('collections', 'readwrite');
-          tx.objectStore('collections').clear();
-        } catch (_) {}
+        try { db.transaction('collections', 'readwrite').objectStore('collections').clear(); } catch (_) {}
       }
 
       async function saveHistoryEntryToDB(entry) {
         const db = await openPersistentDB();
         if (!db) return;
-        try {
-          const tx = db.transaction('history', 'readwrite');
-          tx.objectStore('history').put(entry);
-        } catch (_) {}
+        try { db.transaction('history', 'readwrite').objectStore('history').put(entry); } catch (_) {}
       }
 
       async function deleteHistoryEntryFromDB(id) {
         const db = await openPersistentDB();
         if (!db) return;
-        try {
-          const tx = db.transaction('history', 'readwrite');
-          tx.objectStore('history').delete(id);
-        } catch (_) {}
+        try { db.transaction('history', 'readwrite').objectStore('history').delete(id); } catch (_) {}
       }
 
       async function clearAllHistoryFromDB() {
         const db = await openPersistentDB();
         if (!db) return;
-        try {
-          const tx = db.transaction('history', 'readwrite');
-          tx.objectStore('history').clear();
-        } catch (_) {}
+        try { db.transaction('history', 'readwrite').objectStore('history').clear(); } catch (_) {}
       }
 
       async function loadStateFromDB() {
@@ -2113,10 +2163,7 @@
 
       function showInlineNotice(msg) {
         const el = document.getElementById('inline-picker-notice');
-        if (!msg) {
-          el.classList.add('hidden');
-          return;
-        }
+        if (!msg) { el.classList.add('hidden'); return; }
         el.textContent = msg;
         el.classList.remove('hidden');
         clearTimeout(el._t);
@@ -2159,7 +2206,7 @@
       }
 
       /* ======================================================================
-         4. LOW-CPU RISING GEOMETRIC CANVAS (AUTO-PAUSES DURING VIDEO PLAYBACK)
+         4. LOW-CPU RISING GEOMETRIC CANVAS
          ====================================================================== */
       (function initGeometricCanvas() {
         const canvas = document.getElementById('geometric-bg-canvas');
@@ -2256,7 +2303,7 @@
       })();
 
       /* ======================================================================
-         5. LIGHTING MODES & LANGUAGE (ZERO POPUPS)
+         5. LIGHTING MODES & LANGUAGE
          ====================================================================== */
       function setLightingMode(mode) {
         if (!['dark', 'light', 'eyecare', 'cinema'].includes(mode)) mode = 'dark';
@@ -2305,9 +2352,18 @@
       /* ======================================================================
          6. NAVIGATION & 200% VOLUME AMPLIFIER
          ====================================================================== */
-      function showHomeScreen() {
+      async function showHomeScreen() {
         cancelUpNextCountdown();
         closeSettingsPopover();
+        setScreenLock(false);
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          try {
+            if (document.exitFullscreen) await document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          } catch (_) {}
+        }
+        playerContainer.classList.remove('theater-fullscreen', 'is-fullscreen-active');
+        unlockScreenOrientation();
         viewPlayer.classList.add('hidden');
         viewHome.classList.remove('hidden');
         renderMediaLibraryUI();
@@ -2321,6 +2377,8 @@
 
       document.getElementById('btn-brand-home').addEventListener('click', showHomeScreen);
       document.getElementById('btn-header-home').addEventListener('click', showHomeScreen);
+      document.getElementById('btn-player-back').addEventListener('click', showHomeScreen);
+
       document.getElementById('btn-home-resume').addEventListener('click', () => {
         if (playlist.length > 0 && currentIndex >= 0) {
           showPlayerScreen();
@@ -2418,7 +2476,6 @@
         return name.replace(/\.[^/.]+$/, '').replace(/[._]+/g, ' ').trim();
       }
 
-      /* Smart Upload Folder: Uses File System Access API (persists across restarts!) with fallback */
       async function handleUploadFolderClick() {
         showInlineNotice('');
         if (typeof window.showDirectoryPicker === 'function') {
@@ -2473,7 +2530,6 @@
         inputFolderFiles.click();
       }
 
-      /* Smart Upload Single/Multiple Videos: Uses showOpenFilePicker (persists across restarts!) with fallback */
       async function handleUploadVideoClick() {
         showInlineNotice('');
         if (typeof window.showOpenFilePicker === 'function') {
@@ -2529,7 +2585,6 @@
         inputVideoFiles.click();
       }
 
-      /* Fallback <input type="file"> Handler */
       async function handleFallbackFileInput(fileList, isFolderInput) {
         const videos = [];
         const len = fileList ? fileList.length : 0;
@@ -2605,9 +2660,7 @@
         if (item.fileHandle) {
           try {
             let perm = await item.fileHandle.queryPermission({ mode: 'read' });
-            if (perm !== 'granted') {
-              perm = await item.fileHandle.requestPermission({ mode: 'read' });
-            }
+            if (perm !== 'granted') perm = await item.fileHandle.requestPermission({ mode: 'read' });
             if (perm === 'granted') {
               const file = await item.fileHandle.getFile();
               item.file = file;
@@ -2625,7 +2678,6 @@
         const item = col.items[index];
         const file = await resolvePlayableFile(item);
 
-        // If browser session invalidated a legacy fallback file without handle, prompt user to re-pick cleanly
         if (!file) {
           if (col.type === 'folder') handleUploadFolderClick();
           else handleUploadVideoClick();
@@ -2727,8 +2779,27 @@
       });
 
       /* ======================================================================
-         9. HUD TIMING, LANDSCAPE FULLSCREEN & STUDIO SETTINGS POPOVER
+         9. PRO PLAYER GESTURES (2X HOLD, DOUBLE-TAP SEEK, LOCK, TOP PILL)
          ====================================================================== */
+      const topActionPill = document.getElementById('top-action-pill');
+      const topActionPillText = document.getElementById('top-action-pill-text');
+
+      function showTopActionPill(text, autoHideMs = 750) {
+        topActionPillText.textContent = text;
+        topActionPill.classList.remove('hidden');
+        clearTimeout(topActionPill._t);
+        if (autoHideMs > 0) {
+          topActionPill._t = setTimeout(() => {
+            topActionPill.classList.add('hidden');
+          }, autoHideMs);
+        }
+      }
+
+      function hideTopActionPill() {
+        clearTimeout(topActionPill._t);
+        topActionPill.classList.add('hidden');
+      }
+
       function togglePlayPause() {
         if (!videoEl.src) return;
         if (videoEl.paused) videoEl.play().catch(() => {});
@@ -2737,20 +2808,75 @@
 
       document.getElementById('btn-player-play-pause').addEventListener('click', togglePlayPause);
 
+      /* Screen Lock / Unlock */
+      const btnUnlockScreen = document.getElementById('btn-unlock-screen');
+
+      function setScreenLock(locked) {
+        isScreenLocked = Boolean(locked);
+        playerContainer.classList.toggle('screen-locked', isScreenLocked);
+        if (isScreenLocked) {
+          closeSettingsPopover();
+          btnUnlockScreen.classList.remove('hidden');
+          clearTimeout(unlockBtnTimer);
+          unlockBtnTimer = setTimeout(() => btnUnlockScreen.classList.add('hidden'), 2800);
+        } else {
+          clearTimeout(unlockBtnTimer);
+          btnUnlockScreen.classList.add('hidden');
+          revealHudWithDelay(6000);
+        }
+      }
+
+      document.getElementById('btn-player-lock').addEventListener('click', (e) => {
+        e.stopPropagation();
+        setScreenLock(true);
+      });
+
+      btnUnlockScreen.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setScreenLock(false);
+      });
+
+      /* Aspect Ratio / Zoom Fit Cycling */
+      document.getElementById('btn-player-aspect').addEventListener('click', (e) => {
+        e.stopPropagation();
+        aspectIndex = (aspectIndex + 1) % ASPECT_MODES.length;
+        const mode = ASPECT_MODES[aspectIndex];
+        videoEl.style.objectFit = mode.id;
+        document.getElementById('label-aspect-mode').textContent = mode.label;
+        showTopActionPill(`Aspect: ${mode.label}`, 850);
+        revealHudWithDelay(6000);
+      });
+
+      /* Manual Screen Orientation Toggle */
+      document.getElementById('btn-player-rotate').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        try {
+          if (screen.orientation && typeof screen.orientation.lock === 'function') {
+            const currentType = screen.orientation.type || '';
+            const nextOrient = currentType.startsWith('landscape') ? 'portrait' : 'landscape';
+            await screen.orientation.lock(nextOrient);
+          }
+        } catch (_) {}
+        revealHudWithDelay(6000);
+      });
+
+      /* Cumulative Double-Tap Seek (-10s / +10s) */
+      let seekStreak = 0;
+      let seekStreakTimer = null;
+
       function seekByOffset(sec) {
         if (!videoEl.src || !Number.isFinite(videoEl.duration)) return;
         videoEl.currentTime = Math.max(0, Math.min(videoEl.duration, videoEl.currentTime + sec));
-        const overlay = document.getElementById('player-gesture-overlay');
-        document.getElementById('gesture-text-slot').textContent = sec < 0 ? '-10s' : '+10s';
-        overlay.classList.remove('hidden');
-        clearTimeout(overlay._t);
-        overlay._t = setTimeout(() => overlay.classList.add('hidden'), 420);
+        seekStreak += sec;
+        clearTimeout(seekStreakTimer);
+        seekStreakTimer = setTimeout(() => { seekStreak = 0; }, 800);
+
+        const label = seekStreak > 0 ? `+${seekStreak}s ⏩` : `⏪ ${seekStreak}s`;
+        showTopActionPill(label, 750);
       }
 
-      document.getElementById('btn-player-rw10').addEventListener('click', () => seekByOffset(-10));
-      document.getElementById('btn-player-ff10').addEventListener('click', () => seekByOffset(10));
-
       function revealHudWithDelay(delayMs) {
+        if (isScreenLocked) return;
         playerContainer.classList.remove('controls-hidden');
         clearTimeout(hudHideTimer);
         if (!videoEl.paused && popoverSettings.classList.contains('hidden')) {
@@ -2783,7 +2909,7 @@
         iconPlay.classList.remove('hidden');
         rootHtml.classList.remove('cinema-playing');
         clearTimeout(hudHideTimer);
-        playerContainer.classList.remove('controls-hidden');
+        if (!isScreenLocked) playerContainer.classList.remove('controls-hidden');
         recordCurrentPlaybackInHistory(true);
         releaseScreenWakeLock();
       });
@@ -2811,9 +2937,10 @@
         }
       });
 
+      const scrubberWrap = scrubberRail.parentElement;
       let isScrubbing = false;
       function updateScrub(clientX, apply) {
-        const rect = scrubberRail.getBoundingClientRect();
+        const rect = scrubberWrap.getBoundingClientRect();
         const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / (rect.width || 1)));
         const dur = videoEl.duration || 0;
         scrubberTooltip.style.left = `${ratio * 100}%`;
@@ -2825,21 +2952,26 @@
         }
       }
 
-      scrubberRail.addEventListener('pointerdown', (e) => {
+      scrubberWrap.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
         isScrubbing = true;
-        scrubberRail.setPointerCapture(e.pointerId);
+        try { scrubberWrap.setPointerCapture(e.pointerId); } catch (_) {}
         updateScrub(e.clientX, true);
       });
-      scrubberRail.addEventListener('pointermove', (e) => updateScrub(e.clientX, isScrubbing));
-      scrubberRail.addEventListener('pointerup', (e) => {
-        if (isScrubbing) {
-          isScrubbing = false;
-          scrubberRail.releasePointerCapture(e.pointerId);
-          scrubberTooltip.classList.add('hidden');
-          revealHudWithDelay(6000);
-        }
+      scrubberWrap.addEventListener('pointermove', (e) => {
+        if (isScrubbing) updateScrub(e.clientX, true);
       });
+      function finishScrub(e) {
+        if (!isScrubbing) return;
+        isScrubbing = false;
+        try { scrubberWrap.releasePointerCapture(e.pointerId); } catch (_) {}
+        scrubberTooltip.classList.add('hidden');
+        revealHudWithDelay(6000);
+      }
+      scrubberWrap.addEventListener('pointerup', finishScrub);
+      scrubberWrap.addEventListener('pointercancel', finishScrub);
 
+      /* Settings Drawer Open / Close */
       function openSettingsPopover() {
         popoverSettings.classList.remove('hidden');
         btnSettings.classList.add('ctrl-btn-active');
@@ -2873,11 +3005,25 @@
       });
 
       document.addEventListener('click', (e) => {
-        if (!popoverSettings.classList.contains('hidden') && !document.getElementById('settings-popover-container').contains(e.target)) {
+        if (!popoverSettings.classList.contains('hidden') && !popoverSettings.contains(e.target) && !btnSettings.contains(e.target)) {
           closeSettingsPopover();
         }
       });
 
+      /* Quick Subtitles CC Button in Bottom HUD */
+      document.getElementById('btn-hud-subtitles').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (activeSubtitleUrl && videoEl.textTracks[0]) {
+          const isShowing = videoEl.textTracks[0].mode === 'showing';
+          videoEl.textTracks[0].mode = isShowing ? 'disabled' : 'showing';
+          e.currentTarget.classList.toggle('ctrl-btn-active', !isShowing);
+          showTopActionPill(!isShowing ? 'CC: ON' : 'CC: OFF', 700);
+        } else {
+          inputSubtitleFile.click();
+        }
+      });
+
+      /* Picture Studio Sliders & Presets */
       function applyPictureFilters(activePresetName) {
         videoEl.style.filter = `brightness(${picBrightness}%) contrast(${picContrast}%) saturate(${picSaturation}%)`;
         document.getElementById('val-brightness').textContent = `${picBrightness}%`;
@@ -2910,16 +3056,19 @@
         applyPictureFilters('standard');
       });
 
+      let userBasePlaybackRate = 1;
+      function setPlaybackSpeed(sp) {
+        userBasePlaybackRate = sp;
+        videoEl.playbackRate = sp;
+        document.getElementById('val-playback-speed').textContent = `${sp.toFixed(sp % 1 === 0 ? 1 : 2)}x`;
+        const badge = document.getElementById('hud-speed-badge');
+        badge.classList.toggle('hidden', sp === 1);
+        badge.textContent = `${sp}x`;
+        document.querySelectorAll('.speed-option-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.speed) === sp));
+      }
+
       document.querySelectorAll('.speed-option-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const sp = Number(btn.dataset.speed) || 1;
-          videoEl.playbackRate = sp;
-          document.getElementById('val-playback-speed').textContent = `${sp.toFixed(sp % 1 === 0 ? 1 : 2)}x`;
-          const badge = document.getElementById('hud-speed-badge');
-          badge.classList.toggle('hidden', sp === 1);
-          badge.textContent = `${sp}x`;
-          document.querySelectorAll('.speed-option-btn').forEach((b) => b.classList.toggle('active', b === btn));
-        });
+        btn.addEventListener('click', () => setPlaybackSpeed(Number(btn.dataset.speed) || 1));
       });
 
       document.getElementById('btn-load-subtitle').addEventListener('click', () => inputSubtitleFile.click());
@@ -2947,6 +3096,7 @@
           videoEl.appendChild(track);
           requestAnimationFrame(() => { if (videoEl.textTracks[0]) videoEl.textTracks[0].mode = 'showing'; });
           document.getElementById('btn-remove-subtitle').classList.remove('hidden');
+          document.getElementById('btn-hud-subtitles').classList.add('ctrl-btn-active');
         } catch (_) {}
       });
 
@@ -2954,6 +3104,7 @@
         videoEl.querySelectorAll('track').forEach((tr) => tr.remove());
         if (activeSubtitleUrl) { URL.revokeObjectURL(activeSubtitleUrl); activeSubtitleUrl = null; }
         document.getElementById('btn-remove-subtitle').classList.add('hidden');
+        document.getElementById('btn-hud-subtitles').classList.remove('ctrl-btn-active');
       }
 
       document.getElementById('btn-remove-subtitle').addEventListener('click', clearActiveSubtitleTrack);
@@ -2964,6 +3115,7 @@
         document.getElementById('dynamic-cue-style').textContent = `video::cue { background-color: rgba(2,6,23,0.82); color: #fff; font-family: 'Plus Jakarta Sans','Cairo',sans-serif; font-size: ${SUB_SIZE_SCALES[subSizeIndex]}; line-height: 1.45; padding: 4px 10px; border-radius: 6px; }`;
       });
 
+      /* Fullscreen with Auto-Landscape */
       async function lockLandscapeOrientation() {
         try {
           if (screen.orientation && typeof screen.orientation.lock === 'function') {
@@ -3037,23 +3189,95 @@
 
       document.getElementById('btn-player-fullscreen').addEventListener('click', togglePlayerFullscreen);
 
-      function showCenterGestureBadge(symbol) {
-        const overlay = document.getElementById('player-gesture-overlay');
-        document.getElementById('gesture-text-slot').textContent = symbol;
-        overlay.classList.remove('hidden');
-        clearTimeout(overlay._t);
-        overlay._t = setTimeout(() => overlay.classList.add('hidden'), 420);
-      }
+      /* ======================================================================
+         UNIFIED VIDEO TOUCH & POINTER GESTURES:
+         - Blocks browser contextmenu (Download video / Copy video frame)
+         - Long Press (Hold 340ms): Temporary 2.0x Speed + Top Pill Banner
+         - Double Tap Left / Right: -10s / +10s Seek + Top Pill Banner
+         - Double Tap Center: Play / Pause + Top Pill Banner
+         - Single Tap: Show / Hide HUD (or Show Unlock Pill if Locked)
+         ====================================================================== */
+      playerContainer.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+      });
+      videoEl.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+      });
 
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let longPressTimer = null;
+      let isLongPressActive = false;
+      let blockNextClick = false;
       let controlsHiddenAtPointerDown = false;
       let lastTap = 0;
       let tapTimer = null;
 
-      videoEl.addEventListener('pointerdown', () => {
+      videoEl.addEventListener('pointerdown', (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        pointerStartX = e.clientX;
+        pointerStartY = e.clientY;
+        isLongPressActive = false;
+        blockNextClick = false;
         controlsHiddenAtPointerDown = playerContainer.classList.contains('controls-hidden');
+
+        if (isScreenLocked) return;
+
+        clearTimeout(longPressTimer);
+        longPressTimer = setTimeout(() => {
+          isLongPressActive = true;
+          blockNextClick = true;
+          clearTimeout(tapTimer);
+          lastTap = 0;
+          if (videoEl.paused) videoEl.play().catch(() => {});
+          videoEl.playbackRate = 2.0;
+          showTopActionPill('⏩ 2.0x', 0);
+        }, 340);
       }, { passive: true });
 
+      videoEl.addEventListener('pointermove', (e) => {
+        if (!longPressTimer) return;
+        if (Math.hypot(e.clientX - pointerStartX, e.clientY - pointerStartY) > 14) {
+          clearTimeout(longPressTimer);
+          longPressTimer = null;
+        }
+      }, { passive: true });
+
+      function endLongPressIfActive() {
+        if (longPressTimer) {
+          clearTimeout(longPressTimer);
+          longPressTimer = null;
+        }
+        if (isLongPressActive) {
+          isLongPressActive = false;
+          videoEl.playbackRate = userBasePlaybackRate || 1.0;
+          hideTopActionPill();
+        }
+      }
+
+      videoEl.addEventListener('pointerup', endLongPressIfActive, { passive: true });
+      videoEl.addEventListener('pointercancel', endLongPressIfActive, { passive: true });
+
       videoEl.addEventListener('click', (e) => {
+        if (blockNextClick) {
+          blockNextClick = false;
+          return;
+        }
+
+        if (isScreenLocked) {
+          btnUnlockScreen.classList.remove('hidden');
+          clearTimeout(unlockBtnTimer);
+          unlockBtnTimer = setTimeout(() => btnUnlockScreen.classList.add('hidden'), 2800);
+          return;
+        }
+
+        if (!popoverSettings.classList.contains('hidden')) {
+          closeSettingsPopover();
+          return;
+        }
+
         const now = Date.now();
         const rect = videoEl.getBoundingClientRect();
         const ratio = (e.clientX - rect.left) / (rect.width || 1);
@@ -3061,22 +3285,18 @@
         if (now - lastTap < 280) {
           clearTimeout(tapTimer);
           lastTap = 0;
-          if (ratio < 0.32) {
+          if (ratio < 0.35) {
             seekByOffset(-10);
-          } else if (ratio > 0.68) {
+          } else if (ratio > 0.65) {
             seekByOffset(10);
           } else {
             const willPlay = videoEl.paused;
             togglePlayPause();
-            showCenterGestureBadge(willPlay ? '▶' : '⏸');
+            showTopActionPill(willPlay ? '▶' : '⏸', 650);
           }
         } else {
           lastTap = now;
           tapTimer = setTimeout(() => {
-            if (!popoverSettings.classList.contains('hidden')) {
-              closeSettingsPopover();
-              return;
-            }
             if (controlsHiddenAtPointerDown) {
               revealHudWithDelay(6000);
             } else if (!videoEl.paused) {
@@ -3203,7 +3423,6 @@
         document.getElementById('home-resume-filename').textContent = activeTitle ? `• ${activeTitle}` : '';
         document.getElementById('home-library-stats').innerHTML = t('libraryStats', folderCols.length, totalVideos);
 
-        // If user clicked into a specific folder, show its clean categorized episode list
         if (openedFolderId) {
           const folder = folderCols.find((f) => f.id === openedFolderId);
           if (folder) {
@@ -3243,7 +3462,6 @@
 
         let html = '';
 
-        // 1. Folders Section
         if ((libraryFilter === 'all' || libraryFilter === 'folders') && folderCols.length > 0) {
           html += `
             <div style="padding-top: 14px;">
@@ -3277,7 +3495,6 @@
           `;
         }
 
-        // 2. Standalone Videos Section
         if ((libraryFilter === 'all' || libraryFilter === 'videos') && singleCol && singleCol.items.length > 0) {
           html += `
             <div style="padding-top: 16px;">
@@ -3327,7 +3544,6 @@
         });
       }
 
-      /* Watch History with Direct FileHandle Resume */
       function recordCurrentPlaybackInHistory(force) {
         if (currentIndex < 0 || !playlist[currentIndex]) return;
         const now = Date.now();
@@ -3356,7 +3572,6 @@
 
       async function resumeFromHistoryItem(entry) {
         if (!entry) return;
-        // 1. Check if item exists in any saved collection in library
         for (const col of collections) {
           const idx = col.items.findIndex((it) => it.fileName === entry.fileName);
           if (idx !== -1) {
@@ -3365,7 +3580,6 @@
           }
         }
 
-        // 2. Otherwise use stored FileSystemFileHandle directly!
         if (entry.fileHandle) {
           try {
             let perm = await entry.fileHandle.queryPermission({ mode: 'read' });
@@ -3398,7 +3612,6 @@
           } catch (_) {}
         }
 
-        // 3. Fallback file picker
         handleUploadVideoClick();
       }
 
@@ -3514,7 +3727,7 @@
         });
       }
 
-      /* Boot Sequence: Load Saved Folders & Watch History from IndexedDB */
+      /* Boot Sequence */
       (async function bootApp() {
         await loadStateFromDB();
         applyLanguage('en');
