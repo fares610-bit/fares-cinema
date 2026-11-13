@@ -1,5 +1,5 @@
-const CACHE_NAME = 'fares-cinema-offline-v6';
-const ASSETS = ['./', './index.html', './manifest.json'];
+const CACHE_NAME = 'fares-cinema-offline-v8';
+const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));

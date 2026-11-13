@@ -10,8 +10,8 @@
   <meta name="apple-mobile-web-app-title" content="Fares Cinema" />
   <meta name="application-name" content="Fares Cinema" />
   <meta name="description" content="fares.com — Fares Cinema Ultra-Light Full HD Media & Series Player with 200% Audio Amplifier" />
-  <link id="pwa-favicon" rel="icon" type="image/png" />
-  <link id="pwa-apple-icon" rel="apple-touch-icon" />
+  <link rel="icon" type="image/png" href="./icon-192.png" />
+  <link rel="apple-touch-icon" href="./icon-512.png" />
   <link id="pwa-manifest-link" rel="manifest" href="./manifest.json" />
   <title>fares.com | Fares Cinema</title>
 
@@ -378,7 +378,7 @@
     }
 
     /* ==========================================================================
-       5. MAIN CONTAINER & DESIGNER HERO TITLE
+       5. MAIN CONTAINER, DESIGNER TITLE & CATEGORIZED MEDIA LIBRARY
        ========================================================================== */
     .main-wrap {
       position: relative;
@@ -393,7 +393,7 @@
     }
 
     .home-wrap {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -407,7 +407,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 12px 0 28px;
+      padding: 12px 0 24px;
     }
 
     .hero-badge {
@@ -447,7 +447,7 @@
     }
 
     .hero-subtitle {
-      margin: 0 0 24px;
+      margin: 0 0 22px;
       font-size: clamp(0.95rem, 2.3vw, 1.2rem);
       font-weight: 500;
       color: var(--text-secondary);
@@ -459,7 +459,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .btn-upload-main {
@@ -477,7 +477,7 @@
     .btn-upload-main:active { transform: scale(0.97); }
 
     .btn-resume-pill {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding: 9px 18px;
       border-radius: 999px;
       font-size: 0.8rem;
@@ -495,6 +495,17 @@
       line-height: 1.5;
       color: var(--text-secondary);
       opacity: 0.85;
+    }
+
+    .inline-notice {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fcd34d;
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.32);
     }
 
     /* Cards & Grids */
@@ -555,6 +566,84 @@
       color: var(--text-secondary);
     }
 
+    /* Library Category Filter Tabs */
+    .lib-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+    }
+
+    .lib-tab-btn {
+      padding: 5px 11px;
+      border-radius: 9px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+    }
+
+    .lib-tab-btn.active {
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+      color: #ffffff;
+    }
+
+    /* Folder Cards Grid */
+    .folders-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-top: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .folders-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .folder-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      background: rgba(56, 189, 248, 0.06);
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .folder-card:hover {
+      border-color: var(--accent-primary);
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    .folder-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(56, 189, 248, 0.25));
+      color: var(--accent-primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .ext-pill {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 5px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent-primary);
+    }
+
     .btn-danger-soft {
       padding: 7px 12px;
       border-radius: 11px;
@@ -586,7 +675,7 @@
       grid-template-columns: 1fr;
       gap: 10px;
       padding-top: 14px;
-      max-height: 360px;
+      max-height: 400px;
       overflow-y: auto;
     }
 
@@ -615,8 +704,8 @@
     }
 
     .idx-badge {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 9px;
       display: flex;
       align-items: center;
@@ -898,7 +987,7 @@
     @media (min-width: 640px) { .desktop-only { display: inline-flex; } }
 
     /* ==========================================================================
-       STUDIO VIDEO & AUDIO SETTINGS POPOVER (ENHANCED UI)
+       STUDIO VIDEO & AUDIO SETTINGS POPOVER
        ========================================================================== */
     @keyframes settingsPopIn {
       from { opacity: 0; transform: translateY(10px) scale(0.97); }
@@ -1095,7 +1184,7 @@
       text-align: center;
     }
 
-    /* Modal & Toast */
+    /* Modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1113,27 +1202,6 @@
       max-width: 580px;
       border-radius: 24px;
       padding: 22px;
-    }
-
-    .toast-feed {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      z-index: 70;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      pointer-events: none;
-    }
-
-    .toast-item {
-      padding: 10px 16px;
-      border-radius: 14px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
   </style>
 
@@ -1168,7 +1236,7 @@
     <span class="fares-side-line"></span>
   </aside>
 
-  <!-- Hidden File Inputs -->
+  <!-- Fallback Hidden File Inputs -->
   <input type="file" id="input-video-files" accept="video/*,.mkv,.mp4,.webm,.avi,.mov,.m4v" multiple class="hidden" />
   <input type="file" id="input-folder-files" webkitdirectory directory multiple class="hidden" />
   <input type="file" id="input-subtitle-file" accept=".srt,.vtt" class="hidden" />
@@ -1271,34 +1339,46 @@
         </button>
 
         <p data-i18n="heroHint" class="hero-hint">
-          Supports MP4, MKV, WebM, AVI, MOV &amp; SRT/VTT subtitles • Ultra-low memory single-stream engine
+          Supports MP4, MKV, WebM, AVI, MOV &amp; SRT/VTT subtitles • Auto-saved folders &amp; episodes
         </p>
+
+        <div id="inline-picker-notice" class="hidden inline-notice"></div>
       </div>
 
-      <!-- MEMORY & WATCH HISTORY STACK -->
+      <!-- ORGANIZED MEDIA LIBRARY & WATCH HISTORY STACK -->
       <div class="cards-stack">
 
-        <!-- Loaded Files Card -->
-        <div id="home-memory-manager" class="hidden section-card glass-surface">
+        <!-- Categorized Media Library Card (Folders + Standalone Videos) -->
+        <div id="home-media-library" class="hidden section-card glass-surface">
           <div class="card-header">
             <div class="card-title-group">
               <div class="icon-box">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                 </svg>
               </div>
               <div class="min-w-0">
-                <h2 data-i18n="loadedFilesTitle" class="card-h2">Loaded Files</h2>
-                <p id="home-memory-stats" class="card-sub">0 Files</p>
+                <h2 data-i18n="libraryTitle" class="card-h2">My Media Library</h2>
+                <p id="home-library-stats" class="card-sub">0 Folders • 0 Videos</p>
               </div>
             </div>
 
-            <button type="button" id="btn-home-clear-files" class="btn-danger-soft">
-              <span data-i18n="btnClearUploadedFiles">Clear Uploaded Files</span>
-            </button>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+              <!-- Category Filter Tabs -->
+              <div class="lib-tabs">
+                <button type="button" data-lib-filter="all" class="lib-tab-btn active" data-i18n="tabAll">All</button>
+                <button type="button" data-lib-filter="folders" class="lib-tab-btn" data-i18n="tabFolders">Folders</button>
+                <button type="button" data-lib-filter="videos" class="lib-tab-btn" data-i18n="tabVideos">Videos</button>
+              </div>
+
+              <button type="button" id="btn-home-clear-library" class="btn-danger-soft">
+                <span data-i18n="btnClearLibrary">Clear All</span>
+              </button>
+            </div>
           </div>
 
-          <div id="home-loaded-files-list" class="items-grid"></div>
+          <!-- Dynamic Library Content (Folders Grid + Single Videos Grid OR Opened Folder View) -->
+          <div id="home-library-body"></div>
         </div>
 
         <!-- Watch History Card -->
@@ -1312,7 +1392,7 @@
               </div>
               <div>
                 <h2 data-i18n="watchHistoryTitle" class="card-h2">Watch History</h2>
-                <p data-i18n="watchHistorySubtitle" class="card-sub">Automatically tracks your playback progress</p>
+                <p data-i18n="watchHistorySubtitle" class="card-sub">Tap any video to resume directly from where you stopped</p>
               </div>
             </div>
 
@@ -1441,12 +1521,8 @@
                 </svg>
               </button>
 
-              <!-- ==============================================================
-                   STUDIO VIDEO & AUDIO SETTINGS POPOVER
-                   ============================================================== -->
+              <!-- STUDIO VIDEO & AUDIO SETTINGS POPOVER -->
               <div id="popover-video-settings" class="hidden settings-popover glass-popover">
-                
-                <!-- Top Header Bar -->
                 <div class="settings-header-bar">
                   <div class="settings-title-wrap">
                     <svg width="16" height="16" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
@@ -1485,7 +1561,7 @@
                   </div>
                 </div>
 
-                <!-- Card 2: Picture Studio (Presets + Brightness / Contrast / Saturation) -->
+                <!-- Card 2: Picture Studio -->
                 <div class="settings-card">
                   <div class="settings-card-head">
                     <span class="settings-label-icon">
@@ -1499,7 +1575,6 @@
                     </span>
                   </div>
 
-                  <!-- 1-Tap Picture Presets -->
                   <div class="grid-3" style="margin-bottom: 11px;">
                     <button type="button" data-pic-preset="standard" class="pic-preset-btn pill-opt active">
                       <span data-i18n="presetStandard">Standard</span>
@@ -1577,7 +1652,6 @@
                     </button>
                   </div>
                 </div>
-
               </div>
 
               <!-- Fullscreen Landscape Toggle Button -->
@@ -1631,10 +1705,6 @@
               <input type="checkbox" id="checkbox-auto-next" checked style="accent-color: #0ea5e9;" />
               <span data-i18n="labelAutoNext">Auto-Next</span>
             </label>
-
-            <button type="button" id="btn-playlist-clear-files" class="btn-danger-soft">
-              <span data-i18n="btnClearUploadedFiles">Clear Uploaded Files</span>
-            </button>
           </div>
         </div>
 
@@ -1665,7 +1735,7 @@
           <strong data-i18n="androidTitle" style="color: var(--text-primary); display: block; margin-bottom: 6px;">Android (Chrome / Edge)</strong>
           <div data-i18n="androidStep1">1. Open fares.com in Google Chrome on your phone.</div>
           <div data-i18n="androidStep2">2. Tap the three dots menu (⋮) in the top corner.</div>
-          <div data-i18n="androidStep3">3. Tap "Install app" or "Add to Home screen" and confirm.</div>
+          <div data-i18n="androidStep3">3. Tap "Install and create shortcut" and select "Install".</div>
         </div>
         <div style="padding: 12px; border-radius: 14px; border: 1px solid var(--glass-border);">
           <strong data-i18n="iosTitle" style="color: var(--text-primary); display: block; margin-bottom: 6px;">iPhone &amp; iPad (Safari)</strong>
@@ -1677,11 +1747,8 @@
     </div>
   </div>
 
-  <!-- Toast Feed -->
-  <div id="toast-notification-feed" class="toast-feed"></div>
-
   <!-- ========================================================================
-       3. ULTRA-LIGHT SINGLE-STREAM APPLICATION ENGINE
+       3. PERSISTENT INDEXEDDB MEDIA LIBRARY & SINGLE-STREAM ENGINE
        ======================================================================== -->
   <script>
     (function () {
@@ -1703,11 +1770,18 @@
           btnUploadVideo: 'Upload Video',
           btnUploadFolder: 'Upload Folder',
           btnResumeWatching: 'Resume Watching',
-          heroHint: 'Supports MP4, MKV, WebM, AVI, MOV & SRT/VTT subtitles • Ultra-low memory single-stream engine',
-          loadedFilesTitle: 'Loaded Files',
-          btnClearUploadedFiles: 'Clear Uploaded Files',
+          heroHint: 'Supports MP4, MKV, WebM, AVI, MOV & SRT/VTT subtitles • Auto-saved folders & episodes',
+          libraryTitle: 'My Media Library',
+          tabAll: 'All',
+          tabFolders: 'Folders',
+          tabVideos: 'Videos',
+          btnClearLibrary: 'Clear All',
+          foldersSectionTitle: 'Series & Folders',
+          singlesSectionTitle: 'Individual Videos',
+          btnBackToFolders: 'All Folders',
+          btnPlayAll: 'Play All',
           watchHistoryTitle: 'Watch History',
-          watchHistorySubtitle: 'Automatically tracks your playback progress',
+          watchHistorySubtitle: 'Tap any video to resume directly from where you stopped',
           btnClearWatchHistory: 'Clear Watch History',
           emptyHistoryTitle: 'No watch history yet',
           emptyHistoryDesc: 'Videos and episodes you watch will appear here automatically so you can resume anytime.',
@@ -1735,6 +1809,7 @@
           nowPlayingBadge: 'NOW PLAYING',
           watchedTag: 'Watched',
           noMatchingEpisodes: 'No matching episodes found',
+          restrictedFolderMsg: 'Android blocks the root Download folder. Open a subfolder inside Download (e.g. your series folder) and tap "Use this folder".',
           installModalTitle: 'Install Fares Cinema App',
           installModalSubtitle: 'Install fares.com as an official full-screen app on your phone',
           nativeInstallReadyTitle: 'Instant One-Tap Installation Available',
@@ -1742,29 +1817,18 @@
           androidTitle: 'Android (Chrome / Edge)',
           androidStep1: '1. Open fares.com in Google Chrome on your phone.',
           androidStep2: '2. Tap the three dots menu (⋮) in the top corner.',
-          androidStep3: '3. Tap "Install app" or "Add to Home screen" and confirm.',
+          androidStep3: '3. Tap "Install and create shortcut" and select "Install".',
           iosTitle: 'iPhone & iPad (Safari)',
           iosStep1: '1. Open fares.com in Safari on your iPhone or iPad.',
           iosStep2: '2. Tap the Share button at the bottom of the screen.',
           iosStep3: '3. Scroll down and tap "Add to Home Screen", then "Add".',
-          memoryStats: (count, sizeStr) => `<span dir="ltr">${count} ${count === 1 ? 'File' : 'Files'} • ${sizeStr} (1 Active Stream in RAM)</span>`,
+          libraryStats: (folders, videos) => `<span dir="ltr">${folders} ${folders === 1 ? 'Folder' : 'Folders'} • ${videos} ${videos === 1 ? 'Video' : 'Videos'}</span>`,
+          episodesCount: (count, sizeStr) => `<span dir="ltr">${count} ${count === 1 ? 'Episode' : 'Episodes'} • ${sizeStr}</span>`,
           episodeOf: (idx, total) => `Episode ${idx} of ${total}`,
           justNow: 'Just now',
           minsAgo: (m) => `${m}m ago`,
           hoursAgo: (h) => `${h}h ago`,
           daysAgo: (d) => `${d}d ago`,
-          toastMode: (label) => `Lighting mode: ${label}`,
-          toastLoadedSingle: (title) => `Loaded "${title}"`,
-          toastLoadedFolder: (count, name) => `Loaded ${count} episodes from "${name}"`,
-          toastNoVideos: 'No supported video files were found.',
-          toastFilesCleared: 'All files & RAM cache cleared',
-          toastFileRemoved: (title) => `Removed "${title}"`,
-          toastHistoryCleared: 'Watch history cleared',
-          toastHistoryItemRemoved: 'Removed from watch history',
-          toastPickFileToResume: (timeStr) => `Select the video file to resume at ${timeStr}`,
-          toastSubLoaded: (name) => `Subtitles active: ${name}`,
-          toastSubRemoved: 'Subtitles removed',
-          toastPictureReset: 'Picture reset to default',
         },
         ar: {
           dir: 'rtl',
@@ -1781,11 +1845,18 @@
           btnUploadVideo: 'رفع فيديو',
           btnUploadFolder: 'رفع مجلد',
           btnResumeWatching: 'متابعة المشاهدة',
-          heroHint: 'يدعم MP4, MKV, WebM, AVI, MOV والترجمة SRT/VTT • محرك خفيف يحفظ ذاكرة الهاتف',
-          loadedFilesTitle: 'الملفات المرفوعة',
-          btnClearUploadedFiles: 'مسح الملفات المرفوعة',
+          heroHint: 'يدعم MP4, MKV, WebM, AVI, MOV والترجمة SRT/VTT • يحفظ المجلدات والحلقات تلقائياً',
+          libraryTitle: 'مكتبة الفيديوهات والمجلدات',
+          tabAll: 'الكل',
+          tabFolders: 'المجلدات',
+          tabVideos: 'فيديوهات منفردة',
+          btnClearLibrary: 'مسح الكل',
+          foldersSectionTitle: 'المسلسلات والمجلدات',
+          singlesSectionTitle: 'فيديوهات منفردة',
+          btnBackToFolders: 'كل المجلدات',
+          btnPlayAll: 'تشغيل الكل',
           watchHistoryTitle: 'سجل المشاهدة',
-          watchHistorySubtitle: 'يحفظ تلقائياً آخر نقطة توقفت عندها في كل فيديو أو حلقة',
+          watchHistorySubtitle: 'اضغط على أي فيديو لفتحه ومتابعة المشاهدة مباشرة من آخر نقطة',
           btnClearWatchHistory: 'مسح سجل المشاهدة',
           emptyHistoryTitle: 'سجل المشاهدة فارغ حالياً',
           emptyHistoryDesc: 'ستظهر هنا الأفلام والحلقات التي تشاهدها تلقائياً لتتمكن من متابعتها في أي وقت.',
@@ -1813,6 +1884,7 @@
           nowPlayingBadge: 'يعمل الآن',
           watchedTag: 'تمت المشاهدة',
           noMatchingEpisodes: 'لا توجد حلقات مطابقة للبحث',
+          restrictedFolderMsg: 'نظام أندرويد يمنع اختيار مجلد Download الرئيسي. ادخل على مجلد المسلسل بداخله ثم اضغط "Use this folder".',
           installModalTitle: 'تثبيت تطبيق سينما فارس الرسمي',
           installModalSubtitle: 'ثبّت fares.com كتطبيق رسمي بشاشة كاملة على هاتفك',
           nativeInstallReadyTitle: 'التثبيت المباشر بضغطة واحدة متاح الآن',
@@ -1820,29 +1892,18 @@
           androidTitle: 'هواتف أندرويد (Chrome / Edge)',
           androidStep1: '1. افتح الموقع من متصفح Google Chrome على هاتفك.',
           androidStep2: '2. اضغط على قائمة الثلاث نقاط (⋮) في أعلى المتصفح.',
-          androidStep3: '3. اختر "تثبيت التطبيق" أو "الإضافة إلى الشاشة الرئيسية".',
+          androidStep3: '3. اختر "Install and create shortcut" ثم اضغط "Install".',
           iosTitle: 'هواتف آيفون وآيباد (Safari)',
           iosStep1: '1. افتح الموقع من متصفح Safari على الآيفون أو الآيباد.',
           iosStep2: '2. اضغط على زر المشاركة (Share) في أسفل الشاشة.',
           iosStep3: '3. اختر "إضافة إلى الصفحة الرئيسية" ثم اضغط "إضافة".',
-          memoryStats: (count, sizeStr) => `<span dir="ltr">${count}</span> ${count === 1 ? 'ملف' : 'ملفات'} • <span dir="ltr">${sizeStr}</span> (حلقة واحدة فقط في الرام)`,
+          libraryStats: (folders, videos) => `<span dir="ltr">${folders}</span> ${folders === 1 ? 'مجلد' : 'مجلدات'} • <span dir="ltr">${videos}</span> ${videos === 1 ? 'فيديو' : 'فيديوهات'}`,
+          episodesCount: (count, sizeStr) => `<span dir="ltr">${count}</span> ${count === 1 ? 'حلقة' : 'حلقات'} • <span dir="ltr">${sizeStr}</span>`,
           episodeOf: (idx, total) => `حلقة ${idx} من ${total}`,
           justNow: 'الآن',
           minsAgo: (m) => `منذ ${m} دقيقة`,
           hoursAgo: (h) => `منذ ${h} ساعة`,
           daysAgo: (d) => `منذ ${d} يوم`,
-          toastMode: (label) => `وضع الإضاءة: ${label}`,
-          toastLoadedSingle: (title) => `تم تحميل "${title}"`,
-          toastLoadedFolder: (count, name) => `تم تحميل ${count} حلقة من "${name}"`,
-          toastNoVideos: 'لم يتم العثور على ملفات فيديو صالحة.',
-          toastFilesCleared: 'تم مسح الملفات وتفريغ الذاكرة بالكامل',
-          toastFileRemoved: (title) => `تم حذف "${title}"`,
-          toastHistoryCleared: 'تم مسح سجل المشاهدة بالكامل',
-          toastHistoryItemRemoved: 'تم حذف العنصر من سجل المشاهدة',
-          toastPickFileToResume: (timeStr) => `اختر ملف الفيديو لمتابعة المشاهدة من ${timeStr}`,
-          toastSubLoaded: (name) => `تم تفعيل الترجمة: ${name}`,
-          toastSubRemoved: 'تمت إزالة الترجمة',
-          toastPictureReset: 'تمت إعادة ضبط إعدادات الصورة',
         },
       };
 
@@ -1888,12 +1949,25 @@
       const svgSettingsGear = document.getElementById('svg-settings-gear');
       const upnextBanner = document.getElementById('upnext-banner-overlay');
 
-      /* Single-Stream Memory State: Only ONE ObjectURL exists at a time */
+      /* ======================================================================
+         PERSISTENT LIBRARY & WATCH HISTORY STATE (INDEXEDDB)
+         ====================================================================== */
+      const DB_NAME = 'fares_cinema_persistent_db_v1';
+      const DB_VERSION = 1;
+      let dbInstance = null;
+
+      // Collections: [{ id, name, type: 'folder'|'singles', updatedAt, items: [{ id, title, fileName, ext, size, fileHandle, file, watched }] }]
+      let collections = [];
+      let watchHistory = []; // [{ id, collectionId, fileName, title, collectionName, currentTime, duration, updatedAt, fileHandle }]
+
+      let activeCollectionId = null;
       let playlist = [];
       let activeStreamUrl = null;
       let collectionName = 'Playlist';
       let currentIndex = -1;
-      let pendingResumeTime = null;
+
+      let libraryFilter = 'all'; // 'all' | 'folders' | 'videos'
+      let openedFolderId = null;
 
       let currentVolumePercent = 100;
       let lastUnmutedPercent = 100;
@@ -1912,14 +1986,141 @@
       let hudHideTimer = null;
       let lastHistorySaveTimestamp = 0;
 
-      const HISTORY_STORAGE_KEY = 'fares_cinema_watch_history_v1';
       const THEME_STORAGE_KEY = 'fares_cinema_lighting_mode_v1';
+
+      function openPersistentDB() {
+        return new Promise((resolve) => {
+          if (dbInstance) { resolve(dbInstance); return; }
+          if (!('indexedDB' in window)) { resolve(null); return; }
+          try {
+            const req = indexedDB.open(DB_NAME, DB_VERSION);
+            req.onupgradeneeded = (e) => {
+              const db = e.target.result;
+              if (!db.objectStoreNames.contains('collections')) {
+                db.createObjectStore('collections', { keyPath: 'id' });
+              }
+              if (!db.objectStoreNames.contains('history')) {
+                db.createObjectStore('history', { keyPath: 'id' });
+              }
+            };
+            req.onsuccess = (e) => {
+              dbInstance = e.target.result;
+              resolve(dbInstance);
+            };
+            req.onerror = () => resolve(null);
+          } catch (_) {
+            resolve(null);
+          }
+        });
+      }
+
+      async function saveCollectionToDB(col) {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          // Strip raw File blobs before saving to IndexedDB (keep FileSystemFileHandle which is lightweight!)
+          const serializable = {
+            id: col.id,
+            name: col.name,
+            type: col.type,
+            updatedAt: col.updatedAt || Date.now(),
+            items: col.items.map((it) => ({
+              id: it.id,
+              title: it.title,
+              fileName: it.fileName,
+              ext: it.ext,
+              size: it.size,
+              watched: Boolean(it.watched),
+              fileHandle: it.fileHandle || null,
+            })),
+          };
+          const tx = db.transaction('collections', 'readwrite');
+          tx.objectStore('collections').put(serializable);
+        } catch (_) {}
+      }
+
+      async function deleteCollectionFromDB(colId) {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          const tx = db.transaction('collections', 'readwrite');
+          tx.objectStore('collections').delete(colId);
+        } catch (_) {}
+      }
+
+      async function clearAllCollectionsFromDB() {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          const tx = db.transaction('collections', 'readwrite');
+          tx.objectStore('collections').clear();
+        } catch (_) {}
+      }
+
+      async function saveHistoryEntryToDB(entry) {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          const tx = db.transaction('history', 'readwrite');
+          tx.objectStore('history').put(entry);
+        } catch (_) {}
+      }
+
+      async function deleteHistoryEntryFromDB(id) {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          const tx = db.transaction('history', 'readwrite');
+          tx.objectStore('history').delete(id);
+        } catch (_) {}
+      }
+
+      async function clearAllHistoryFromDB() {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          const tx = db.transaction('history', 'readwrite');
+          tx.objectStore('history').clear();
+        } catch (_) {}
+      }
+
+      async function loadStateFromDB() {
+        const db = await openPersistentDB();
+        if (!db) return;
+        try {
+          const cols = await new Promise((res) => {
+            const req = db.transaction('collections', 'readonly').objectStore('collections').getAll();
+            req.onsuccess = () => res(req.result || []);
+            req.onerror = () => res([]);
+          });
+          collections = cols.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+
+          const hist = await new Promise((res) => {
+            const req = db.transaction('history', 'readonly').objectStore('history').getAll();
+            req.onsuccess = () => res(req.result || []);
+            req.onerror = () => res([]);
+          });
+          watchHistory = hist.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)).slice(0, 24);
+        } catch (_) {}
+      }
 
       function revokeActiveStreamUrl() {
         if (activeStreamUrl) {
           try { URL.revokeObjectURL(activeStreamUrl); } catch (_) {}
           activeStreamUrl = null;
         }
+      }
+
+      function showInlineNotice(msg) {
+        const el = document.getElementById('inline-picker-notice');
+        if (!msg) {
+          el.classList.add('hidden');
+          return;
+        }
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        clearTimeout(el._t);
+        el._t = setTimeout(() => el.classList.add('hidden'), 6500);
       }
 
       function escapeHtml(str) {
@@ -1955,15 +2156,6 @@
         const diffHr = Math.floor(diffMin / 60);
         if (diffHr < 24) return t('hoursAgo', diffHr);
         return t('daysAgo', Math.floor(diffHr / 24));
-      }
-
-      function showToast(message) {
-        const feed = document.getElementById('toast-notification-feed');
-        const toast = document.createElement('div');
-        toast.className = 'toast-item glass-popover';
-        toast.innerHTML = `<span class="pulse-dot"></span><span>${escapeHtml(message)}</span>`;
-        feed.appendChild(toast);
-        setTimeout(() => toast.remove(), 2800);
       }
 
       /* ======================================================================
@@ -2064,9 +2256,9 @@
       })();
 
       /* ======================================================================
-         5. LIGHTING MODES & LANGUAGE
+         5. LIGHTING MODES & LANGUAGE (ZERO POPUPS)
          ====================================================================== */
-      function setLightingMode(mode, silent) {
+      function setLightingMode(mode) {
         if (!['dark', 'light', 'eyecare', 'cinema'].includes(mode)) mode = 'dark';
         activeTheme = mode;
         rootHtml.className = `theme-${mode}`;
@@ -2078,18 +2270,14 @@
         });
 
         try { localStorage.setItem(THEME_STORAGE_KEY, mode); } catch (_) {}
-        if (!silent) {
-          const map = { dark: 'modeDark', light: 'modeLight', eyecare: 'modeEyeCare', cinema: 'modeCinema' };
-          showToast(t('toastMode', t(map[mode])));
-        }
       }
 
       document.querySelectorAll('.lighting-mode-btn').forEach((btn) => {
-        btn.addEventListener('click', () => setLightingMode(btn.dataset.lightingMode, false));
+        btn.addEventListener('click', () => setLightingMode(btn.dataset.lightingMode));
       });
 
-      try { setLightingMode(localStorage.getItem(THEME_STORAGE_KEY) || 'dark', true); }
-      catch (_) { setLightingMode('dark', true); }
+      try { setLightingMode(localStorage.getItem(THEME_STORAGE_KEY) || 'dark'); }
+      catch (_) { setLightingMode('dark'); }
 
       function applyLanguage(lang) {
         activeLang = lang === 'ar' ? 'ar' : 'en';
@@ -2105,7 +2293,7 @@
 
         document.getElementById('input-playlist-search').placeholder = pack.searchPlaceholder;
         document.getElementById('label-sub-size').textContent = pack.subSizes[subSizeIndex];
-        renderMemoryManagerUI();
+        renderMediaLibraryUI();
         renderWatchHistoryUI();
         renderPlaylistUI();
       }
@@ -2122,7 +2310,7 @@
         closeSettingsPopover();
         viewPlayer.classList.add('hidden');
         viewHome.classList.remove('hidden');
-        renderMemoryManagerUI();
+        renderMediaLibraryUI();
         renderWatchHistoryUI();
       }
 
@@ -2134,9 +2322,11 @@
       document.getElementById('btn-brand-home').addEventListener('click', showHomeScreen);
       document.getElementById('btn-header-home').addEventListener('click', showHomeScreen);
       document.getElementById('btn-home-resume').addEventListener('click', () => {
-        if (playlist.length > 0) {
+        if (playlist.length > 0 && currentIndex >= 0) {
           showPlayerScreen();
           if (videoEl.paused) videoEl.play().catch(() => {});
+        } else if (watchHistory.length > 0) {
+          resumeFromHistoryItem(watchHistory[0]);
         }
       });
 
@@ -2210,93 +2400,246 @@
       });
 
       /* ======================================================================
-         7. SINGLE-STREAM FILE & FOLDER UPLOADER (ZERO MEMORY SPIKE)
+         7. PERSISTENT FILE SYSTEM & CATEGORIZED MEDIA LIBRARY UPLOADER
          ====================================================================== */
       const VIDEO_EXT = /\.(mp4|mkv|webm|avi|mov|m4v|ogv|flv|wmv)$/i;
       const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
-      function isVideoFile(f) {
-        return (f.type && f.type.startsWith('video/')) || VIDEO_EXT.test(f.name);
+      function isVideoFileName(name, type) {
+        return (type && type.startsWith('video/')) || VIDEO_EXT.test(name);
+      }
+
+      function getFileExtension(name) {
+        const m = /\.([^/.]+)$/.exec(name);
+        return m ? m[1].toUpperCase() : 'VID';
       }
 
       function cleanTitle(name) {
         return name.replace(/\.[^/.]+$/, '').replace(/[._]+/g, ' ').trim();
       }
 
-      function loadUploadedFiles(fileList) {
+      /* Smart Upload Folder: Uses File System Access API (persists across restarts!) with fallback */
+      async function handleUploadFolderClick() {
+        showInlineNotice('');
+        if (typeof window.showDirectoryPicker === 'function') {
+          try {
+            const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
+            const entries = [];
+            for await (const entry of dirHandle.values()) {
+              if (entry.kind === 'file' && isVideoFileName(entry.name, '')) {
+                const file = await entry.getFile();
+                entries.push({
+                  id: `${dirHandle.name}::${entry.name}`,
+                  title: cleanTitle(entry.name),
+                  fileName: entry.name,
+                  ext: getFileExtension(entry.name),
+                  size: file.size || 0,
+                  fileHandle: entry,
+                  file: file,
+                  watched: false,
+                });
+              }
+            }
+
+            if (entries.length === 0) {
+              inputFolderFiles.click();
+              return;
+            }
+
+            entries.sort((a, b) => collator.compare(a.fileName, b.fileName));
+            const colId = `folder_${dirHandle.name.toLowerCase().replace(/\s+/g, '_')}`;
+            const newCol = {
+              id: colId,
+              name: dirHandle.name,
+              type: 'folder',
+              updatedAt: Date.now(),
+              items: entries,
+            };
+
+            collections = [newCol, ...collections.filter((c) => c.id !== colId)];
+            await saveCollectionToDB(newCol);
+            openedFolderId = colId;
+            renderMediaLibraryUI();
+            playEpisodeFromCollection(colId, 0, 0);
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+            if (err && (err.name === 'NotAllowedError' || err.name === 'SecurityError')) {
+              showInlineNotice(t('restrictedFolderMsg'));
+              return;
+            }
+          }
+        }
+        inputFolderFiles.click();
+      }
+
+      /* Smart Upload Single/Multiple Videos: Uses showOpenFilePicker (persists across restarts!) with fallback */
+      async function handleUploadVideoClick() {
+        showInlineNotice('');
+        if (typeof window.showOpenFilePicker === 'function') {
+          try {
+            const handles = await window.showOpenFilePicker({
+              multiple: true,
+              types: [{
+                description: 'Video Files',
+                accept: { 'video/*': ['.mp4', '.mkv', '.webm', '.avi', '.mov', '.m4v'] },
+              }],
+            });
+            if (!handles || handles.length === 0) return;
+
+            const newItems = [];
+            for (const h of handles) {
+              const file = await h.getFile();
+              newItems.push({
+                id: `single::${file.name}`,
+                title: cleanTitle(file.name),
+                fileName: file.name,
+                ext: getFileExtension(file.name),
+                size: file.size || 0,
+                fileHandle: h,
+                file: file,
+                watched: false,
+              });
+            }
+
+            newItems.sort((a, b) => collator.compare(a.fileName, b.fileName));
+            const singlesId = 'singles_collection';
+            const existing = collections.find((c) => c.id === singlesId);
+            const merged = existing
+              ? [...newItems, ...existing.items.filter((old) => !newItems.some((n) => n.fileName === old.fileName))]
+              : newItems;
+
+            const singlesCol = {
+              id: singlesId,
+              name: activeLang === 'ar' ? 'فيديوهات منفردة' : 'Individual Videos',
+              type: 'singles',
+              updatedAt: Date.now(),
+              items: merged,
+            };
+
+            collections = [singlesCol, ...collections.filter((c) => c.id !== singlesId)];
+            await saveCollectionToDB(singlesCol);
+            renderMediaLibraryUI();
+            playEpisodeFromCollection(singlesId, 0, 0);
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+          }
+        }
+        inputVideoFiles.click();
+      }
+
+      /* Fallback <input type="file"> Handler */
+      async function handleFallbackFileInput(fileList, isFolderInput) {
         const videos = [];
         const len = fileList ? fileList.length : 0;
         for (let i = 0; i < len; i++) {
           const f = fileList[i];
-          if (isVideoFile(f)) videos.push(f);
+          if (isVideoFileName(f.name, f.type)) videos.push(f);
         }
-
-        if (videos.length === 0) {
-          showToast(t('toastNoVideos'));
-          return;
-        }
+        if (videos.length === 0) return;
 
         videos.sort((a, b) => collator.compare(a.name, b.name));
-        revokeActiveStreamUrl();
-
         let folderTitle = '';
         if (videos[0].webkitRelativePath) {
           const parts = videos[0].webkitRelativePath.split('/');
           if (parts.length > 1) folderTitle = parts[0];
         }
 
-        collectionName = folderTitle || (videos.length > 1 ? (activeLang === 'ar' ? 'قائمة التشغيل' : 'Series Playlist') : cleanTitle(videos[0].name));
+        const isFolder = Boolean(folderTitle || isFolderInput);
+        const colId = isFolder
+          ? `folder_${(folderTitle || 'Series').toLowerCase().replace(/\s+/g, '_')}`
+          : 'singles_collection';
+        const colName = folderTitle || (isFolder ? 'Series Folder' : (activeLang === 'ar' ? 'فيديوهات منفردة' : 'Individual Videos'));
 
-        playlist = videos.map((file) => ({
+        const items = videos.map((file) => ({
+          id: `${colId}::${file.name}`,
           title: cleanTitle(file.name),
           fileName: file.name,
+          ext: getFileExtension(file.name),
           size: file.size || 0,
+          fileHandle: null,
           file: file,
           watched: false,
         }));
 
-        let startIndex = 0;
-        if (pendingResumeTime && pendingResumeTime.fileName) {
-          const found = playlist.findIndex((p) => p.fileName === pendingResumeTime.fileName);
-          if (found !== -1) startIndex = found;
-        }
+        const newCol = {
+          id: colId,
+          name: colName,
+          type: isFolder ? 'folder' : 'singles',
+          updatedAt: Date.now(),
+          items: items,
+        };
 
-        showToast(playlist.length === 1 ? t('toastLoadedSingle', playlist[0].title) : t('toastLoadedFolder', playlist.length, collectionName));
-        renderMemoryManagerUI();
-        playEpisodeAtIndex(startIndex, pendingResumeTime ? pendingResumeTime.time : 0);
-        pendingResumeTime = null;
+        collections = [newCol, ...collections.filter((c) => c.id !== colId)];
+        await saveCollectionToDB(newCol);
+        if (isFolder) openedFolderId = colId;
+        renderMediaLibraryUI();
+        playEpisodeFromCollection(colId, 0, 0);
       }
 
-      document.getElementById('btn-home-upload-video').addEventListener('click', () => inputVideoFiles.click());
-      document.getElementById('btn-home-upload-folder').addEventListener('click', () => inputFolderFiles.click());
-      document.getElementById('btn-player-upload-video').addEventListener('click', () => inputVideoFiles.click());
-      document.getElementById('btn-player-upload-folder').addEventListener('click', () => inputFolderFiles.click());
+      document.getElementById('btn-home-upload-video').addEventListener('click', handleUploadVideoClick);
+      document.getElementById('btn-home-upload-folder').addEventListener('click', handleUploadFolderClick);
+      document.getElementById('btn-player-upload-video').addEventListener('click', handleUploadVideoClick);
+      document.getElementById('btn-player-upload-folder').addEventListener('click', handleUploadFolderClick);
 
       inputVideoFiles.addEventListener('change', (e) => {
         if (e.target.files && e.target.files.length > 0) {
-          loadUploadedFiles(e.target.files);
+          handleFallbackFileInput(e.target.files, false);
           e.target.value = '';
         }
       });
 
       inputFolderFiles.addEventListener('change', (e) => {
         if (e.target.files && e.target.files.length > 0) {
-          loadUploadedFiles(e.target.files);
+          handleFallbackFileInput(e.target.files, true);
           e.target.value = '';
         }
       });
 
       /* ======================================================================
-         8. PLAYBACK & AUTO-NEXT ENGINE
+         8. ON-DEMAND FILE STREAMING & AUTO-NEXT ENGINE
          ====================================================================== */
-      function playEpisodeAtIndex(index, seekSeconds = 0) {
-        if (index < 0 || index >= playlist.length) return;
+      async function resolvePlayableFile(item) {
+        if (item.file instanceof File) return item.file;
+        if (item.fileHandle) {
+          try {
+            let perm = await item.fileHandle.queryPermission({ mode: 'read' });
+            if (perm !== 'granted') {
+              perm = await item.fileHandle.requestPermission({ mode: 'read' });
+            }
+            if (perm === 'granted') {
+              const file = await item.fileHandle.getFile();
+              item.file = file;
+              return file;
+            }
+          } catch (_) {}
+        }
+        return null;
+      }
+
+      async function playEpisodeFromCollection(colId, index, seekSeconds = 0) {
+        const col = collections.find((c) => c.id === colId);
+        if (!col || index < 0 || index >= col.items.length) return;
+
+        const item = col.items[index];
+        const file = await resolvePlayableFile(item);
+
+        // If browser session invalidated a legacy fallback file without handle, prompt user to re-pick cleanly
+        if (!file) {
+          if (col.type === 'folder') handleUploadFolderClick();
+          else handleUploadVideoClick();
+          return;
+        }
+
         cancelUpNextCountdown();
+        activeCollectionId = colId;
+        collectionName = col.name;
+        playlist = col.items;
         currentIndex = index;
-        const item = playlist[currentIndex];
 
         revokeActiveStreamUrl();
-        activeStreamUrl = URL.createObjectURL(item.file);
+        activeStreamUrl = URL.createObjectURL(file);
 
         showPlayerScreen();
         videoEl.src = activeStreamUrl;
@@ -2328,12 +2671,16 @@
         btnNext.disabled = currentIndex >= playlist.length - 1;
 
         renderPlaylistUI();
-        renderMemoryManagerUI();
+        renderMediaLibraryUI();
         recordCurrentPlaybackInHistory(true);
       }
 
-      btnPrev.addEventListener('click', () => { if (currentIndex > 0) playEpisodeAtIndex(currentIndex - 1, 0); });
-      btnNext.addEventListener('click', () => { if (currentIndex < playlist.length - 1) playEpisodeAtIndex(currentIndex + 1, 0); });
+      btnPrev.addEventListener('click', () => {
+        if (activeCollectionId && currentIndex > 0) playEpisodeFromCollection(activeCollectionId, currentIndex - 1, 0);
+      });
+      btnNext.addEventListener('click', () => {
+        if (activeCollectionId && currentIndex < playlist.length - 1) playEpisodeFromCollection(activeCollectionId, currentIndex + 1, 0);
+      });
 
       function startUpNextCountdown() {
         if (!document.getElementById('checkbox-auto-next').checked || currentIndex >= playlist.length - 1) return;
@@ -2347,7 +2694,7 @@
           upnextRemaining -= 1;
           if (upnextRemaining <= 0) {
             cancelUpNextCountdown();
-            playEpisodeAtIndex(currentIndex + 1, 0);
+            playEpisodeFromCollection(activeCollectionId, currentIndex + 1, 0);
           } else {
             document.getElementById('upnext-seconds-display').textContent = String(upnextRemaining);
           }
@@ -2363,13 +2710,15 @@
       document.getElementById('btn-upnext-play-now').addEventListener('click', () => {
         const next = currentIndex + 1;
         cancelUpNextCountdown();
-        if (next < playlist.length) playEpisodeAtIndex(next, 0);
+        if (activeCollectionId && next < playlist.length) playEpisodeFromCollection(activeCollectionId, next, 0);
       });
       document.getElementById('btn-upnext-cancel').addEventListener('click', cancelUpNextCountdown);
 
       videoEl.addEventListener('ended', () => {
         if (playlist[currentIndex]) {
           playlist[currentIndex].watched = true;
+          const col = collections.find((c) => c.id === activeCollectionId);
+          if (col) saveCollectionToDB(col);
           renderPlaylistUI();
         }
         recordCurrentPlaybackInHistory(true);
@@ -2413,7 +2762,6 @@
         }
       }
 
-      /* Hide HUD immediately as soon as video starts playing (if settings menu is closed) */
       videoEl.addEventListener('play', () => {
         iconPlay.classList.add('hidden');
         iconPause.classList.remove('hidden');
@@ -2430,7 +2778,6 @@
         }
       });
 
-      /* Keep HUD visible while paused so user can adjust settings anytime */
       videoEl.addEventListener('pause', () => {
         iconPause.classList.add('hidden');
         iconPlay.classList.remove('hidden');
@@ -2441,7 +2788,6 @@
         releaseScreenWakeLock();
       });
 
-      /* Keep HUD alive for 6 seconds whenever user interacts with bottom control bar */
       const bottomHudEl = document.getElementById('player-bottom-hud');
       bottomHudEl.addEventListener('pointerdown', () => revealHudWithDelay(6000), { passive: true });
       bottomHudEl.addEventListener('input', () => revealHudWithDelay(6000), { passive: true });
@@ -2494,7 +2840,6 @@
         }
       });
 
-      /* Settings Popover Open / Close */
       function openSettingsPopover() {
         popoverSettings.classList.remove('hidden');
         btnSettings.classList.add('ctrl-btn-active');
@@ -2533,7 +2878,6 @@
         }
       });
 
-      /* Picture Studio Sliders & 1-Tap Presets */
       function applyPictureFilters(activePresetName) {
         videoEl.style.filter = `brightness(${picBrightness}%) contrast(${picContrast}%) saturate(${picSaturation}%)`;
         document.getElementById('val-brightness').textContent = `${picBrightness}%`;
@@ -2564,7 +2908,6 @@
       document.getElementById('btn-reset-picture').addEventListener('click', () => {
         picBrightness = picContrast = picSaturation = 100;
         applyPictureFilters('standard');
-        showToast(t('toastPictureReset'));
       });
 
       document.querySelectorAll('.speed-option-btn').forEach((btn) => {
@@ -2604,7 +2947,6 @@
           videoEl.appendChild(track);
           requestAnimationFrame(() => { if (videoEl.textTracks[0]) videoEl.textTracks[0].mode = 'showing'; });
           document.getElementById('btn-remove-subtitle').classList.remove('hidden');
-          showToast(t('toastSubLoaded', file.name));
         } catch (_) {}
       });
 
@@ -2614,10 +2956,7 @@
         document.getElementById('btn-remove-subtitle').classList.add('hidden');
       }
 
-      document.getElementById('btn-remove-subtitle').addEventListener('click', () => {
-        clearActiveSubtitleTrack();
-        showToast(t('toastSubRemoved'));
-      });
+      document.getElementById('btn-remove-subtitle').addEventListener('click', clearActiveSubtitleTrack);
 
       document.getElementById('btn-cycle-sub-size').addEventListener('click', () => {
         subSizeIndex = (subSizeIndex + 1) % SUB_SIZE_SCALES.length;
@@ -2625,9 +2964,6 @@
         document.getElementById('dynamic-cue-style').textContent = `video::cue { background-color: rgba(2,6,23,0.82); color: #fff; font-family: 'Plus Jakarta Sans','Cairo',sans-serif; font-size: ${SUB_SIZE_SCALES[subSizeIndex]}; line-height: 1.45; padding: 4px 10px; border-radius: 6px; }`;
       });
 
-      /* ======================================================================
-         FULLSCREEN WITH AUTOMATIC LANDSCAPE ORIENTATION LOCK
-         ====================================================================== */
       async function lockLandscapeOrientation() {
         try {
           if (screen.orientation && typeof screen.orientation.lock === 'function') {
@@ -2701,7 +3037,14 @@
 
       document.getElementById('btn-player-fullscreen').addEventListener('click', togglePlayerFullscreen);
 
-      /* Accurate Tap & Double-Tap Video Gesture Handler (6s HUD Delay) */
+      function showCenterGestureBadge(symbol) {
+        const overlay = document.getElementById('player-gesture-overlay');
+        document.getElementById('gesture-text-slot').textContent = symbol;
+        overlay.classList.remove('hidden');
+        clearTimeout(overlay._t);
+        overlay._t = setTimeout(() => overlay.classList.add('hidden'), 420);
+      }
+
       let controlsHiddenAtPointerDown = false;
       let lastTap = 0;
       let tapTimer = null;
@@ -2715,12 +3058,18 @@
         const rect = videoEl.getBoundingClientRect();
         const ratio = (e.clientX - rect.left) / (rect.width || 1);
 
-        if (now - lastTap < 250) {
+        if (now - lastTap < 280) {
           clearTimeout(tapTimer);
           lastTap = 0;
-          if (ratio < 0.35) seekByOffset(-10);
-          else if (ratio > 0.65) seekByOffset(10);
-          else togglePlayerFullscreen();
+          if (ratio < 0.32) {
+            seekByOffset(-10);
+          } else if (ratio > 0.68) {
+            seekByOffset(10);
+          } else {
+            const willPlay = videoEl.paused;
+            togglePlayPause();
+            showCenterGestureBadge(willPlay ? '▶' : '⏸');
+          }
         } else {
           lastTap = now;
           tapTimer = setTimeout(() => {
@@ -2730,17 +3079,26 @@
             }
             if (controlsHiddenAtPointerDown) {
               revealHudWithDelay(6000);
-            } else {
-              togglePlayPause();
+            } else if (!videoEl.paused) {
+              playerContainer.classList.add('controls-hidden');
             }
-          }, 240);
+          }, 260);
         }
       });
 
       /* ======================================================================
-         10. MEMORY & WATCH HISTORY MANAGERS
+         10. CATEGORIZED MEDIA LIBRARY & PERSISTENT WATCH HISTORY UI
          ====================================================================== */
-      function clearAllUploadedFiles() {
+      document.querySelectorAll('[data-lib-filter]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          libraryFilter = btn.dataset.libFilter;
+          openedFolderId = null;
+          document.querySelectorAll('[data-lib-filter]').forEach((b) => b.classList.toggle('active', b === btn));
+          renderMediaLibraryUI();
+        });
+      });
+
+      document.getElementById('btn-home-clear-library').addEventListener('click', async () => {
         cancelUpNextCountdown();
         videoEl.pause();
         videoEl.removeAttribute('src');
@@ -2748,116 +3106,314 @@
         revokeActiveStreamUrl();
         clearActiveSubtitleTrack();
 
+        collections = [];
         playlist = [];
+        activeCollectionId = null;
+        openedFolderId = null;
         currentIndex = -1;
-        collectionName = 'Playlist';
 
-        showHomeScreen();
-        renderMemoryManagerUI();
+        await clearAllCollectionsFromDB();
+        renderMediaLibraryUI();
         renderPlaylistUI();
-        showToast(t('toastFilesCleared'));
+      });
+
+      async function removeCollection(colId) {
+        collections = collections.filter((c) => c.id !== colId);
+        if (openedFolderId === colId) openedFolderId = null;
+        if (activeCollectionId === colId) {
+          videoEl.pause();
+          videoEl.removeAttribute('src');
+          videoEl.load();
+          revokeActiveStreamUrl();
+          activeCollectionId = null;
+          playlist = [];
+          currentIndex = -1;
+        }
+        await deleteCollectionFromDB(colId);
+        renderMediaLibraryUI();
+        renderPlaylistUI();
       }
 
-      function removeSingleUploadedFile(idx) {
-        if (idx < 0 || idx >= playlist.length) return;
-        const removed = playlist[idx];
-        playlist.splice(idx, 1);
-        if (playlist.length === 0) {
-          clearAllUploadedFiles();
+      async function removeEpisodeFromCollection(colId, itemIdx) {
+        const col = collections.find((c) => c.id === colId);
+        if (!col || itemIdx < 0 || itemIdx >= col.items.length) return;
+        col.items.splice(itemIdx, 1);
+
+        if (col.items.length === 0) {
+          await removeCollection(colId);
           return;
         }
-        if (idx === currentIndex) {
-          playEpisodeAtIndex(Math.min(idx, playlist.length - 1), 0);
-        } else if (idx < currentIndex) {
-          currentIndex -= 1;
+
+        await saveCollectionToDB(col);
+        if (activeCollectionId === colId) {
+          playlist = col.items;
+          if (itemIdx === currentIndex) {
+            playEpisodeFromCollection(colId, Math.min(itemIdx, playlist.length - 1), 0);
+          } else if (itemIdx < currentIndex) {
+            currentIndex -= 1;
+          }
         }
-        renderMemoryManagerUI();
+        renderMediaLibraryUI();
         renderPlaylistUI();
-        showToast(t('toastFileRemoved', removed.title));
       }
 
-      document.getElementById('btn-home-clear-files').addEventListener('click', clearAllUploadedFiles);
-      document.getElementById('btn-playlist-clear-files').addEventListener('click', clearAllUploadedFiles);
-
-      function renderMemoryManagerUI() {
-        const card = document.getElementById('home-memory-manager');
-        const resumeBtn = document.getElementById('btn-home-resume');
-        const listEl = document.getElementById('home-loaded-files-list');
-        if (playlist.length === 0) {
-          card.classList.add('hidden');
-          resumeBtn.classList.add('hidden');
-          return;
-        }
-        card.classList.remove('hidden');
-        resumeBtn.classList.remove('hidden');
-        const active = playlist[currentIndex] || playlist[0];
-        document.getElementById('home-resume-filename').textContent = active ? `• ${active.title}` : '';
-
-        const totalBytes = playlist.reduce((s, it) => s + (it.size || 0), 0);
-        document.getElementById('home-memory-stats').innerHTML = t('memoryStats', playlist.length, formatBytes(totalBytes));
-
-        listEl.innerHTML = playlist.map((item, idx) => `
-          <div class="media-item-card ${idx === currentIndex ? 'is-active' : ''}">
-            <button type="button" data-play-idx="${idx}" style="display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; text-align: start;">
+      function renderEpisodeRowCard(colId, item, idx, isCurrent) {
+        const hist = watchHistory.find((h) => h.fileName === item.fileName);
+        const pct = hist && hist.duration > 0 ? Math.min(100, Math.round((hist.currentTime / hist.duration) * 100)) : 0;
+        return `
+          <div class="media-item-card ${isCurrent ? 'is-active' : ''}">
+            <button type="button" data-open-col="${escapeHtml(colId)}" data-open-idx="${idx}" style="display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; text-align: start;">
               <span dir="ltr" class="idx-badge">${idx + 1}</span>
               <div class="min-w-0 flex-1">
-                <div class="truncate" style="font-size: 12px; font-weight: 700;">${escapeHtml(item.title)}</div>
-                <div dir="ltr" style="font-size: 11px; color: var(--text-secondary);">${formatBytes(item.size)}</div>
+                <div class="truncate" style="font-size: 12.5px; font-weight: 800;">${escapeHtml(item.title)}</div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 10.5px; color: var(--text-secondary);">
+                  <span dir="ltr" class="ext-pill">${escapeHtml(item.ext || 'VID')}</span>
+                  <span dir="ltr">${formatBytes(item.size)}</span>
+                  ${item.watched ? `<span style="color: #34d399; font-weight: 700;">• ${escapeHtml(t('watchedTag'))}</span>` : (pct > 0 ? `<span dir="ltr" style="color: var(--accent-primary); font-weight: 700;">• ${pct}%</span>` : '')}
+                </div>
               </div>
             </button>
-            <button type="button" data-del-idx="${idx}" class="btn-icon-del" aria-label="Remove">✕</button>
+            <button type="button" data-del-col="${escapeHtml(colId)}" data-del-idx="${idx}" class="btn-icon-del" aria-label="Delete">✕</button>
           </div>
-        `).join('');
-
-        listEl.querySelectorAll('[data-play-idx]').forEach((b) => b.addEventListener('click', () => playEpisodeAtIndex(Number(b.dataset.playIdx), 0)));
-        listEl.querySelectorAll('[data-del-idx]').forEach((b) => b.addEventListener('click', () => removeSingleUploadedFile(Number(b.dataset.delIdx))));
+        `;
       }
 
-      function getWatchHistory() {
-        try {
-          const parsed = JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY) || '[]');
-          return Array.isArray(parsed) ? parsed : [];
-        } catch (_) { return []; }
+      function renderMediaLibraryUI() {
+        const card = document.getElementById('home-media-library');
+        const bodyEl = document.getElementById('home-library-body');
+        const resumeBtn = document.getElementById('btn-home-resume');
+
+        const folderCols = collections.filter((c) => c.type === 'folder');
+        const singleCol = collections.find((c) => c.type === 'singles');
+        const totalVideos = collections.reduce((sum, c) => sum + c.items.length, 0);
+
+        if (totalVideos === 0) {
+          card.classList.add('hidden');
+          if (watchHistory.length === 0) resumeBtn.classList.add('hidden');
+          else {
+            resumeBtn.classList.remove('hidden');
+            document.getElementById('home-resume-filename').textContent = `• ${watchHistory[0].title}`;
+          }
+          return;
+        }
+
+        card.classList.remove('hidden');
+        resumeBtn.classList.remove('hidden');
+        const activeTitle = (playlist[currentIndex] && playlist[currentIndex].title) || (watchHistory[0] && watchHistory[0].title) || '';
+        document.getElementById('home-resume-filename').textContent = activeTitle ? `• ${activeTitle}` : '';
+        document.getElementById('home-library-stats').innerHTML = t('libraryStats', folderCols.length, totalVideos);
+
+        // If user clicked into a specific folder, show its clean categorized episode list
+        if (openedFolderId) {
+          const folder = folderCols.find((f) => f.id === openedFolderId);
+          if (folder) {
+            const totalSize = folder.items.reduce((s, it) => s + (it.size || 0), 0);
+            bodyEl.innerHTML = `
+              <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px;">
+                <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                  <button type="button" id="btn-back-to-folders" class="btn-pill glass-surface glass-surface-interactive">
+                    <span>← ${escapeHtml(t('btnBackToFolders'))}</span>
+                  </button>
+                  <div class="min-w-0">
+                    <div class="truncate" style="font-size: 0.92rem; font-weight: 800;">${escapeHtml(folder.name)}</div>
+                    <div style="font-size: 0.72rem; color: var(--text-secondary);">${t('episodesCount', folder.items.length, formatBytes(totalSize))}</div>
+                  </div>
+                </div>
+                <button type="button" id="btn-play-folder-all" class="btn-pill btn-primary-grad">
+                  <span>▶ ${escapeHtml(t('btnPlayAll'))}</span>
+                </button>
+              </div>
+              <div class="items-grid">
+                ${folder.items.map((it, idx) => renderEpisodeRowCard(folder.id, it, idx, activeCollectionId === folder.id && currentIndex === idx)).join('')}
+              </div>
+            `;
+            document.getElementById('btn-back-to-folders').addEventListener('click', () => {
+              openedFolderId = null;
+              renderMediaLibraryUI();
+            });
+            document.getElementById('btn-play-folder-all').addEventListener('click', () => {
+              playEpisodeFromCollection(folder.id, 0, 0);
+            });
+            bindLibraryItemEvents(bodyEl);
+            return;
+          } else {
+            openedFolderId = null;
+          }
+        }
+
+        let html = '';
+
+        // 1. Folders Section
+        if ((libraryFilter === 'all' || libraryFilter === 'folders') && folderCols.length > 0) {
+          html += `
+            <div style="padding-top: 14px;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--accent-primary); margin-bottom: 8px; text-transform: uppercase;">
+                ${escapeHtml(t('foldersSectionTitle'))} (${folderCols.length})
+              </div>
+              <div class="folders-grid" style="padding-top: 0;">
+                ${folderCols.map((f) => {
+                  const totalSize = f.items.reduce((s, it) => s + (it.size || 0), 0);
+                  return `
+                    <div class="folder-card">
+                      <button type="button" data-open-folder="${escapeHtml(f.id)}" style="display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; text-align: start;">
+                        <div class="folder-icon-badge">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                          </svg>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                          <div class="truncate" style="font-size: 13.5px; font-weight: 800;">${escapeHtml(f.name)}</div>
+                          <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 2px;">
+                            ${t('episodesCount', f.items.length, formatBytes(totalSize))}
+                          </div>
+                        </div>
+                      </button>
+                      <button type="button" data-del-folder="${escapeHtml(f.id)}" class="btn-icon-del" aria-label="Delete Folder">✕</button>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // 2. Standalone Videos Section
+        if ((libraryFilter === 'all' || libraryFilter === 'videos') && singleCol && singleCol.items.length > 0) {
+          html += `
+            <div style="padding-top: 16px;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--accent-primary); margin-bottom: 8px; text-transform: uppercase;">
+                ${escapeHtml(t('singlesSectionTitle'))} (${singleCol.items.length})
+              </div>
+              <div class="items-grid" style="padding-top: 0;">
+                ${singleCol.items.map((it, idx) => renderEpisodeRowCard(singleCol.id, it, idx, activeCollectionId === singleCol.id && currentIndex === idx)).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        bodyEl.innerHTML = html;
+
+        bodyEl.querySelectorAll('[data-open-folder]').forEach((b) => {
+          b.addEventListener('click', () => {
+            openedFolderId = b.dataset.openFolder;
+            renderMediaLibraryUI();
+          });
+        });
+
+        bodyEl.querySelectorAll('[data-del-folder]').forEach((b) => {
+          b.addEventListener('click', () => removeCollection(b.dataset.delFolder));
+        });
+
+        bindLibraryItemEvents(bodyEl);
       }
 
-      function saveWatchHistory(entries) {
-        try { localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(entries.slice(0, 20))); } catch (_) {}
+      function bindLibraryItemEvents(container) {
+        container.querySelectorAll('[data-open-col]').forEach((b) => {
+          b.addEventListener('click', () => {
+            const colId = b.dataset.openCol;
+            const idx = Number(b.dataset.openIdx);
+            const col = collections.find((c) => c.id === colId);
+            const item = col && col.items[idx];
+            const hist = item && watchHistory.find((h) => h.fileName === item.fileName);
+            const seek = hist && hist.currentTime > 3 && hist.currentTime < hist.duration - 10 ? hist.currentTime : 0;
+            playEpisodeFromCollection(colId, idx, seek);
+          });
+        });
+
+        container.querySelectorAll('[data-del-col]').forEach((b) => {
+          b.addEventListener('click', () => {
+            removeEpisodeFromCollection(b.dataset.delCol, Number(b.dataset.delIdx));
+          });
+        });
       }
 
+      /* Watch History with Direct FileHandle Resume */
       function recordCurrentPlaybackInHistory(force) {
         if (currentIndex < 0 || !playlist[currentIndex]) return;
         const now = Date.now();
-        if (!force && now - lastHistorySaveTimestamp < 5000) return;
+        if (!force && now - lastHistorySaveTimestamp < 4000) return;
         const dur = videoEl.duration || 0;
         const cur = videoEl.currentTime || 0;
         if (!Number.isFinite(dur) || dur <= 1) return;
 
         lastHistorySaveTimestamp = now;
         const item = playlist[currentIndex];
-        const history = getWatchHistory().filter((h) => h.fileName !== item.fileName);
-        history.unshift({
+        const entry = {
+          id: item.fileName,
+          collectionId: activeCollectionId,
           fileName: item.fileName,
           title: item.title,
-          collection: collectionName,
+          collectionName: collectionName,
           currentTime: cur,
           duration: dur,
           updatedAt: now,
-        });
-        saveWatchHistory(history);
+          fileHandle: item.fileHandle || null,
+        };
+
+        watchHistory = [entry, ...watchHistory.filter((h) => h.fileName !== item.fileName)].slice(0, 24);
+        saveHistoryEntryToDB(entry);
       }
 
-      document.getElementById('btn-clear-watch-history').addEventListener('click', () => {
-        saveWatchHistory([]);
+      async function resumeFromHistoryItem(entry) {
+        if (!entry) return;
+        // 1. Check if item exists in any saved collection in library
+        for (const col of collections) {
+          const idx = col.items.findIndex((it) => it.fileName === entry.fileName);
+          if (idx !== -1) {
+            await playEpisodeFromCollection(col.id, idx, entry.currentTime);
+            return;
+          }
+        }
+
+        // 2. Otherwise use stored FileSystemFileHandle directly!
+        if (entry.fileHandle) {
+          try {
+            let perm = await entry.fileHandle.queryPermission({ mode: 'read' });
+            if (perm !== 'granted') perm = await entry.fileHandle.requestPermission({ mode: 'read' });
+            if (perm === 'granted') {
+              const file = await entry.fileHandle.getFile();
+              const singlesId = 'singles_collection';
+              const newItem = {
+                id: `single::${file.name}`,
+                title: cleanTitle(file.name),
+                fileName: file.name,
+                ext: getFileExtension(file.name),
+                size: file.size || 0,
+                fileHandle: entry.fileHandle,
+                file: file,
+                watched: false,
+              };
+              const singlesCol = {
+                id: singlesId,
+                name: activeLang === 'ar' ? 'فيديوهات منفردة' : 'Individual Videos',
+                type: 'singles',
+                updatedAt: Date.now(),
+                items: [newItem],
+              };
+              collections = [singlesCol, ...collections.filter((c) => c.id !== singlesId)];
+              await saveCollectionToDB(singlesCol);
+              await playEpisodeFromCollection(singlesId, 0, entry.currentTime);
+              return;
+            }
+          } catch (_) {}
+        }
+
+        // 3. Fallback file picker
+        handleUploadVideoClick();
+      }
+
+      document.getElementById('btn-clear-watch-history').addEventListener('click', async () => {
+        watchHistory = [];
+        await clearAllHistoryFromDB();
         renderWatchHistoryUI();
-        showToast(t('toastHistoryCleared'));
+        renderMediaLibraryUI();
       });
 
       function renderWatchHistoryUI() {
         const gridEl = document.getElementById('watch-history-grid');
         const clearBtn = document.getElementById('btn-clear-watch-history');
-        const history = getWatchHistory();
 
-        if (history.length === 0) {
+        if (watchHistory.length === 0) {
           clearBtn.classList.add('hidden');
           gridEl.innerHTML = `
             <div style="text-align: center; padding: 24px 12px;">
@@ -2869,14 +3425,14 @@
         }
 
         clearBtn.classList.remove('hidden');
-        gridEl.innerHTML = `<div class="items-grid" style="padding-top: 0;">${history.map((entry, idx) => {
+        gridEl.innerHTML = `<div class="items-grid" style="padding-top: 0;">${watchHistory.map((entry, idx) => {
           const pct = entry.duration > 0 ? Math.min(100, Math.round((entry.currentTime / entry.duration) * 100)) : 0;
           return `
             <div class="media-item-card" style="flex-direction: column; align-items: stretch;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
                 <button type="button" data-res-hist="${idx}" class="min-w-0 flex-1" style="text-align: start;">
                   <div class="truncate" style="font-size: 13px; font-weight: 800;">${escapeHtml(entry.title)}</div>
-                  <div class="truncate" style="font-size: 11px; color: var(--text-secondary);">${escapeHtml(entry.collection || '')} • ${escapeHtml(formatRelativeTime(entry.updatedAt))}</div>
+                  <div class="truncate" style="font-size: 11px; color: var(--text-secondary);">${escapeHtml(entry.collectionName || '')} • ${escapeHtml(formatRelativeTime(entry.updatedAt))}</div>
                 </button>
                 <button type="button" data-del-hist="${idx}" class="btn-icon-del" aria-label="Delete">✕</button>
               </div>
@@ -2894,33 +3450,24 @@
         }).join('')}</div>`;
 
         gridEl.querySelectorAll('[data-res-hist]').forEach((b) => {
-          b.addEventListener('click', () => {
-            const entry = history[Number(b.dataset.resHist)];
-            if (!entry) return;
-            const found = playlist.findIndex((p) => p.fileName === entry.fileName);
-            if (found !== -1) playEpisodeAtIndex(found, entry.currentTime);
-            else {
-              pendingResumeTime = { fileName: entry.fileName, time: entry.currentTime };
-              showToast(t('toastPickFileToResume', formatTime(entry.currentTime)));
-              inputVideoFiles.click();
-            }
-          });
+          b.addEventListener('click', () => resumeFromHistoryItem(watchHistory[Number(b.dataset.resHist)]));
         });
 
         gridEl.querySelectorAll('[data-del-hist]').forEach((b) => {
-          b.addEventListener('click', () => {
-            const entry = history[Number(b.dataset.delHist)];
+          b.addEventListener('click', async () => {
+            const entry = watchHistory[Number(b.dataset.delHist)];
             if (entry) {
-              saveWatchHistory(getWatchHistory().filter((h) => h.fileName !== entry.fileName));
+              watchHistory = watchHistory.filter((h) => h.fileName !== entry.fileName);
+              await deleteHistoryEntryFromDB(entry.id);
               renderWatchHistoryUI();
-              showToast(t('toastHistoryItemRemoved'));
+              renderMediaLibraryUI();
             }
           });
         });
       }
 
       /* ======================================================================
-         11. PLAYLIST DRAWER
+         11. PLAYLIST DRAWER IN PLAYER
          ====================================================================== */
       const playlistDrawer = document.getElementById('playlist-drawer-panel');
       const inputSearch = document.getElementById('input-playlist-search');
@@ -2932,7 +3479,7 @@
         document.getElementById('badge-playlist-count').textContent = String(playlist.length);
         document.getElementById('playlist-collection-name').textContent = collectionName;
         const totalBytes = playlist.reduce((s, it) => s + (it.size || 0), 0);
-        document.getElementById('playlist-memory-summary').innerHTML = t('memoryStats', playlist.length, formatBytes(totalBytes));
+        document.getElementById('playlist-memory-summary').innerHTML = t('episodesCount', playlist.length, formatBytes(totalBytes));
 
         const q = (inputSearch.value || '').trim().toLowerCase();
         const filtered = playlist.map((item, idx) => ({ item, idx })).filter(({ item }) => !q || item.title.toLowerCase().includes(q));
@@ -2948,9 +3495,10 @@
               <span dir="ltr" class="idx-badge">${idx + 1}</span>
               <div class="min-w-0 flex-1">
                 <div class="truncate" style="font-size: 12px; font-weight: 800;">${escapeHtml(item.title)}</div>
-                <div style="font-size: 10px; color: var(--text-secondary);">
+                <div style="display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
+                  <span dir="ltr" class="ext-pill">${escapeHtml(item.ext || 'VID')}</span>
                   <span dir="ltr">${formatBytes(item.size)}</span>
-                  ${item.watched ? `<span style="color: #34d399; font-weight: 700;"> • ${escapeHtml(t('watchedTag'))}</span>` : ''}
+                  ${item.watched ? `<span style="color: #34d399; font-weight: 700;">• ${escapeHtml(t('watchedTag'))}</span>` : ''}
                 </div>
               </div>
             </button>
@@ -2958,11 +3506,19 @@
           </div>
         `).join('');
 
-        gridEl.querySelectorAll('[data-pl-play]').forEach((b) => b.addEventListener('click', () => playEpisodeAtIndex(Number(b.dataset.plPlay), 0)));
-        gridEl.querySelectorAll('[data-pl-del]').forEach((b) => b.addEventListener('click', () => removeSingleUploadedFile(Number(b.dataset.plDel))));
+        gridEl.querySelectorAll('[data-pl-play]').forEach((b) => {
+          b.addEventListener('click', () => playEpisodeFromCollection(activeCollectionId, Number(b.dataset.plPlay), 0));
+        });
+        gridEl.querySelectorAll('[data-pl-del]').forEach((b) => {
+          b.addEventListener('click', () => removeEpisodeFromCollection(activeCollectionId, Number(b.dataset.plDel)));
+        });
       }
 
-      applyLanguage('en');
+      /* Boot Sequence: Load Saved Folders & Watch History from IndexedDB */
+      (async function bootApp() {
+        await loadStateFromDB();
+        applyLanguage('en');
+      })();
 
       /* ======================================================================
          12. SCREEN WAKE LOCK & PWA SETUP
