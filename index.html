@@ -119,6 +119,8 @@
     html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      max-width: 100vw;
       min-height: 100vh;
       overflow-x: hidden;
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -335,6 +337,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .btn-primary-grad {
@@ -377,11 +380,12 @@
     }
 
     /* ==========================================================================
-       5. MAIN CONTAINER & CATEGORIZED MEDIA LIBRARY
+       5. MAIN CONTAINER & OVERFLOW-SAFE CATEGORIZED MEDIA LIBRARY
        ========================================================================== */
     .main-wrap {
       position: relative;
       z-index: 10;
+      width: 100%;
       max-width: 1440px;
       margin: 0 auto;
       padding: 20px 14px 40px 28px;
@@ -392,6 +396,7 @@
     }
 
     .home-wrap {
+      width: 100%;
       max-width: 980px;
       margin: 0 auto;
       display: flex;
@@ -419,6 +424,7 @@
       font-weight: 800;
       color: var(--accent-primary);
       margin-bottom: 16px;
+      max-width: 100%;
     }
 
     .pulse-dot {
@@ -426,6 +432,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent-primary);
+      flex-shrink: 0;
     }
 
     .hero-title {
@@ -456,28 +463,31 @@
       width: 100%;
       max-width: 480px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 14px;
     }
 
     .btn-upload-main {
-      padding: 15px 14px;
+      min-width: 0;
+      padding: 15px 12px;
       border-radius: 16px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      white-space: nowrap;
       transition: transform 0.15s ease;
     }
 
     .btn-upload-main:active { transform: scale(0.97); }
 
     .btn-resume-pill {
+      max-width: 100%;
       margin-bottom: 14px;
-      padding: 9px 18px;
+      padding: 9px 16px;
       border-radius: 999px;
       font-size: 0.8rem;
       font-weight: 800;
@@ -507,17 +517,22 @@
       border: 1px solid rgba(245, 158, 11, 0.32);
     }
 
-    /* Cards & Grids */
+    /* Cards & Grids (Strict minmax(0, 1fr) to prevent any long-string overflow) */
     .cards-stack {
       width: 100%;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
 
     .section-card {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
       border-radius: 22px;
-      padding: 18px;
+      padding: 16px;
+      overflow: hidden;
     }
 
     @media (min-width: 640px) {
@@ -532,6 +547,7 @@
       gap: 12px;
       padding-bottom: 14px;
       border-bottom: 1px solid var(--glass-border);
+      min-width: 0;
     }
 
     .card-title-group {
@@ -539,6 +555,7 @@
       align-items: center;
       gap: 12px;
       min-width: 0;
+      flex: 1;
     }
 
     .icon-box {
@@ -581,6 +598,7 @@
       font-size: 0.74rem;
       font-weight: 800;
       color: var(--text-secondary);
+      white-space: nowrap;
       transition: all 0.15s ease;
     }
 
@@ -590,25 +608,31 @@
     }
 
     .folders-grid {
+      width: 100%;
+      min-width: 0;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 10px;
       padding-top: 14px;
     }
 
     @media (min-width: 640px) {
-      .folders-grid { grid-template-columns: repeat(2, 1fr); }
+      .folders-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     .folder-card {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 13px 14px;
+      padding: 12px 13px;
       border-radius: 16px;
       border: 1px solid var(--glass-border);
       background: rgba(56, 189, 248, 0.06);
+      overflow: hidden;
       transition: border-color 0.18s ease, background 0.18s ease;
     }
 
@@ -618,8 +642,8 @@
     }
 
     .folder-icon-badge {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -639,6 +663,7 @@
       text-transform: uppercase;
       background: rgba(56, 189, 248, 0.16);
       color: var(--accent-primary);
+      flex-shrink: 0;
     }
 
     .btn-danger-soft {
@@ -649,6 +674,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
       color: #fda4af;
       background: rgba(244, 63, 94, 0.14);
       border: 1px solid rgba(244, 63, 94, 0.28);
@@ -662,29 +688,35 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
       color: #fcd34d;
       background: rgba(245, 158, 11, 0.14);
       border: 1px solid rgba(245, 158, 11, 0.28);
     }
 
     .items-grid {
+      width: 100%;
+      min-width: 0;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 10px;
       padding-top: 14px;
-      max-height: 400px;
+      max-height: 420px;
       overflow-y: auto;
     }
 
     @media (min-width: 640px) {
-      .items-grid { grid-template-columns: repeat(2, 1fr); }
+      .items-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (min-width: 1024px) {
-      .items-grid { grid-template-columns: repeat(3, 1fr); }
+      .items-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
     .media-item-card {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -693,6 +725,7 @@
       border-radius: 15px;
       border: 1px solid rgba(255, 255, 255, 0.09);
       background: rgba(255, 255, 255, 0.04);
+      overflow: hidden;
     }
 
     .media-item-card.is-active {
@@ -727,7 +760,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      background: rgba(244, 63, 94, 0.12);
+      background: rgba(244, 63, 94, 0.14);
       color: #fda4af;
     }
 
@@ -735,15 +768,18 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      display: block;
     }
 
     .min-w-0 { min-width: 0; }
     .flex-1 { flex: 1; }
+    .shrink-0 { flex-shrink: 0; }
 
     /* ==========================================================================
-       6. PRO FULL HD CINEMA PLAYER, GESTURES, LOCK & SETTINGS DRAWER
+       6. PRO FULL HD CINEMA PLAYER, VERTICAL SWIPES, PIP & SETTINGS DRAWER
        ========================================================================== */
     .player-section {
+      width: 100%;
       max-width: 1150px;
       margin: 0 auto;
       display: flex;
@@ -763,7 +799,6 @@
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
-      touch-action: manipulation;
     }
 
     .player-container.is-fullscreen-active,
@@ -792,6 +827,7 @@
       object-fit: contain;
       background: #000000;
       display: block;
+      touch-action: none;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
       user-select: none;
@@ -837,28 +873,30 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
 
-    /* Top Pill Notification Banner (For +10s, -10s, 2.0x Hold, Aspect Ratio) */
+    /* Top Action Pill Banner (+10s, -10s, 2.0x Hold, Volume Swipe, Brightness Swipe) */
     .top-action-pill {
       position: absolute;
       top: 52px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 45;
-      padding: 6px 15px;
+      padding: 6px 16px;
       border-radius: 999px;
       background: rgba(6, 14, 34, 0.88);
-      border: 1px solid rgba(56, 189, 248, 0.5);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.52);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.72);
       color: #ffffff;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 900;
       display: flex;
       align-items: center;
       gap: 7px;
+      white-space: nowrap;
       pointer-events: none;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -902,15 +940,15 @@
       left: 0;
       right: 0;
       z-index: 25;
-      padding: 24px 12px 10px;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.74) 65%, transparent 100%);
+      padding: 20px 12px 10px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.74) 68%, transparent 100%);
     }
 
     @media (min-width: 640px) {
-      .player-bottom-hud { padding: 28px 18px 14px; }
+      .player-bottom-hud { padding: 24px 18px 14px; }
     }
 
-    /* Timeline Scrubber */
+    /* Timeline Scrubber (Expanded Touch Area for Instant Tap-to-Jump) */
     .scrubber-wrap {
       position: relative;
       width: 100%;
@@ -947,6 +985,7 @@
     .scrubber-wrap:active .scrubber-rail {
       height: 9px;
     }
+
     .scrubber-buffered {
       position: absolute;
       top: 0;
@@ -1057,7 +1096,7 @@
     @media (min-width: 640px) { .vol-slider-hud { width: 76px; } }
 
     /* ==========================================================================
-       STUDIO VIDEO & AUDIO SETTINGS DRAWER (FULL HEIGHT, NEVER CLIPPED)
+       STUDIO VIDEO & AUDIO SETTINGS DRAWER
        ========================================================================== */
     @keyframes settingsPopIn {
       from { opacity: 0; transform: translateY(10px) scale(0.97); }
@@ -1154,7 +1193,7 @@
 
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 6px;
     }
 
@@ -1352,14 +1391,14 @@
 
         <div class="upload-grid">
           <button type="button" id="btn-home-upload-video" class="btn-upload-main btn-primary-grad">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="18" height="18" class="shrink-0" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.6-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/>
             </svg>
             <span data-i18n="btnUploadVideo">Upload Video</span>
           </button>
 
           <button type="button" id="btn-home-upload-folder" class="btn-upload-main glass-surface glass-surface-interactive">
-            <svg width="18" height="18" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <svg width="18" height="18" class="shrink-0" style="color: var(--accent-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
             </svg>
             <span data-i18n="btnUploadFolder">Upload Folder</span>
@@ -1368,8 +1407,8 @@
 
         <button type="button" id="btn-home-resume" class="hidden btn-resume-pill glass-surface">
           <span class="pulse-dot"></span>
-          <span data-i18n="btnResumeWatching">Resume Watching</span>
-          <span id="home-resume-filename" class="truncate" style="max-width: 200px; opacity: 0.85;"></span>
+          <span data-i18n="btnResumeWatching" class="shrink-0">Resume Watching</span>
+          <span id="home-resume-filename" class="truncate min-w-0" style="opacity: 0.85;"></span>
         </button>
 
         <p data-i18n="heroHint" class="hero-hint">
@@ -1391,13 +1430,13 @@
                   <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                 </svg>
               </div>
-              <div class="min-w-0">
-                <h2 data-i18n="libraryTitle" class="card-h2">My Media Library</h2>
-                <p id="home-library-stats" class="card-sub">0 Folders • 0 Videos</p>
+              <div class="min-w-0 flex-1">
+                <h2 data-i18n="libraryTitle" class="card-h2 truncate">My Media Library</h2>
+                <p id="home-library-stats" class="card-sub truncate">0 Folders • 0 Videos</p>
               </div>
             </div>
 
-            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: 100%;">
               <div class="lib-tabs">
                 <button type="button" data-lib-filter="all" class="lib-tab-btn active" data-i18n="tabAll">All</button>
                 <button type="button" data-lib-filter="folders" class="lib-tab-btn" data-i18n="tabFolders">Folders</button>
@@ -1422,8 +1461,8 @@
                   <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                 </svg>
               </div>
-              <div>
-                <h2 data-i18n="watchHistoryTitle" class="card-h2">Watch History</h2>
+              <div class="min-w-0 flex-1">
+                <h2 data-i18n="watchHistoryTitle" class="card-h2 truncate">Watch History</h2>
                 <p data-i18n="watchHistorySubtitle" class="card-sub">Tap any video to resume directly from where you stopped</p>
               </div>
             </div>
@@ -1445,7 +1484,7 @@
       <div id="player-container" dir="ltr" class="player-container">
         <video id="cinema-video-el" class="cinema-video" playsinline webkit-playsinline preload="metadata"></video>
 
-        <!-- Floating Unlock Button (Visible only when Screen Lock is active) -->
+        <!-- Floating Unlock Button -->
         <button type="button" id="btn-unlock-screen" class="hidden unlock-floating-bar">
           <svg width="15" height="15" style="color: #38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -1453,7 +1492,7 @@
           <span data-i18n="tapToUnlock">Screen Locked • Tap to Unlock</span>
         </button>
 
-        <!-- Top Action Pill Banner (+10s, -10s, 2.0x Hold, Aspect Fit) -->
+        <!-- Top Action Pill Banner (+10s, -10s, 2.0x Hold, Volume Swipe, Brightness Swipe) -->
         <div id="top-action-pill" class="hidden top-action-pill">
           <span id="top-action-pill-text"></span>
         </div>
@@ -1462,7 +1501,7 @@
         <div id="upnext-banner-overlay" class="upnext-overlay hidden">
           <div class="upnext-card glass-popover">
             <div data-i18n="upNextLabel" style="font-size: 11px; font-weight: 800; color: var(--accent-primary); margin-bottom: 6px;">UP NEXT</div>
-            <h3 id="upnext-next-title" style="margin: 0 0 14px; font-size: 1rem; font-weight: 800; color: #fff;">Next Episode</h3>
+            <h3 id="upnext-next-title" class="truncate" style="margin: 0 0 14px; font-size: 1rem; font-weight: 800; color: #fff;">Next Episode</h3>
             <div style="width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 50%; border: 3px solid rgba(56,189,248,0.4); display: flex; align-items: center; justify-content: center;">
               <span id="upnext-seconds-display" dir="ltr" style="font-size: 1.3rem; font-weight: 900; color: #38bdf8;">4</span>
             </div>
@@ -1477,7 +1516,7 @@
           </div>
         </div>
 
-        <!-- TOP HUD BAR: Back + Title + Aspect Ratio + Rotate + Screen Lock -->
+        <!-- TOP HUD BAR: Back + Title + PiP + Aspect Ratio + Rotate + Screen Lock -->
         <div class="player-hud-layer player-top-hud">
           <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
             <button type="button" id="btn-player-back" class="top-hud-btn" aria-label="Back to Library" title="Back">
@@ -1492,6 +1531,14 @@
           <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
             <span id="hud-speed-badge" dir="ltr" class="hidden" style="padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 800; background: rgba(99,102,241,0.35); color: #c7d2fe;">1.0x</span>
             <span id="hud-boost-badge" dir="ltr" class="hidden" style="padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 800; background: rgba(245,158,11,0.35); color: #fcd34d;">200%</span>
+
+            <!-- Picture-in-Picture Icon -->
+            <button type="button" id="btn-player-pip" class="top-hud-btn" aria-label="Picture in Picture" title="Picture-in-Picture">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <rect x="12" y="11" width="8" height="6" rx="1" fill="currentColor"/>
+              </svg>
+            </button>
 
             <!-- Aspect Ratio / Zoom Fit Icon -->
             <button type="button" id="btn-player-aspect" class="top-hud-btn" aria-label="Aspect Ratio" title="Fit / Fill / Stretch">
@@ -1517,7 +1564,7 @@
           </div>
         </div>
 
-        <!-- STUDIO VIDEO & AUDIO SETTINGS DRAWER (Direct Child of player-container -> Full Height Scrollable!) -->
+        <!-- STUDIO VIDEO & AUDIO SETTINGS DRAWER -->
         <div id="popover-video-settings" class="hidden settings-popover glass-popover">
           <div class="settings-header-bar">
             <div class="settings-title-wrap">
@@ -1650,7 +1697,7 @@
           </div>
         </div>
 
-        <!-- BOTTOM HUD BAR (Clean: Play/Pause, Prev, Next, Volume, Time | Subtitles CC, Settings Gear, Fullscreen) -->
+        <!-- BOTTOM HUD BAR -->
         <div id="player-bottom-hud" class="player-hud-layer player-bottom-hud">
           <div class="scrubber-wrap">
             <div id="scrubber-time-tooltip" dir="ltr" class="scrubber-tooltip hidden">00:00</div>
@@ -1708,7 +1755,7 @@
               </div>
             </div>
 
-            <!-- RIGHT CLUSTER: Quick Subtitles CC + Settings Gear + Fullscreen -->
+            <!-- RIGHT CLUSTER: Subtitles CC + Settings Gear + Fullscreen -->
             <div class="controls-right">
               <button type="button" id="btn-hud-subtitles" aria-label="Subtitles" class="ctrl-btn" style="font-size: 11px; font-weight: 900;">CC</button>
 
@@ -1756,7 +1803,7 @@
       <!-- Playlist Drawer -->
       <div id="playlist-drawer-panel" class="section-card glass-surface cinema-ambient-dim">
         <div class="card-header">
-          <div class="min-w-0">
+          <div class="min-w-0 flex-1">
             <h3 id="playlist-collection-name" class="card-h2 truncate">Playlist</h3>
             <p id="playlist-memory-summary" class="card-sub">0 episodes</p>
           </div>
@@ -1794,7 +1841,7 @@
           <span data-i18n="btnInstallNow">Install Now</span>
         </button>
       </div>
-      <div style="display: grid; grid-template-columns: 1fr; gap: 10px; font-size: 0.8rem; color: var(--text-secondary);">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; font-size: 0.8rem; color: var(--text-secondary);">
         <div style="padding: 12px; border-radius: 14px; border: 1px solid var(--glass-border);">
           <strong data-i18n="androidTitle" style="color: var(--text-primary); display: block; margin-bottom: 6px;">Android (Chrome / Edge)</strong>
           <div data-i18n="androidStep1">1. Open fares.com in Google Chrome on your phone.</div>
@@ -1812,7 +1859,7 @@
   </div>
 
   <!-- ========================================================================
-       3. PERSISTENT INDEXEDDB LIBRARY & PRO TOUCH/GESTURE ENGINE
+       3. HARDENED PERSISTENT INDEXEDDB & PRO CINEMA ENGINE (v12)
        ======================================================================== -->
   <script>
     (function () {
@@ -2042,6 +2089,8 @@
       let picBrightness = 100;
       let picContrast = 100;
       let picSaturation = 100;
+      let activePicPreset = 'standard';
+      let userBasePlaybackRate = 1;
       let activeSubtitleUrl = null;
       let subSizeIndex = 1;
       const SUB_SIZE_SCALES = ['0.85em', '1.05em', '1.30em', '1.60em'];
@@ -2097,6 +2146,7 @@
               size: it.size,
               watched: Boolean(it.watched),
               fileHandle: it.fileHandle || null,
+              subHandle: it.subHandle || null,
             })),
           };
           const tx = db.transaction('collections', 'readwrite');
@@ -2353,6 +2403,7 @@
          6. NAVIGATION & 200% VOLUME AMPLIFIER
          ====================================================================== */
       async function showHomeScreen() {
+        recordCurrentPlaybackInHistory(true);
         cancelUpNextCountdown();
         closeSettingsPopover();
         setScreenLock(false);
@@ -2458,13 +2509,22 @@
       });
 
       /* ======================================================================
-         7. PERSISTENT FILE SYSTEM & CATEGORIZED MEDIA LIBRARY UPLOADER
+         7. RECURSIVE FOLDER SCANNER, AUTO-SUBTITLES & PERSISTENT LIBRARY
          ====================================================================== */
       const VIDEO_EXT = /\.(mp4|mkv|webm|avi|mov|m4v|ogv|flv|wmv)$/i;
+      const SUB_EXT = /\.(srt|vtt)$/i;
       const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
       function isVideoFileName(name, type) {
         return (type && type.startsWith('video/')) || VIDEO_EXT.test(name);
+      }
+
+      function isSubtitleFileName(name) {
+        return SUB_EXT.test(name);
+      }
+
+      function getBaseName(name) {
+        return name.replace(/\.[^/.]+$/, '').toLowerCase();
       }
 
       function getFileExtension(name) {
@@ -2476,38 +2536,55 @@
         return name.replace(/\.[^/.]+$/, '').replace(/[._]+/g, ' ').trim();
       }
 
+      function cleanFolderDisplayName(name) {
+        return String(name || 'Series Folder').replace(/[._]+/g, ' ').trim() || name;
+      }
+
+      async function collectDirectoryEntries(dirHandle, depth = 0, videoList = [], subMap = new Map()) {
+        for await (const entry of dirHandle.values()) {
+          if (entry.kind === 'file') {
+            if (isVideoFileName(entry.name, '')) {
+              const file = await entry.getFile();
+              videoList.push({ entry, file });
+            } else if (isSubtitleFileName(entry.name)) {
+              subMap.set(getBaseName(entry.name), entry);
+            }
+          } else if (entry.kind === 'directory' && depth < 2) {
+            await collectDirectoryEntries(entry, depth + 1, videoList, subMap);
+          }
+        }
+        return { videoList, subMap };
+      }
+
       async function handleUploadFolderClick() {
         showInlineNotice('');
         if (typeof window.showDirectoryPicker === 'function') {
           try {
             const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
-            const entries = [];
-            for await (const entry of dirHandle.values()) {
-              if (entry.kind === 'file' && isVideoFileName(entry.name, '')) {
-                const file = await entry.getFile();
-                entries.push({
-                  id: `${dirHandle.name}::${entry.name}`,
-                  title: cleanTitle(entry.name),
-                  fileName: entry.name,
-                  ext: getFileExtension(entry.name),
-                  size: file.size || 0,
-                  fileHandle: entry,
-                  file: file,
-                  watched: false,
-                });
-              }
-            }
+            const { videoList, subMap } = await collectDirectoryEntries(dirHandle, 0);
 
-            if (entries.length === 0) {
+            if (videoList.length === 0) {
               inputFolderFiles.click();
               return;
             }
+
+            const entries = videoList.map(({ entry, file }) => ({
+              id: `${dirHandle.name}::${entry.name}`,
+              title: cleanTitle(entry.name),
+              fileName: entry.name,
+              ext: getFileExtension(entry.name),
+              size: file.size || 0,
+              fileHandle: entry,
+              subHandle: subMap.get(getBaseName(entry.name)) || null,
+              file: file,
+              watched: false,
+            }));
 
             entries.sort((a, b) => collator.compare(a.fileName, b.fileName));
             const colId = `folder_${dirHandle.name.toLowerCase().replace(/\s+/g, '_')}`;
             const newCol = {
               id: colId,
-              name: dirHandle.name,
+              name: cleanFolderDisplayName(dirHandle.name),
               type: 'folder',
               updatedAt: Date.now(),
               items: entries,
@@ -2553,6 +2630,7 @@
                 ext: getFileExtension(file.name),
                 size: file.size || 0,
                 fileHandle: h,
+                subHandle: null,
                 file: file,
                 watched: false,
               });
@@ -2587,10 +2665,12 @@
 
       async function handleFallbackFileInput(fileList, isFolderInput) {
         const videos = [];
+        const subFiles = new Map();
         const len = fileList ? fileList.length : 0;
         for (let i = 0; i < len; i++) {
           const f = fileList[i];
           if (isVideoFileName(f.name, f.type)) videos.push(f);
+          else if (isSubtitleFileName(f.name)) subFiles.set(getBaseName(f.name), f);
         }
         if (videos.length === 0) return;
 
@@ -2605,7 +2685,9 @@
         const colId = isFolder
           ? `folder_${(folderTitle || 'Series').toLowerCase().replace(/\s+/g, '_')}`
           : 'singles_collection';
-        const colName = folderTitle || (isFolder ? 'Series Folder' : (activeLang === 'ar' ? 'فيديوهات منفردة' : 'Individual Videos'));
+        const colName = folderTitle
+          ? cleanFolderDisplayName(folderTitle)
+          : (isFolder ? 'Series Folder' : (activeLang === 'ar' ? 'فيديوهات منفردة' : 'Individual Videos'));
 
         const items = videos.map((file) => ({
           id: `${colId}::${file.name}`,
@@ -2614,6 +2696,8 @@
           ext: getFileExtension(file.name),
           size: file.size || 0,
           fileHandle: null,
+          subHandle: null,
+          subFile: subFiles.get(getBaseName(file.name)) || null,
           file: file,
           watched: false,
         }));
@@ -2653,7 +2737,7 @@
       });
 
       /* ======================================================================
-         8. ON-DEMAND FILE STREAMING & AUTO-NEXT ENGINE
+         8. ON-DEMAND FILE STREAMING, AUTO-SUBTITLE & AUTO-NEXT ENGINE
          ====================================================================== */
       async function resolvePlayableFile(item) {
         if (item.file instanceof File) return item.file;
@@ -2671,6 +2755,47 @@
         return null;
       }
 
+      async function loadSubtitleFromFileObject(file) {
+        if (!file) return;
+        try {
+          const buf = await file.arrayBuffer();
+          let text = '';
+          try { text = new TextDecoder('utf-8', { fatal: true }).decode(buf); }
+          catch (_) { text = new TextDecoder('windows-1256').decode(buf); }
+
+          let vtt = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n');
+          if (!vtt.trim().startsWith('WEBVTT')) {
+            vtt = 'WEBVTT\n\n' + vtt.replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, '$1.$2');
+          }
+          clearActiveSubtitleTrack();
+          activeSubtitleUrl = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt;charset=utf-8' }));
+          const track = document.createElement('track');
+          track.kind = 'subtitles';
+          track.label = file.name;
+          track.src = activeSubtitleUrl;
+          track.default = true;
+          videoEl.appendChild(track);
+          requestAnimationFrame(() => { if (videoEl.textTracks[0]) videoEl.textTracks[0].mode = 'showing'; });
+          document.getElementById('btn-remove-subtitle').classList.remove('hidden');
+          document.getElementById('btn-hud-subtitles').classList.add('ctrl-btn-active');
+        } catch (_) {}
+      }
+
+      async function tryAutoLoadEpisodeSubtitle(item) {
+        clearActiveSubtitleTrack();
+        if (item.subFile instanceof File) {
+          await loadSubtitleFromFileObject(item.subFile);
+          return;
+        }
+        if (item.subHandle) {
+          try {
+            const subF = await item.subHandle.getFile();
+            item.subFile = subF;
+            await loadSubtitleFromFileObject(subF);
+          } catch (_) {}
+        }
+      }
+
       async function playEpisodeFromCollection(colId, index, seekSeconds = 0) {
         const col = collections.find((c) => c.id === colId);
         if (!col || index < 0 || index >= col.items.length) return;
@@ -2686,7 +2811,7 @@
 
         cancelUpNextCountdown();
         activeCollectionId = colId;
-        collectionName = col.name;
+        collectionName = cleanFolderDisplayName(col.name);
         playlist = col.items;
         currentIndex = index;
 
@@ -2697,15 +2822,19 @@
         videoEl.src = activeStreamUrl;
         videoEl.load();
 
-        if (seekSeconds > 0) {
-          const onMeta = () => {
-            if (Number.isFinite(videoEl.duration) && seekSeconds < videoEl.duration - 2) {
-              videoEl.currentTime = seekSeconds;
-            }
-            videoEl.removeEventListener('loadedmetadata', onMeta);
-          };
-          videoEl.addEventListener('loadedmetadata', onMeta);
-        }
+        await tryAutoLoadEpisodeSubtitle(item);
+
+        const onMeta = () => {
+          videoEl.playbackRate = userBasePlaybackRate || 1.0;
+          applyPictureFilters(activePicPreset);
+          setVolumePercent(currentVolumePercent);
+          if (seekSeconds > 0 && Number.isFinite(videoEl.duration) && seekSeconds < videoEl.duration - 2) {
+            videoEl.currentTime = seekSeconds;
+          }
+          recordCurrentPlaybackInHistory(true);
+          videoEl.removeEventListener('loadedmetadata', onMeta);
+        };
+        videoEl.addEventListener('loadedmetadata', onMeta);
 
         setVolumePercent(currentVolumePercent);
         videoEl.play().catch(() => {
@@ -2724,7 +2853,6 @@
 
         renderPlaylistUI();
         renderMediaLibraryUI();
-        recordCurrentPlaybackInHistory(true);
       }
 
       btnPrev.addEventListener('click', () => {
@@ -2779,7 +2907,7 @@
       });
 
       /* ======================================================================
-         9. PRO PLAYER GESTURES (2X HOLD, DOUBLE-TAP SEEK, LOCK, TOP PILL)
+         9. PRO PLAYER CONTROLS, PIP, LOCK & INSTANT TAP SCRUBBER
          ====================================================================== */
       const topActionPill = document.getElementById('top-action-pill');
       const topActionPillText = document.getElementById('top-action-pill-text');
@@ -2834,6 +2962,40 @@
       btnUnlockScreen.addEventListener('click', (e) => {
         e.stopPropagation();
         setScreenLock(false);
+      });
+
+      /* Picture-in-Picture (PiP) */
+      const btnPip = document.getElementById('btn-player-pip');
+      const supportsPiP = Boolean(
+        (document.pictureInPictureEnabled && typeof videoEl.requestPictureInPicture === 'function') ||
+        typeof videoEl.webkitSetPresentationMode === 'function'
+      );
+      if (!supportsPiP && btnPip) {
+        btnPip.classList.add('hidden');
+      }
+
+      if (btnPip) {
+        btnPip.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          try {
+            if (document.pictureInPictureElement) {
+              await document.exitPictureInPicture();
+            } else if (typeof videoEl.requestPictureInPicture === 'function') {
+              await videoEl.requestPictureInPicture();
+            } else if (typeof videoEl.webkitSetPresentationMode === 'function') {
+              const nextMode = videoEl.webkitPresentationMode === 'picture-in-picture' ? 'inline' : 'picture-in-picture';
+              videoEl.webkitSetPresentationMode(nextMode);
+            }
+          } catch (_) {}
+          revealHudWithDelay(6000);
+        });
+      }
+
+      videoEl.addEventListener('enterpictureinpicture', () => {
+        if (btnPip) btnPip.classList.add('ctrl-btn-active');
+      });
+      videoEl.addEventListener('leavepictureinpicture', () => {
+        if (btnPip) btnPip.classList.remove('ctrl-btn-active');
       });
 
       /* Aspect Ratio / Zoom Fit Cycling */
@@ -2920,6 +3082,7 @@
 
       videoEl.addEventListener('loadedmetadata', () => {
         hudTotalDuration.textContent = formatTime(videoEl.duration);
+        recordCurrentPlaybackInHistory(true);
       });
 
       videoEl.addEventListener('timeupdate', () => {
@@ -2937,6 +3100,7 @@
         }
       });
 
+      /* Instant Tap-to-Jump & Smooth Scrubbing on Timeline */
       const scrubberWrap = scrubberRail.parentElement;
       let isScrubbing = false;
       function updateScrub(clientX, apply) {
@@ -2966,6 +3130,7 @@
         isScrubbing = false;
         try { scrubberWrap.releasePointerCapture(e.pointerId); } catch (_) {}
         scrubberTooltip.classList.add('hidden');
+        recordCurrentPlaybackInHistory(true);
         revealHudWithDelay(6000);
       }
       scrubberWrap.addEventListener('pointerup', finishScrub);
@@ -3025,6 +3190,7 @@
 
       /* Picture Studio Sliders & Presets */
       function applyPictureFilters(activePresetName) {
+        activePicPreset = activePresetName;
         videoEl.style.filter = `brightness(${picBrightness}%) contrast(${picContrast}%) saturate(${picSaturation}%)`;
         document.getElementById('val-brightness').textContent = `${picBrightness}%`;
         document.getElementById('val-contrast').textContent = `${picContrast}%`;
@@ -3056,7 +3222,6 @@
         applyPictureFilters('standard');
       });
 
-      let userBasePlaybackRate = 1;
       function setPlaybackSpeed(sp) {
         userBasePlaybackRate = sp;
         videoEl.playbackRate = sp;
@@ -3076,28 +3241,7 @@
         const file = e.target.files && e.target.files[0];
         if (!file) return;
         e.target.value = '';
-        try {
-          const buf = await file.arrayBuffer();
-          let text = '';
-          try { text = new TextDecoder('utf-8', { fatal: true }).decode(buf); }
-          catch (_) { text = new TextDecoder('windows-1256').decode(buf); }
-
-          let vtt = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n');
-          if (!vtt.trim().startsWith('WEBVTT')) {
-            vtt = 'WEBVTT\n\n' + vtt.replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, '$1.$2');
-          }
-          clearActiveSubtitleTrack();
-          activeSubtitleUrl = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt;charset=utf-8' }));
-          const track = document.createElement('track');
-          track.kind = 'subtitles';
-          track.label = file.name;
-          track.src = activeSubtitleUrl;
-          track.default = true;
-          videoEl.appendChild(track);
-          requestAnimationFrame(() => { if (videoEl.textTracks[0]) videoEl.textTracks[0].mode = 'showing'; });
-          document.getElementById('btn-remove-subtitle').classList.remove('hidden');
-          document.getElementById('btn-hud-subtitles').classList.add('ctrl-btn-active');
-        } catch (_) {}
+        await loadSubtitleFromFileObject(file);
       });
 
       function clearActiveSubtitleTrack() {
@@ -3190,12 +3334,7 @@
       document.getElementById('btn-player-fullscreen').addEventListener('click', togglePlayerFullscreen);
 
       /* ======================================================================
-         UNIFIED VIDEO TOUCH & POINTER GESTURES:
-         - Blocks browser contextmenu (Download video / Copy video frame)
-         - Long Press (Hold 340ms): Temporary 2.0x Speed + Top Pill Banner
-         - Double Tap Left / Right: -10s / +10s Seek + Top Pill Banner
-         - Double Tap Center: Play / Pause + Top Pill Banner
-         - Single Tap: Show / Hide HUD (or Show Unlock Pill if Locked)
+         UNIFIED PRO VIDEO GESTURES & KEYBOARD SHORTCUTS (v12)
          ====================================================================== */
       playerContainer.addEventListener('contextmenu', (e) => {
         e.preventDefault();
@@ -3208,6 +3347,10 @@
 
       let pointerStartX = 0;
       let pointerStartY = 0;
+      let activePointerId = null;
+      let gestureMode = null; // null | 'volume' | 'brightness'
+      let swipeStartVolume = 100;
+      let swipeStartBrightness = 100;
       let longPressTimer = null;
       let isLongPressActive = false;
       let blockNextClick = false;
@@ -3219,14 +3362,24 @@
         if (e.button !== undefined && e.button !== 0) return;
         pointerStartX = e.clientX;
         pointerStartY = e.clientY;
+        activePointerId = e.pointerId;
+        gestureMode = null;
         isLongPressActive = false;
         blockNextClick = false;
         controlsHiddenAtPointerDown = playerContainer.classList.contains('controls-hidden');
 
         if (isScreenLocked) return;
 
+        // Ignore touches within 24px of screen edges so Android system back gestures work smoothly
+        const edgeMargin = 24;
+        if (e.clientX < edgeMargin || e.clientX > window.innerWidth - edgeMargin) return;
+
+        swipeStartVolume = currentVolumePercent;
+        swipeStartBrightness = picBrightness;
+
         clearTimeout(longPressTimer);
         longPressTimer = setTimeout(() => {
+          if (gestureMode) return;
           isLongPressActive = true;
           blockNextClick = true;
           clearTimeout(tapTimer);
@@ -3238,27 +3391,69 @@
       }, { passive: true });
 
       videoEl.addEventListener('pointermove', (e) => {
-        if (!longPressTimer) return;
-        if (Math.hypot(e.clientX - pointerStartX, e.clientY - pointerStartY) > 14) {
-          clearTimeout(longPressTimer);
-          longPressTimer = null;
+        if (isScreenLocked || isLongPressActive) return;
+        const dx = e.clientX - pointerStartX;
+        const dy = e.clientY - pointerStartY;
+
+        if (!gestureMode) {
+          if (Math.hypot(dx, dy) > 14) {
+            if (longPressTimer) {
+              clearTimeout(longPressTimer);
+              longPressTimer = null;
+            }
+            if (Math.abs(dy) > Math.abs(dx) * 1.2) {
+              const rect = videoEl.getBoundingClientRect();
+              const startRatio = (pointerStartX - rect.left) / (rect.width || 1);
+              gestureMode = startRatio < 0.5 ? 'brightness' : 'volume';
+              blockNextClick = true;
+              clearTimeout(tapTimer);
+              lastTap = 0;
+              try { videoEl.setPointerCapture(e.pointerId); } catch (_) {}
+            }
+          }
+        }
+
+        if (gestureMode === 'brightness') {
+          const rect = videoEl.getBoundingClientRect();
+          const deltaPct = Math.round((-dy / (rect.height || 260)) * 140);
+          picBrightness = Math.max(50, Math.min(180, swipeStartBrightness + deltaPct));
+          applyPictureFilters('custom');
+          showTopActionPill(`☀️ ${picBrightness}%`, 0);
+        } else if (gestureMode === 'volume') {
+          const rect = videoEl.getBoundingClientRect();
+          const deltaPct = Math.round((-dy / (rect.height || 260)) * 200);
+          const nextVol = Math.max(0, Math.min(200, swipeStartVolume + deltaPct));
+          setVolumePercent(nextVol);
+          const volIcon = nextVol === 0 ? '🔇' : (nextVol > 100 ? '🔊' : '🔉');
+          showTopActionPill(`${volIcon} ${nextVol}%`, 0);
         }
       }, { passive: true });
 
-      function endLongPressIfActive() {
+      function endPointerGesture() {
         if (longPressTimer) {
           clearTimeout(longPressTimer);
           longPressTimer = null;
+        }
+        if (activePointerId !== null) {
+          try { videoEl.releasePointerCapture(activePointerId); } catch (_) {}
+          activePointerId = null;
         }
         if (isLongPressActive) {
           isLongPressActive = false;
           videoEl.playbackRate = userBasePlaybackRate || 1.0;
           hideTopActionPill();
         }
+        if (gestureMode) {
+          gestureMode = null;
+          clearTimeout(topActionPill._t);
+          topActionPill._t = setTimeout(() => {
+            topActionPill.classList.add('hidden');
+          }, 450);
+        }
       }
 
-      videoEl.addEventListener('pointerup', endLongPressIfActive, { passive: true });
-      videoEl.addEventListener('pointercancel', endLongPressIfActive, { passive: true });
+      videoEl.addEventListener('pointerup', endPointerGesture, { passive: true });
+      videoEl.addEventListener('pointercancel', endPointerGesture, { passive: true });
 
       videoEl.addEventListener('click', (e) => {
         if (blockNextClick) {
@@ -3282,7 +3477,7 @@
         const rect = videoEl.getBoundingClientRect();
         const ratio = (e.clientX - rect.left) / (rect.width || 1);
 
-        if (now - lastTap < 280) {
+        if (now - lastTap < 300) {
           clearTimeout(tapTimer);
           lastTap = 0;
           if (ratio < 0.35) {
@@ -3302,12 +3497,53 @@
             } else if (!videoEl.paused) {
               playerContainer.classList.add('controls-hidden');
             }
-          }, 260);
+          }, 280);
         }
       });
 
+      /* Desktop Keyboard Shortcuts */
+      document.addEventListener('keydown', (e) => {
+        if (viewPlayer.classList.contains('hidden') || isScreenLocked) return;
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        if (e.code === 'Space' || e.key === 'k' || e.key === 'K') {
+          e.preventDefault();
+          const willPlay = videoEl.paused;
+          togglePlayPause();
+          showTopActionPill(willPlay ? '▶' : '⏸', 650);
+        } else if (e.code === 'ArrowLeft') {
+          e.preventDefault();
+          seekByOffset(-10);
+        } else if (e.code === 'ArrowRight') {
+          e.preventDefault();
+          seekByOffset(10);
+        } else if (e.code === 'ArrowUp') {
+          e.preventDefault();
+          const nv = Math.min(200, currentVolumePercent + 10);
+          setVolumePercent(nv);
+          showTopActionPill(`🔊 ${nv}%`, 650);
+        } else if (e.code === 'ArrowDown') {
+          e.preventDefault();
+          const nv = Math.max(0, currentVolumePercent - 10);
+          setVolumePercent(nv);
+          showTopActionPill(`🔉 ${nv}%`, 650);
+        } else if (e.key === 'f' || e.key === 'F') {
+          e.preventDefault();
+          togglePlayerFullscreen();
+        } else if (e.key === 'm' || e.key === 'M') {
+          e.preventDefault();
+          setVolumePercent(currentVolumePercent === 0 ? lastUnmutedPercent || 100 : 0);
+        }
+      });
+
+      /* Auto-save progress when app goes to background or closes */
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) recordCurrentPlaybackInHistory(true);
+      });
+      window.addEventListener('pagehide', () => recordCurrentPlaybackInHistory(true));
+
       /* ======================================================================
-         10. CATEGORIZED MEDIA LIBRARY & PERSISTENT WATCH HISTORY UI
+         10. OVERFLOW-SAFE CATEGORIZED MEDIA LIBRARY & WATCH HISTORY UI
          ====================================================================== */
       document.querySelectorAll('[data-lib-filter]').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -3382,14 +3618,14 @@
         const pct = hist && hist.duration > 0 ? Math.min(100, Math.round((hist.currentTime / hist.duration) * 100)) : 0;
         return `
           <div class="media-item-card ${isCurrent ? 'is-active' : ''}">
-            <button type="button" data-open-col="${escapeHtml(colId)}" data-open-idx="${idx}" style="display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; text-align: start;">
+            <button type="button" data-open-col="${escapeHtml(colId)}" data-open-idx="${idx}" class="min-w-0 flex-1" style="display: flex; align-items: center; gap: 10px; text-align: start;">
               <span dir="ltr" class="idx-badge">${idx + 1}</span>
               <div class="min-w-0 flex-1">
                 <div class="truncate" style="font-size: 12.5px; font-weight: 800;">${escapeHtml(item.title)}</div>
                 <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 10.5px; color: var(--text-secondary);">
                   <span dir="ltr" class="ext-pill">${escapeHtml(item.ext || 'VID')}</span>
-                  <span dir="ltr">${formatBytes(item.size)}</span>
-                  ${item.watched ? `<span style="color: #34d399; font-weight: 700;">• ${escapeHtml(t('watchedTag'))}</span>` : (pct > 0 ? `<span dir="ltr" style="color: var(--accent-primary); font-weight: 700;">• ${pct}%</span>` : '')}
+                  <span dir="ltr" class="truncate">${formatBytes(item.size)}</span>
+                  ${item.watched ? `<span class="shrink-0" style="color: #34d399; font-weight: 700;">• ${escapeHtml(t('watchedTag'))}</span>` : (pct > 0 ? `<span dir="ltr" class="shrink-0" style="color: var(--accent-primary); font-weight: 700;">• ${pct}%</span>` : '')}
                 </div>
               </div>
             </button>
@@ -3427,18 +3663,19 @@
           const folder = folderCols.find((f) => f.id === openedFolderId);
           if (folder) {
             const totalSize = folder.items.reduce((s, it) => s + (it.size || 0), 0);
+            const displayFolderName = cleanFolderDisplayName(folder.name);
             bodyEl.innerHTML = `
-              <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px;">
-                <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
-                  <button type="button" id="btn-back-to-folders" class="btn-pill glass-surface glass-surface-interactive">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; min-width: 0;">
+                <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
+                  <button type="button" id="btn-back-to-folders" class="btn-pill glass-surface glass-surface-interactive shrink-0">
                     <span>← ${escapeHtml(t('btnBackToFolders'))}</span>
                   </button>
-                  <div class="min-w-0">
-                    <div class="truncate" style="font-size: 0.92rem; font-weight: 800;">${escapeHtml(folder.name)}</div>
-                    <div style="font-size: 0.72rem; color: var(--text-secondary);">${t('episodesCount', folder.items.length, formatBytes(totalSize))}</div>
+                  <div class="min-w-0 flex-1">
+                    <div class="truncate" style="font-size: 0.92rem; font-weight: 800;">${escapeHtml(displayFolderName)}</div>
+                    <div class="truncate" style="font-size: 0.72rem; color: var(--text-secondary);">${t('episodesCount', folder.items.length, formatBytes(totalSize))}</div>
                   </div>
                 </div>
-                <button type="button" id="btn-play-folder-all" class="btn-pill btn-primary-grad">
+                <button type="button" id="btn-play-folder-all" class="btn-pill btn-primary-grad shrink-0">
                   <span>▶ ${escapeHtml(t('btnPlayAll'))}</span>
                 </button>
               </div>
@@ -3464,24 +3701,25 @@
 
         if ((libraryFilter === 'all' || libraryFilter === 'folders') && folderCols.length > 0) {
           html += `
-            <div style="padding-top: 14px;">
+            <div style="padding-top: 14px; min-width: 0;">
               <div style="font-size: 11px; font-weight: 800; color: var(--accent-primary); margin-bottom: 8px; text-transform: uppercase;">
                 ${escapeHtml(t('foldersSectionTitle'))} (${folderCols.length})
               </div>
               <div class="folders-grid" style="padding-top: 0;">
                 ${folderCols.map((f) => {
                   const totalSize = f.items.reduce((s, it) => s + (it.size || 0), 0);
+                  const displayFolderName = cleanFolderDisplayName(f.name);
                   return `
                     <div class="folder-card">
-                      <button type="button" data-open-folder="${escapeHtml(f.id)}" style="display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; text-align: start;">
+                      <button type="button" data-open-folder="${escapeHtml(f.id)}" class="min-w-0 flex-1" style="display: flex; align-items: center; gap: 11px; text-align: start;">
                         <div class="folder-icon-badge">
-                          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                          <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
                           </svg>
                         </div>
                         <div class="min-w-0 flex-1">
-                          <div class="truncate" style="font-size: 13.5px; font-weight: 800;">${escapeHtml(f.name)}</div>
-                          <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 2px;">
+                          <div class="truncate" style="font-size: 13px; font-weight: 800;">${escapeHtml(displayFolderName)}</div>
+                          <div class="truncate" style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">
                             ${t('episodesCount', f.items.length, formatBytes(totalSize))}
                           </div>
                         </div>
@@ -3497,7 +3735,7 @@
 
         if ((libraryFilter === 'all' || libraryFilter === 'videos') && singleCol && singleCol.items.length > 0) {
           html += `
-            <div style="padding-top: 16px;">
+            <div style="padding-top: 16px; min-width: 0;">
               <div style="font-size: 11px; font-weight: 800; color: var(--accent-primary); margin-bottom: 8px; text-transform: uppercase;">
                 ${escapeHtml(t('singlesSectionTitle'))} (${singleCol.items.length})
               </div>
@@ -3547,21 +3785,22 @@
       function recordCurrentPlaybackInHistory(force) {
         if (currentIndex < 0 || !playlist[currentIndex]) return;
         const now = Date.now();
-        if (!force && now - lastHistorySaveTimestamp < 4000) return;
-        const dur = videoEl.duration || 0;
-        const cur = videoEl.currentTime || 0;
-        if (!Number.isFinite(dur) || dur <= 1) return;
+        if (!force && now - lastHistorySaveTimestamp < 3500) return;
+        const dur = Number.isFinite(videoEl.duration) && videoEl.duration > 0 ? videoEl.duration : 0;
+        const cur = Number.isFinite(videoEl.currentTime) && videoEl.currentTime >= 0 ? videoEl.currentTime : 0;
+        if (!force && dur <= 1) return;
 
         lastHistorySaveTimestamp = now;
         const item = playlist[currentIndex];
+        const prev = watchHistory.find((h) => h.fileName === item.fileName);
         const entry = {
           id: item.fileName,
           collectionId: activeCollectionId,
           fileName: item.fileName,
           title: item.title,
-          collectionName: collectionName,
-          currentTime: cur,
-          duration: dur,
+          collectionName: cleanFolderDisplayName(collectionName),
+          currentTime: cur > 0 ? cur : (prev ? prev.currentTime : 0),
+          duration: dur > 0 ? dur : (prev ? prev.duration : 0),
           updatedAt: now,
           fileHandle: item.fileHandle || null,
         };
@@ -3594,6 +3833,7 @@
                 ext: getFileExtension(file.name),
                 size: file.size || 0,
                 fileHandle: entry.fileHandle,
+                subHandle: null,
                 file: file,
                 watched: false,
               };
@@ -3642,10 +3882,10 @@
           const pct = entry.duration > 0 ? Math.min(100, Math.round((entry.currentTime / entry.duration) * 100)) : 0;
           return `
             <div class="media-item-card" style="flex-direction: column; align-items: stretch;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; min-width: 0;">
                 <button type="button" data-res-hist="${idx}" class="min-w-0 flex-1" style="text-align: start;">
                   <div class="truncate" style="font-size: 13px; font-weight: 800;">${escapeHtml(entry.title)}</div>
-                  <div class="truncate" style="font-size: 11px; color: var(--text-secondary);">${escapeHtml(entry.collectionName || '')} • ${escapeHtml(formatRelativeTime(entry.updatedAt))}</div>
+                  <div class="truncate" style="font-size: 11px; color: var(--text-secondary);">${escapeHtml(cleanFolderDisplayName(entry.collectionName || ''))} • ${escapeHtml(formatRelativeTime(entry.updatedAt))}</div>
                 </button>
                 <button type="button" data-del-hist="${idx}" class="btn-icon-del" aria-label="Delete">✕</button>
               </div>
@@ -3690,7 +3930,7 @@
       function renderPlaylistUI() {
         const gridEl = document.getElementById('playlist-episodes-grid');
         document.getElementById('badge-playlist-count').textContent = String(playlist.length);
-        document.getElementById('playlist-collection-name').textContent = collectionName;
+        document.getElementById('playlist-collection-name').textContent = cleanFolderDisplayName(collectionName);
         const totalBytes = playlist.reduce((s, it) => s + (it.size || 0), 0);
         document.getElementById('playlist-memory-summary').innerHTML = t('episodesCount', playlist.length, formatBytes(totalBytes));
 
@@ -3704,14 +3944,14 @@
 
         gridEl.innerHTML = filtered.map(({ item, idx }) => `
           <div class="media-item-card ${idx === currentIndex ? 'is-active' : ''}">
-            <button type="button" data-pl-play="${idx}" style="display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; text-align: start;">
+            <button type="button" data-pl-play="${idx}" class="min-w-0 flex-1" style="display: flex; align-items: center; gap: 10px; text-align: start;">
               <span dir="ltr" class="idx-badge">${idx + 1}</span>
               <div class="min-w-0 flex-1">
                 <div class="truncate" style="font-size: 12px; font-weight: 800;">${escapeHtml(item.title)}</div>
                 <div style="display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
                   <span dir="ltr" class="ext-pill">${escapeHtml(item.ext || 'VID')}</span>
-                  <span dir="ltr">${formatBytes(item.size)}</span>
-                  ${item.watched ? `<span style="color: #34d399; font-weight: 700;">• ${escapeHtml(t('watchedTag'))}</span>` : ''}
+                  <span dir="ltr" class="truncate">${formatBytes(item.size)}</span>
+                  ${item.watched ? `<span class="shrink-0" style="color: #34d399; font-weight: 700;">• ${escapeHtml(t('watchedTag'))}</span>` : ''}
                 </div>
               </div>
             </button>
